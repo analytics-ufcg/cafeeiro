@@ -7,6 +7,7 @@ rm(list = ls())
 library(randomForest)
 library(plyr)
 library(ROCR)
+library(DMwR)
 
 source("src/experiments/prediction_evaluator.R")
 
@@ -63,7 +64,7 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
     
     # Store the target values of the test set
     test.target <- test[,ncol(test)]
-        
+    
     # Remove the target.attribute from the test set
     test <- test[,-ncol(data.scenario.atts)]
     
@@ -73,7 +74,9 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
     
     # --------------------------------------------------------------------------
     # Evaluate the predictions
-    # TODO: Correct BUG! Implement our evaluator.
+    # TODO: 
+    #   * Stocastic BUG: Sometimes the fold has a unique class, raising an erro in the ROCR function! 
+    #   * Solution: Implement our evaluator.
     pred <- prediction(predictions, test.target)
     
     acc <- performance(pred, measure = "acc")@y.values[[1]][2]
@@ -89,7 +92,7 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
                                        sens = sens, spec = spec,
                                        fprate = fprate, tprate = tprate,
                                        auc = auc))
-
+    
     # Remove the fold.rows from the rows vector (to not be selected in the next iteration)
     rows <- rows[-fold.rows]
   }
@@ -105,11 +108,12 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
 }
 
 RunByAttributeSubset <- function(attribute.subset, target.attribute, data.scenario){
-
+  
   # Select data: attribute.subset + target.attribute
   data.scenario.atts <- data.scenario[,c(attribute.subset, target.attribute)]
   
   # PROBLEM: We did not rebalanced the classes!
+#   SMOTE(as.formula(target.attribute, "~ ."), data.scenario.atts)
   
   # Run 10-Fold Cross-Validation and return the result
   return(Run10FoldCrossValidation(data.scenario.atts))
@@ -117,7 +121,7 @@ RunByAttributeSubset <- function(attribute.subset, target.attribute, data.scenar
 }
 
 RunByScenario <- function(scenario, attributes, data){
-
+  
   # Select data: scenario
   data.scenario <- subset(data, cidade %in% scenario$cidades & carga == scenario$carga)
   target.attribute <- scenario$atributo.meta
@@ -144,7 +148,7 @@ cat("Reading the data...\n")
 # 
 # # DATASET retrieval
 # query <- "SELECT * FROM incidencia;"
-# dataset <- sqlQuery(my.conn, query)
+# data <- sqlQuery(my.conn, query)
 
 data <- read.csv("data/dados_cafeeiro_db.csv")
 
@@ -154,18 +158,20 @@ data <- read.csv("data/dados_cafeeiro_db.csv")
 cat("Defining the scenarios and attributes lists...\n")
 
 # Create the scenarios list (based on the dissertation)
-scenarios <- list("Varginha-alta-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-                  "Varginha-baixa-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-                  "Varginha-alta-tx10" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
-                  "Varginha-Novo-alta-tx5" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-                  "Varginha-Novo-baixa-tx5" = list(cidades=c("Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-                  "Varginha-Novo-alta-tx10" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
-                  "Tudo-alta-tx5" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-                  "Tudo-baixa-tx5" = list(cidades=unique(data$cidade), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-                  "Tudo-alta-tx10" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m10"), 
-                  "Tudo-Novo-alta-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-                  "Tudo-Novo-baixa-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-                  "Tudo-Novo-alta-tx10" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m10"))
+scenarios <- list(
+  "Varginha-alta-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
+  "Varginha-baixa-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+  "Varginha-alta-tx10" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
+#   "Varginha-Novo-alta-tx5" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
+#   "Varginha-Novo-baixa-tx5" = list(cidades=c("Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+#   "Varginha-Novo-alta-tx10" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
+  "Tudo-alta-tx5" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m5"), 
+  "Tudo-baixa-tx5" = list(cidades=unique(data$cidade), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+  "Tudo-alta-tx10" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m10")
+#   "Tudo-Novo-alta-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
+#   "Tudo-Novo-baixa-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+#   "Tudo-Novo-alta-tx10" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m10")
+  )
 
 # Create the attributes list (based on the dissertation)
 attributes <- c("lavoura", "tmax_pinf", "tmin_pinf", "tmed_pinf", 
