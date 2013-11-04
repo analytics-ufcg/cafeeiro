@@ -2,6 +2,10 @@ rm(list = ls())
 
 # Read the dataset
 dataset <- read.csv2("data/dados_cafeeiro.csv", header = T)
+
+# ------------------------------------------------------------------------------
+# TRANSFORM "mes", "ano" IN "dia"
+# ------------------------------------------------------------------------------
 fixed.day <- 25
 
 # From month abbreviation in portuguese to month name in english
@@ -19,5 +23,16 @@ dataset$ano <- NULL
 # Reorganize the dataset
 dataset <- dataset[,c(1, ncol(dataset), 2:(ncol(dataset)-1))]
 
-# Write it with another name
+# ------------------------------------------------------------------------------
+# Replace the NA values from "thur95_pinf" with -1
+# ------------------------------------------------------------------------------
+
+# dataset$thur95_pinf <- as.numeric(as.character(dataset$thur95_pinf))
+# 
+# dataset[is.na(dataset[,"thur95_pinf"]), "thur95_pinf"] <- -1
+
+# ------------------------------------------------------------------------------
+# Write a new dataset: dados_cafeeiro_db.csv
+# ------------------------------------------------------------------------------
 write.csv(dataset, file="data/dados_cafeeiro_db.csv", row.names = F)
+

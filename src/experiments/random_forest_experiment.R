@@ -8,6 +8,8 @@ library(randomForest)
 library(plyr)
 library(ROCR)
 
+source("src/experiments/prediction_evaluator.R")
+
 ################################################################################
 # FUNCTIONS
 ################################################################################
@@ -16,16 +18,24 @@ TrainTestRandomForest <- function(train, test){
   # The test has only the independent variables
   # Obs.: the target.attribute is always the last attribute of the train data
   
-  # TODO: 
-  # * Run Classification with Random Forest with the same parameters of the dissertation
-  # * Do the predictions in the test set and reset this vector (this is a binary, 0 or 1 vector)
-  predictions <- rep(0, nrow(test))
-  
-  # DICA:
+  # From dissertation:
+  # * nº de árvores: 100 
   # * atributos aleatórios: 8 
   # * nível máximo por árvore: 8 
-  # * nº de árvores: 100 
-  # * FALTA pegar os outros parametros default do WEKA para checar se são o mesmo dos default do R
+  
+  # Replace the NA values from "thur95_pinf" with -1
+  if ("thur95_pinf" %in% colnames(train)){
+    train[is.na(train[, "thur95_pinf"]), "thur95_pinf"] <- -1
+    test[is.na(test[, "thur95_pinf"]), "thur95_pinf"] <- -1
+  }
+  
+  # Train the RandomForest
+  x <- train[,-ncol(train)]
+  y <- factor(train[,ncol(train)])
+  
+  # Test the RandomForest
+  r.tree <- randomForest(x, y, xtest = test, ntree = 100, mtry = 8)
+  predictions <- as.numeric(r.tree$test$predicted)
   
   return(predictions)
 }
@@ -59,15 +69,11 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
     
     # --------------------------------------------------------------------------
     # Train and Predict the Test values with the RandomForest
-    
-    # TODO: Uncomment this when finished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # predictions <- TrainTestRandomForest(train, test)
-    
-    # TODO: Comment this when finished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    predictions <- sample(0:1, length(fold.rows), replace = T)
+    predictions <- TrainTestRandomForest(train, test)
     
     # --------------------------------------------------------------------------
-    # Evaluate the predictions    
+    # Evaluate the predictions
+    # TODO: Correct BUG! Implement our evaluator.
     pred <- prediction(predictions, test.target)
     
     acc <- performance(pred, measure = "acc")@y.values[[1]][2]
@@ -79,24 +85,31 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
     auc <- performance(pred, measure = "auc")@y.values[[1]][1]
     
     # Store thre result
-    result <- rbind(result, data.frame(model = "Random Forest",
-                                       fold = fold,
-                                       accuracy = acc, error = err,
-                                       sensitivity = sens, specificity = spec,
+    result <- rbind(result, data.frame(acc = acc, err = err,
+                                       sens = sens, spec = spec,
                                        fprate = fprate, tprate = tprate,
                                        auc = auc))
 
     # Remove the fold.rows from the rows vector (to not be selected in the next iteration)
     rows <- rows[-fold.rows]
   }
+  result <- colMeans(result)
   
-  return(result)
+  final.cv <- data.frame(model = "Random Forest",
+                         accuracy = result["acc"], error = result["err"],
+                         sensitivity = result["sens"], specificity = result["spec"],
+                         fprate = result["fprate"], tprate = result["tprate"],
+                         auc = result["auc"])
+  
+  return(final.cv)
 }
 
 RunByAttributeSubset <- function(attribute.subset, target.attribute, data.scenario){
 
   # Select data: attribute.subset + target.attribute
   data.scenario.atts <- data.scenario[,c(attribute.subset, target.attribute)]
+  
+  # PROBLEM: We did not rebalanced the classes!
   
   # Run 10-Fold Cross-Validation and return the result
   return(Run10FoldCrossValidation(data.scenario.atts))
@@ -177,5 +190,8 @@ colnames(result)[1] <- "scenario"
 # ------------------------------------------------------------------------------
 # Persist the results
 # ------------------------------------------------------------------------------
+output.dir <- "data/experiments"
+dir.create(output.dir, showWarnings=F)
+
 cat("Persisting the results...\n")
-write.csv(result, file = "data/experiment_random_forest_10foldCV.csv", row.names = F)
+write.csv(result, file = paste(output.dir, "/RF_10foldCV.csv", sep = ""), row.names = F)
