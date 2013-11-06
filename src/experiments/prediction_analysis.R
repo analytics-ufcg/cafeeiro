@@ -18,7 +18,7 @@ theme_set(theme_bw())
 output.dir <- "data/analysis"
 dir.create(output.dir, showWarnings=F)
 
-pdf(paste(output.dir, "/Avaliações_Por_Cenário_RF_10CV.pdf", sep = ""), width=12, height=9)
+pdf(paste(output.dir, "/Avaliações_Por_Cenário_RF_10CV.pdf", sep = ""), width=10, height=7)
 print(ggplot(rf.exp) +
         geom_boxplot(aes(x=scenario, y=accuracy)) +
         ylab("Acurácia") + xlab("Cenário") + 
@@ -46,7 +46,7 @@ print(ggplot(rf.exp) +
 dev.off()
 
 
-pdf(paste(output.dir, "/Avaliações_Por_Cenário_RF_10CV.pdf", sep = ""), width=12, height=9)
+pdf(paste(output.dir, "/Avaliações_Por_Cenário_RF_10CV.pdf", sep = ""), width=8, height=6)
 print(ggplot(rf.exp) +
         geom_boxplot(aes(x=scenario, y=accuracy)) +
         ylab("Acurácia") + xlab("Cenário") + 
@@ -100,3 +100,8 @@ print(ggplot(rf.exp) +
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 dev.off()
 
+# TODO: Create gráhic with IC 
+# print(ggplot(rf.exp) +
+#         geom_boxplot(aes(x=attribute.method, y=accuracy)) +
+#         ylab("Acurácia") + xlab("Cenário") + facet_wrap(~scenario)+ 
+#         theme(axis.text.x = element_text(angle=45, hjust=1)))
