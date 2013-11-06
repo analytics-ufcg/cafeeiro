@@ -1,4 +1,4 @@
-rm(list = ls())
+# rm(list = ls())
 
 ################################################################################
 # SOURCE() and LIBRARY()
@@ -111,10 +111,7 @@ RunByAttributeSubset <- function(attribute.subset, target.attribute, data.scenar
   
   # Select data: attribute.subset + target.attribute
   data.scenario.atts <- data.scenario[,c(attribute.subset, target.attribute)]
-  
-  # PROBLEM: We did not rebalanced the classes!
-#   SMOTE(as.formula(target.attribute, "~ ."), data.scenario.atts)
-  
+    
   # Run 10-Fold Cross-Validation and return the result
   return(Run10FoldCrossValidation(data.scenario.atts))
   
@@ -126,6 +123,21 @@ RunByScenario <- function(scenario, attributes, data){
   data.scenario <- subset(data, cidade %in% scenario$cidades & carga == scenario$carga)
   target.attribute <- scenario$atributo.meta
   
+  # ----------------------------------------------------------------------------
+  # Rebalancing classes to the scenarios with the following characteristics:
+  #   * Carga = alta and atributo.meta = taxa_inf_m10
+  #   * Carga = baixa and atributo.meta = taxa_inf_m5
+  # ----------------------------------------------------------------------------
+  if ((scenario$carga == "alta" & scenario$atributo.meta == "taxa_inf_m10") 
+      | (scenario$carga == "baixa" & scenario$atributo.meta == "taxa_inf_m5")){
+    # Casting the target.attribute to factor
+    data.scenario[,target.attribute] <- as.factor(data.scenario[,target.attribute])
+    # Running the SMOTE balancing method
+    data.scenario <- SMOTE(as.formula(paste(target.attribute, "~ .")), data.scenario, perc.over=250, perc.under=150)
+    # Re-Casting the target.attribute to integer
+    data.scenario[,target.attribute] <- as.integer(as.character(data.scenario[,target.attribute]))
+  }
+    
   # For each attribute subset do... and RETURN
   result <- ldply(attributes, RunByAttributeSubset, target.attribute, data.scenario, .progress = "text")
   colnames(result)[1] <- "attribute.method"
