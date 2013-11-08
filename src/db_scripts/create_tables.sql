@@ -39,3 +39,23 @@ CREATE TABLE IF NOT EXISTS incidencia (
 
     PRIMARY KEY            (id_incidencia)
 );
+
+
+-- =========== TABLE: EXPERIMENT =========== 
+
+CREATE TABLE IF NOT EXISTS experiment (
+    id_experiment          AUTO_INCREMENT,
+    run                    INTEGER,
+    scenario               VARCHAR(150),
+    attribute_method       VARCHAR(150),
+    model                  VARCHAR(150),
+    accuracy               NUMERIC,
+    error                  NUMERIC,
+    sensitivity            NUMERIC,
+    specificity            NUMERIC,
+    fprate                 NUMERIC,
+    tprate                 NUMERIC,
+    auc                    NUMERIC,
+
+    PRIMARY KEY            (id_experiment)
+);
