@@ -2,13 +2,13 @@
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
-	<title>Cafeeiro</title>
+	<title id="titulo">Cafeeiro</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
 	<!-- CSS -->
-	<link href="css/stocks.css" rel="stylesheet">
+	<link href="css/cafeeiro.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="css/datepicker.css" rel="stylesheet">
@@ -33,40 +33,51 @@
 		<!-- Begin page content -->
 		<div id="content_bar" class="container">
         	<div id="top_bar" class="hero-unit">
-          		<h1>Cafeeiro<br>
+          		<h1 id="titulo">Cafeeiro<br>
           			<!-- Subtitle -->
-          			<small>Colocar subtitulo aqui</small>
+          			<small>Alerta de Progresso da Ferrugem do Cafeeiro</small>
           		</h1>
         	</div>
 
         	<div id="central_bar" class="tabbable">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#pane1" data-toggle="tab">Pesquisa Empresas</a></li>
-					<li><a href="#pane2" data-toggle="tab">TOP Ações</a></li>
+					<li class="active"><a href="#pane1" data-toggle="tab">Análise dos Atributos</a></li>
+					<li><a href="#pane2" data-toggle="tab">Análise da Predição</a></li>
 				</ul>
 				<div class="tab-content">
 					
-					<!-- TAB PESQUISA EMPRESA -->
+					<!-- Análise dos atributos -->
 					<div id="pane1" class="tab-pane active">
 				    	<form id ="search_form" class = "form-inline" method="GET">
 			        		<fieldset>
-			        			<!-- <legend>Empresas Cadastradas</legend> -->
-			        			<label> Buscar por </label>
+			        			<!-- <legend>Cenários apresentados</legend> -->
 			        			<select id = "search_type" name="search_type" style='width:auto;'>
-									<option>CNPJ</option>
-									<option>CVM</option>
-									<option>ISIN</option>
+									<option>Cenário</option>
 									<option disabled>- - - - - - - -</option>
-									<option>Setor</option>
-									<option>Sub-Setor</option>
-									<option>Segmento</option>
 								</select> 
-								<div class="input-append">
-				    				<input id="text_area" name="text_area" class = "input-xlarge" type="text" placeholder="Palavra-Chave..." data-provide="typeahead">
-			    					<button id="go_search" type="submit" class="btn" data-loading-text="Carregando...">Search</button>
-			    				</div>
+								<select id = "search_type" name="search_type" style='width:auto;'>
+									<option>Cidade</option>
+									<option disabled>- - - - - - - -</option>
+								</select> 
+								<select id = "search_type" name="search_type" style='width:auto;'>
+									<option>Mês</option>
+									<option disabled>- - - - - - - -</option>
+								</select> 
+								<select id = "search_type" name="search_type" style='width:auto;'>
+									<option>Lavoura</option>
+									<option disabled>- - - - - - - -</option>
+								</select> 
 			        		</fieldset>
 			        	</form>
+			        	<!-- <legend>Análise Temporal e Atemporal</legend> -->
+			        	<div id="central_bar" class="tabbable">
+			        		<ul class="nav nav-tabs">
+								<li class="active"><a href="#sub_pane1" data-toggle="tab">Temporal</a></li>
+								<li><a href="#sub_pane2" data-toggle="tab">Atemporal</a></li>
+							</ul>
+			        	</div>
+
+			        	<!-- <legend>Codigo provavelmente util no futuro</legend> 
 			        	<div id="inner_central_bar" class="container"></div>
 			        	<div id="ts_news_container_search" title="Série Temporal" class="container">
 			        		<div id="loading_ts" style="display:none"><center><img src="img/ajax-loader.gif"></center></div>
@@ -79,43 +90,21 @@
 							    <div id="estadao" style="margin-left: 510px;"></div>
 							</div>
 			        	</div>
+			        	-->
 				    </div>
 
 					<!-- TAB TOP -->
 				    <div id="pane2" class="tab-pane">
 				    	<form id ="top_acoes_form" class = "form-inline" method="GET">
 							<fieldset>
-								<label>TOP</label>
-								<input id = "top_spinner" name = "top_n" type = "text" class = "input-mini" value="10"></input>
-								<label> Agrupamento </label>
-								<select id = "top_grouping" name="top_grouping" style='width:auto;'>
-									<option>Ação</option>
+								<!-- <legend>Cenários apresentados</legend> -->
+			        			<select id = "search_type" name="search_type" style='width:auto;'>
+									<option>Cenário</option>
 									<option disabled>- - - - - - - -</option>
-									<option>Setor</option>
-									<option>Sub-Setor</option>
-									<option>Segmento</option>
 								</select> 
-								<label> Métrica </label>
-								<select id = "top_metric" name="top_metric" style='width:auto;'>
-									<option>Crescimento</option>
-									<option>Queda</option>
-									<option>Maior Liquidez</option>
-									<option>Menor Liquidez</option>
-									<option>Oscilação</option>
-								</select> 
-								<label> Data Inicial </label>  
-									<div class="input-append date" id="start_date_wrapper" data-date data-date-format="dd/mm/yyyy">
-										<input class="input-small" id="start_date" name="start_date_top" type="text" placeholder="dd/mm/aaaa" value='dd/mm/aaaa' maxlength="10">
-										<span class="add-on"><i class="icon-calendar"></i></span>
-									</div>
-								<label> Data Final </label>
-									<div class="input-append date date_div" id="end_date_wrapper" data-date data-date-format="dd/mm/yyyy"> 
-										<input class="input-small" id="end_date" name="end_date_top" type="text" placeholder="dd/mm/aaaa" value='dd/mm/aaaa' maxlength="10">
-										<span class="add-on"><i class="icon-calendar"></i></span>
-									</div>
-								<button id="go_top10" type="submit" class="btn" data-loading-text="Carregando...">Submit</button>
 							</fieldset>
 						</form>
+						<!-- <legend>Codigo reusavel</legend>
 						<div id="central_bar_top" class="container"></div>
 						<div id="ts_news_container_top" title="Série Temporal" class="container">
 			        		<div id="loading_ts" style="display:none"><center><img src="img/ajax-loader.gif"></center></div>
@@ -128,6 +117,16 @@
 							    <div id="estadao" style="margin-left: 510px;">aaa</div>
 							</div>
 			        	</div>
+			        	-->
+
+						<!-- <legend>Análise Temporal e Atemporal</legend> -->
+			        	<div id="central_bar" class="tabbable">
+			        		<ul class="nav nav-tabs">
+								<li class="active"><a href="#sub_pane1" data-toggle="tab">Análise Temporal</a></li>
+								<li><a href="#sub_pane2" data-toggle="tab">Comparação de Modelos</a></li>
+							</ul>
+			        	</div>
+
 				    </div>
 				</div>
 			</div>
@@ -135,18 +134,13 @@
     </div>
     <div id="footer">
 	    <div class="container">
-	        <p class="muted credit text-center">Projetado e Desenvolvido pelo time <em>Stocks Analytics</em><br>
-	        	<a class='text-info' target='_blank' href='http://br.linkedin.com/pub/augusto-queiroz-de-macedo/22/b98/552'>Augusto Queiroz</a>,
-	        	<a class='text-info' target='_blank' href='http://lattes.cnpq.br/6027095454406194 '>Danilo Lacerda</a>,
-	        	<a class='muted' target='_blank' href=''>Elias Paulino</a>,
-	        	<a class='text-info' target='_blank' href='www.lsd.ufcg.edu.br/~ricardo'>Ricardo Araújo</a> (Scrum Master),
-	        	<a class='text-info' target='_blank' href='www.dsc.ufcg.edu.br/~raquel'>Raquel Lopes</a> (Líder Técnico) e 
-				<a class='muted' target='_blank' href=''>José Gildo</a> (Cliente)
-	        </p>
+
 	        <p class="muted credit text-center">
+	        	<a class="text-success" target='_blank' href='https://sites.google.com/a/computacao.ufcg.edu.br/analytics/'> UFCG - FRH <em>Analytics </em><br>
+	        	</a>
 	        	Powered by <a class='text-success' target='_blank' href='http://twitter.github.io/bootstrap/'>Bootstrap</a>,
 	        	<a class='text-success' target='_blank' href='http://www.vertica.com/'>Vertica</a> |
-				<a class='text-success' target='_blank' href='https://github.com/analyticsUfcg/stocks'>View source on GitHub</a>
+				<a class='text-success' target='_blank' href='https://github.com/analyticsUfcg/cafeeiro'>View source on GitHub</a>
 			</p>
         </div>
     </div>
