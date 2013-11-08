@@ -11,3 +11,11 @@ NULL AS 'NA'     -- NULL values are defined as NA
 SKIP 1;          -- Skip the header
 
 --select * from incidencia;
+
+-- ================= LOAD the EXPERIMENT table =================
+COPY incidencia
+FROM LOCAL '/home/augusto/git/cafeeiro/data/dados_cafeeiro_db.csv'
+DELIMITER ','    -- Column Delimiter
+ENCLOSED BY '"'  -- String delimiter
+NULL AS 'NA'     -- NULL values are defined as NA
+SKIP 1;          -- Skip the header

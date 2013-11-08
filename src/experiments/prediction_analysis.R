@@ -75,33 +75,33 @@ dev.off()
 
 pdf(paste(output.dir, "/Avaliações_Por_Sel_Atributos_RF_10CV.pdf", sep = ""), width=10, height=8)
 print(ggplot(rf.exp) +
-        geom_boxplot(aes(x=attribute.method, y=accuracy)) +
+        geom_boxplot(aes(x=attribute_method, y=accuracy)) +
         ylab("Acurácia") + xlab("Método de Seleção de Atributos") + 
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 
 print(ggplot(rf.exp) +
-        geom_boxplot(aes(x=attribute.method, y=error)) +
+        geom_boxplot(aes(x=attribute_method, y=error)) +
         ylab("Erro") + xlab("Método de Seleção de Atributos") + 
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 
 print(ggplot(rf.exp) +
-        geom_boxplot(aes(x=attribute.method, y=sensitivity)) +
+        geom_boxplot(aes(x=attribute_method, y=sensitivity)) +
         ylab("Sensitividade") + xlab("Método de Seleção de Atributos") + 
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 
 print(ggplot(rf.exp) +
-        geom_boxplot(aes(x=attribute.method, y=specificity)) +
+        geom_boxplot(aes(x=attribute_method, y=specificity)) +
         ylab("Especificidade") + xlab("Método de Seleção de Atributos") + 
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 
 print(ggplot(rf.exp) +
-        geom_boxplot(aes(x=attribute.method, y=auc)) +
+        geom_boxplot(aes(x=attribute_method, y=auc)) +
         ylab("AUC") + xlab("Método de Seleção de Atributos") + 
         theme(axis.text.x = element_text(angle=45, hjust=1)))
 dev.off()
 
 # TODO: Create gráhic with IC 
 # print(ggplot(rf.exp) +
-#         geom_boxplot(aes(x=attribute.method, y=accuracy)) +
+#         geom_boxplot(aes(x=attribute_method, y=accuracy)) +
 #         ylab("Acurácia") + xlab("Cenário") + facet_wrap(~scenario)+ 
 #         theme(axis.text.x = element_text(angle=45, hjust=1)))

@@ -94,11 +94,11 @@ Run10FoldCrossValidation <- function(data.scenario.atts){
                                        auc = auc))
     
     # Remove the fold.rows from the rows vector (to not be selected in the next iteration)
-    rows <- rows[-fold.rows]
+    rows <- rows[-which(rows %in% fold.rows)]
   }
   result <- colMeans(result)
   
-  final.cv <- data.frame(model = "Random Forest",
+  final.cv <- data.frame(model = "Random Forest - Dissertation",
                          accuracy = result["acc"], error = result["err"],
                          sensitivity = result["sens"], specificity = result["spec"],
                          fprate = result["fprate"], tprate = result["tprate"],
@@ -140,7 +140,7 @@ RunByScenario <- function(scenario, attributes, data){
     
   # For each attribute subset do... and RETURN
   result <- ldply(attributes, RunByAttributeSubset, target.attribute, data.scenario, .progress = "text")
-  colnames(result)[1] <- "attribute.method"
+  colnames(result)[1] <- "attribute_method"
   
   return (result)
 }
@@ -174,12 +174,12 @@ scenarios <- list(
   "Varginha-alta-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
   "Varginha-baixa-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
   "Varginha-alta-tx10" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
-#   "Varginha-Novo-alta-tx5" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-#   "Varginha-Novo-baixa-tx5" = list(cidades=c("Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-#   "Varginha-Novo-alta-tx10" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
   "Tudo-alta-tx5" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m5"), 
   "Tudo-baixa-tx5" = list(cidades=unique(data$cidade), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
   "Tudo-alta-tx10" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m10")
+#   "Varginha-Novo-alta-tx5" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
+#   "Varginha-Novo-baixa-tx5" = list(cidades=c("Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+#   "Varginha-Novo-alta-tx10" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
 #   "Tudo-Novo-alta-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
 #   "Tudo-Novo-baixa-tx5" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
 #   "Tudo-Novo-alta-tx10" = list(cidades=c("Varginha", "Carmo-de-minas", "Boa-esperanca"), carga = "alta", atributo.meta = "taxa_inf_m10")
@@ -202,8 +202,11 @@ attribute.subsets <- list("Subjetivo-Modelagem1" = attributes,
 # RUN THE EXPERIMENT per Scenario
 # ------------------------------------------------------------------------------
 cat("Running the experiment per scenario...\n")
-result <- ldply(scenarios, RunByScenario, attribute.subsets, data)
-colnames(result)[1] <- "scenario"
+num.experiments <- 15
+result <- adply(1:num.experiments, 1, function(df){
+  result <- ldply(scenarios, RunByScenario, attribute.subsets, data)
+}, .progress="text")
+colnames(result)[1:2] <- c("run", "scenario")
 
 # ------------------------------------------------------------------------------
 # Persist the results
@@ -212,4 +215,4 @@ output.dir <- "data/experiments"
 dir.create(output.dir, showWarnings=F)
 
 cat("Persisting the results...\n")
-write.csv(result, file = paste(output.dir, "/RF_10foldCV.csv", sep = ""), row.names = F)
+write.csv(result, file = paste(output.dir, "/RF_Dissertation_10FoldCV.csv", sep = ""), row.names = F)
