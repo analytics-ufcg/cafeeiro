@@ -1,7 +1,7 @@
 rm(list = ls())
 
 # Read the dataset
-dataset <- read.csv2("data/dados_cafeeiro.csv", header = T)
+data <- read.csv2("data/dados_cafeeiro.csv", header = T)
 
 # ------------------------------------------------------------------------------
 # TRANSFORM "mes", "ano" IN "dia"
@@ -14,25 +14,27 @@ MonthName = list("JAN" = "January", "FEV" = "February", "MAR" = "March", "ABR" =
                  "SET" = "September", "OUT" = "October", "NOV" = "November", "DEZ" = "December")
 
 # Define a new column as: "fixed.day month.name year"
-dataset$dia <- paste(fixed.day, MonthName[as.character(dataset$mes)], dataset$ano)
+data$dia <- paste(fixed.day, MonthName[as.character(data$mes)], data$ano)
 
 # Remove the mes and ano
-dataset$mes <- NULL
-dataset$ano <- NULL
+data$mes <- NULL
+data$ano <- NULL
 
-# Reorganize the dataset
-dataset <- dataset[,c(1, ncol(dataset), 2:(ncol(dataset)-1))]
+# Reorganize the data
+data <- data[,c(1, ncol(data), 2:(ncol(data)-1))]
 
-# ------------------------------------------------------------------------------
-# Replace the NA values from "thur95_pinf" with -1
-# ------------------------------------------------------------------------------
-
-# dataset$thur95_pinf <- as.numeric(as.character(dataset$thur95_pinf))
-# 
-# dataset[is.na(dataset[,"thur95_pinf"]), "thur95_pinf"] <- -1
 
 # ------------------------------------------------------------------------------
-# Write a new dataset: dados_cafeeiro_db.csv
+# Cast data to its correct classes
 # ------------------------------------------------------------------------------
-write.csv(dataset, file="data/dados_cafeeiro_db.csv", row.names = F)
+data.classes <- c("factor", "character", rep("factor", 2), rep("numeric", 2), 
+                  rep("integer", 2), rep("numeric", 22))
+for (col in 1:ncol(data)){
+  data[,col] <- do.call(paste("as.", data.classes[col], sep = ""), list(data[,col]))
+}
+
+# ------------------------------------------------------------------------------
+# Write a new data: dados_cafeeiro_db.csv
+# ------------------------------------------------------------------------------
+write.csv(data, file="data/dados_cafeeiro_db.csv", row.names = F)
 

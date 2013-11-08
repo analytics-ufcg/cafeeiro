@@ -3,7 +3,7 @@
 ################################################################################
 # SOURCE() and LIBRARY()
 ################################################################################
-# library(RODBC)
+library(RODBC)
 library(randomForest)
 library(plyr)
 library(ROCR)
@@ -157,8 +157,8 @@ cat("Reading the data...\n")
 # 
 # # DATABASE CONNECTION
 # my.conn <- odbcConnect("CafeeiroDSN")
-# 
-# # DATASET retrieval
+# # 
+# # # DATASET retrieval
 # query <- "SELECT * FROM incidencia;"
 # data <- sqlQuery(my.conn, query)
 

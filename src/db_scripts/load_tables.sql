@@ -1,6 +1,6 @@
 -- ==================== BULK LOAD DATA SCRIPT ====================
 
--- We consider that the data is completely under the "/home/augusto/git/cafeeiro/data/dados_cafeeiro_db.csv" directory
+-- We consider that the data is completely under the "/home/augusto/git/cafeeiro/data" directory
 
 -- ================= LOAD the INCIDENCIA table =================
 COPY incidencia
