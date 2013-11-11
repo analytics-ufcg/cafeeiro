@@ -1,6 +1,7 @@
 rm(list = ls())
 
 library(ggplot2)
+library(plyr)
 library(boot)
 
 ################################################################################
@@ -22,7 +23,7 @@ PlotMetricCI <- function(metric.ci, metric.name, output.dir){
   
   limits <- aes(ymin=lower_ci, ymax=upper_ci)
   
-  png(paste(output.dir, "/IC_", metric.name, "_Por_Cenário_SelAtributos_10FoldCV.png", sep = ""), width=700, height=600)
+  png(paste(output.dir, "/IC-", metric.name, "_Por_Cenário_SelAtributos-RF_Dissertation-10FoldCV.png", sep = ""), width=700, height=600)
   print(ggplot(metric.ci, aes(x=attribute_method, y=mean_ci)) +
           geom_point() + geom_errorbar(limits) + 
           ylab(metric.name) + xlab("Cenário") + facet_wrap(~scenario)+ 
