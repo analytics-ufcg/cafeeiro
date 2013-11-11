@@ -12,8 +12,8 @@
     # Prepare the query
     if ($scenario == 'Varginha_alta_tx5'){
         $query = $query_map['get_scenario_varginha_alta_tx5'];
-    } elseif ($scenario == 'Tudo_baixa_tx5') {
-        $query = $query_map['get_scenario_tudo_baixa_tx5'];
+    } elseif ($scenario == 'Tudo_alta_tx5') {
+        $query = $query_map['get_scenario_tudo_alta_tx5'];
     } else{
         $query = '';
     }
@@ -36,4 +36,3 @@
     # Close the connection
     odbc_close($conn);
 ?>
-

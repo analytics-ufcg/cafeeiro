@@ -11,21 +11,19 @@
 	<link href="css/cafeeiro.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
-	<link href="css/datepicker.css" rel="stylesheet">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	
 	<!-- LIBRARIES -->
 	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 	<!-- CONTROLLER -->
-	<script type="text/javascript" src="controller/controllers.js"></script>
+	<script type="text/javascript" src="controller/controller.js"></script>
 	
 	<!-- VIEW -->
-	<script type="text/javascript" src="view/view_search_tab.js"></script>
+	<!--<script type="text/javascript" src="view/view_search_tab.js"></script>
 	<script type="text/javascript" src="view/view_top_tab.js"></script>
 	<script type="text/javascript" src="view/view_ts_dialog.js"></script>
-
+	-->
 </head>
 <body>
 	<!-- Part 1: Wrap all page content here -->
@@ -41,29 +39,29 @@
 
         	<div id="central_bar" class="tabbable">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#pane1" data-toggle="tab">Análise dos Atributos</a></li>
-					<li><a href="#pane2" data-toggle="tab">Análise da Predição</a></li>
+					<li class="active"><a href="#att_pane" data-toggle="tab">Análise dos Atributos</a></li>
+					<li><a href="#prediction_pane" data-toggle="tab">Análise da Predição</a></li>
 				</ul>
 				<div class="tab-content">
 					
 					<!-- Análise dos atributos -->
-					<div id="pane1" class="tab-pane active">
-				    	<form id ="search_form" class = "form-inline" method="GET">
+					<div id="att_pane" class="tab-pane active">
+				    	<form id ="scenario_data_analysis" class = "form-inline" method="GET">
 			        		<fieldset>
 			        			<!-- <legend>Cenários apresentados</legend> -->
-			        			<select id = "search_type" name="search_type" style='width:auto;'>
+			        			<select id = "id_scenario" name="search_scenario" style='width:auto;'>
 									<option>Cenário</option>
 									<option disabled>- - - - - - - -</option>
 								</select> 
-								<select id = "search_type" name="search_type" style='width:auto;'>
+								<select id = "id_city" name="search_city" style='width:auto;'>
 									<option>Cidade</option>
 									<option disabled>- - - - - - - -</option>
 								</select> 
-								<select id = "search_type" name="search_type" style='width:auto;'>
+								<select id = "id_month" name="search_month" style='width:auto;'>
 									<option>Mês</option>
 									<option disabled>- - - - - - - -</option>
 								</select> 
-								<select id = "search_type" name="search_type" style='width:auto;'>
+								<select id = "id_farming" name="search_farming" style='width:auto;'>
 									<option>Lavoura</option>
 									<option disabled>- - - - - - - -</option>
 								</select> 
@@ -94,30 +92,13 @@
 				    </div>
 
 					<!-- TAB TOP -->
-				    <div id="pane2" class="tab-pane">
-				    	<form id ="top_acoes_form" class = "form-inline" method="GET">
-							<fieldset>
-								<!-- <legend>Cenários apresentados</legend> -->
-			        			<select id = "search_type" name="search_type" style='width:auto;'>
-									<option>Cenário</option>
-									<option disabled>- - - - - - - -</option>
-								</select> 
-							</fieldset>
-						</form>
-						<!-- <legend>Codigo reusavel</legend>
-						<div id="central_bar_top" class="container"></div>
-						<div id="ts_news_container_top" title="Série Temporal" class="container">
-			        		<div id="loading_ts" style="display:none"><center><img src="img/ajax-loader.gif"></center></div>
-			        		<div id="time_serie"></div>
-			        		<br/>
-		        			<div id="correlation_pdf" style="text-align:center"></div>
-							<br/>
-							<div id="news" style="width: 100%; overflow: hidden;">
-							    <div id="folha_sao_paulo" style="width: 490px; float: left;">saaa</div>
-							    <div id="estadao" style="margin-left: 510px;">aaa</div>
-							</div>
-			        	</div>
-			        	-->
+				    <div id="prediction_pane" class="tab-pane">
+				    		Cenários apresentados
+			        		<select id = "prediction_scenario_select" name="prediction_scenario_select" style='width:auto;'>
+								<option>teste2</option>
+								<option>teste</option>
+							</select> 
+
 
 						<!-- <legend>Análise Temporal e Atemporal</legend> -->
 			        	<div id="central_bar" class="tabbable">
