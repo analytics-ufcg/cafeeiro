@@ -2,9 +2,9 @@
     include 'global_model.php';
 
     # Read the GET parameters
-    // $scenario = $_GET['scenario'];
+    $scenario = $_GET['scenario'];
 
-    $scenario  = 'Varginha_alta_tx10';
+    //$scenario  = 'Varginha_alta_tx10';
 
     # Connect to the Database
     $conn = odbc_connect($dsn,'','') or die ("CONNECTION ERROR\n");
@@ -30,8 +30,8 @@
         }
     }
 
-    print_r(array($incidencia_rows));
-    // echo json_encode(array($incidencia_rows));
+    //print_r(array($incidencia_rows));
+    echo json_encode(array($incidencia_rows));
     
     # Close the connection
     odbc_close($conn);
