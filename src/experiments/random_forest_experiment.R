@@ -9,8 +9,6 @@ library(plyr)
 library(ROCR)
 library(DMwR)
 
-source("src/experiments/prediction_evaluator.R")
-
 ################################################################################
 # FUNCTIONS
 ################################################################################
@@ -172,11 +170,11 @@ cat("Defining the scenarios and attributes lists...\n")
 # Create the scenarios list (based on the dissertation)
 scenarios <- list(
   "Varginha-alta-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-  "Varginha-baixa-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-  "Varginha-alta-tx10" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
-  "Tudo-alta-tx5" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m5"), 
-  "Tudo-baixa-tx5" = list(cidades=unique(data$cidade), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
-  "Tudo-alta-tx10" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m10")
+  "Tudo-alta-tx5" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m5")
+#   "Varginha-baixa-tx5" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+#   "Varginha-alta-tx10" = list(cidades=c("Varginha-antigo", "Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 
+#   "Tudo-baixa-tx5" = list(cidades=unique(data$cidade), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
+#   "Tudo-alta-tx10" = list(cidades=unique(data$cidade), carga = "alta", atributo.meta = "taxa_inf_m10"),
 #   "Varginha-Novo-alta-tx5" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m5"), 
 #   "Varginha-Novo-baixa-tx5" = list(cidades=c("Varginha"), carga = "baixa", atributo.meta = "taxa_inf_m5"), 
 #   "Varginha-Novo-alta-tx10" = list(cidades=c("Varginha"), carga = "alta", atributo.meta = "taxa_inf_m10"), 

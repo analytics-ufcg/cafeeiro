@@ -4,15 +4,15 @@
     # Read the GET parameters
     $scenario = $_GET['scenario'];
 
-    //$scenario  = 'Varginha_alta_tx10';
+    $scenario  = 'Varginha-alta-tx5';
 
     # Connect to the Database
     $conn = odbc_connect($dsn,'','') or die ("CONNECTION ERROR\n");
 
     # Prepare the query
-    if ($scenario == 'Varginha_alta_tx5'){
+    if ($scenario == 'Varginha-alta-tx5'){
         $query = $query_map['get_scenario_varginha_alta_tx5'];
-    } elseif ($scenario == 'Tudo_alta_tx5') {
+    } elseif ($scenario == 'Tudo-alta-tx5') {
         $query = $query_map['get_scenario_tudo_alta_tx5'];
     } else{
         $query = '';
@@ -30,7 +30,7 @@
         }
     }
 
-    //print_r(array($incidencia_rows));
+    print_r(array($incidencia_rows));
     echo json_encode(array($incidencia_rows));
     
     # Close the connection

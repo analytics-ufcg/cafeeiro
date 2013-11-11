@@ -23,10 +23,10 @@ PlotMetricCI <- function(metric.ci, metric.name, output.dir){
   
   limits <- aes(ymin=lower_ci, ymax=upper_ci)
   
-  png(paste(output.dir, "/IC-", metric.name, "_Por_Cenário_SelAtributos-RF_Dissertation-10FoldCV.png", sep = ""), width=700, height=600)
+  png(paste(output.dir, "/IC-", metric.name, "_Por_Cenário_SelAtributos-RF_Dissertation-10FoldCV.png", sep = ""), width=700, height=500)
   print(ggplot(metric.ci, aes(x=attribute_method, y=mean_ci)) +
           geom_point() + geom_errorbar(limits) + 
-          ylab(metric.name) + xlab("Cenário") + facet_wrap(~scenario)+ 
+          ylab(metric.name) + xlab("Método de Seleção de Atributos") + facet_wrap(~scenario)+ 
           theme(axis.text.x = element_text(angle=45, hjust=1)))  
   dev.off()
 }

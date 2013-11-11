@@ -3,11 +3,7 @@
 */
 function main_controller(){
 
-	/*
-		TAB SEARCH
-	*/
 	$("#prediction_scenario_select").change(function(e){
-		console.log("teste");
 		// Avoid refreshing the page
 		run_search();
 		
@@ -27,7 +23,7 @@ function run_search(){
 		success: function(response) {
 			// $("#go_search").button('reset');
 			console.log(response);
-			console.log("teste");
+			console.log("klaklak");
 		}
 	});
 	return false;
