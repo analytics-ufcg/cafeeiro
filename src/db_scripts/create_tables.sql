@@ -5,8 +5,6 @@
 CREATE TABLE IF NOT EXISTS incidencia (
     id_incidencia          AUTO_INCREMENT,
     cidade                 VARCHAR(50),
-    -- mes                    VARCHAR(15),
-    -- ano                    INTEGER(4),
     dia                    TIMESTAMP,
     lavoura                VARCHAR(15),
     carga                  VARCHAR(10),
