@@ -20,5 +20,16 @@
 			'SELECT dia, incidencia, taxa_inf_m5
 			FROM incidencia
 			WHERE carga = \'alta\'',
+
+		//Model Comparison Tab
+		"get_prediction_varginha_alta_tx5" =>
+			'SELECT scenario, attribute_method, model, accuracy, error, sensitivity, specificity, fprate, tprate, auc
+			FROM experiment
+			WHERE scenario = \'Varginha-alta-tx5\'',
+      
+      	"get_prediction_tudo_alta_tx5" =>
+			'SELECT scenario, attribute_method, model, accuracy, error, sensitivity, specificity, fprate, tprate, auc
+			FROM experiment
+			WHERE scenario = \'Tudo-alta-tx5\''
 	);
 ?>
