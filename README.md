@@ -11,10 +11,6 @@ Código fonte do Projeto
 
 Relatórios produzidos durante o ciclo
 
-# data
-
-Dados públicos compartilhados entre os colaboradores
-
 # releases
 
 Resultados de cada sprint
