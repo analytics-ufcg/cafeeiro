@@ -5,18 +5,13 @@ function main_controller(){
 
 	$("#prediction_scenario_select").change(function(e){
 		// Avoid refreshing the page
-		get_prediction_data();
+		get_incidencia_data();
 	});
-
-	$('a[data-toggle="tab"]').on('shown', function (e) {
-		e.target // activated tab
-		e.relatedTarget // previous tab
-	})
 }
-function get_prediction_data(){
+
+function get_incidencia_data(){
 	// $("#go_search").button('loading');
 	var call_data = 'scenario=' + $('#prediction_scenario_select').val();
-	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
@@ -30,17 +25,23 @@ function get_prediction_data(){
 		}
 	});
 
+	return false;
+}
+
+function get_experiment_data(){
+
+	var call_data = 'scenario=' + $('#prediction_scenario_select').val();
+	console.log(call_data);
+
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
-		url: 'model/model_experiment_by_scenario.php',
-		async: true,
+		url: 'model/model_compare_models_ic.php',
+		async: false,
 		data: call_data,
 		success: function(experiment_table) {
 			console.log(experiment_table);
 			view_prediction_model_comparison(experiment_table);
 		}
 	});
-
-	return false;
 }

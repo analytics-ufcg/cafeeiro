@@ -73,20 +73,6 @@
 							</ul>
 			        	</div>
 
-			        	<!-- <legend>Codigo provavelmente util no futuro</legend> 
-			        	<div id="inner_central_bar" class="container"></div>
-			        	<div id="ts_news_container_search" title="Série Temporal" class="container">
-			        		<div id="loading_ts" style="display:none"><center><img src="img/ajax-loader.gif"></center></div>
-			        		<div id="time_serie"></div>
-			        		<br/>
-		        			<div id="correlation_pdf" style="text-align:center"></div>
-							<br/>
-							<div id="news" style="width: 100%; overflow: hidden;">
-							    <div id="folha_sao_paulo" style="width: 490px; float: left;"></div>
-							    <div id="estadao" style="margin-left: 510px;"></div>
-							</div>
-			        	</div>
-			        	-->
 				    </div>
 
 					<!-- TAB TOP -->
@@ -101,16 +87,39 @@
 
 			        	<div id="central_bar" class="tabbable">
 			        		<ul class="nav nav-tabs">
-								<li class="active"><a href="#sub_pane1" data-toggle="tab">Temporal</a></li>
-								<li><a href="#sub_pane2" data-toggle="tab">Avaliação</a></li>
+								<li class="active"><a href="#prediction_temporal_pane" data-toggle="tab">Análise Temporal</a></li>
+								<li><a href="#prediction_model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 							</ul>
 							<div class="tab-content">
-								<div id="model_temporal_analisys" class="tab-pane">
+								<div id="prediction_temporal_pane" class="tab-pane">
+								</div>
+								<div id="prediction_model_comparison_pane" class="tab-pane">
+									<select id="model_comparison_att" name="model_comparison_att" style='width:auto;'>
+					        			<option>Método de Seleção de Atributos</option>
+					        			<option disabled>------------</option>
+										<option>Subjetivo - Modelagem 1</option>
+										<option>Subjetivo - Modelagem 2</option>
+										<option>Subjetivo - Modelagem 3</option>
+									</select> 
+									
+									<!-- <select id="model_comparison_model" name="model_comparison_model" style='width:auto;'>
+					        			<option>Modelo</option>
+					        			<option disabled>------------</option>
+										<option>Random Forest - Dissertação</option>
+									</select>  -->
+									<select id="model_comparison_metric" name="model_comparison_metric" style='width:auto;'>
+					        			<option>Métrica de Avaliação</option>
+					        			<option disabled>------------</option>
+										<option>Acurácia</option>
+										<option>Erro</option>
+										<option>Sensitividade</option>
+										<option>Especificidade</option>
+										<option>FP-Rate</option>
+										<option>TP-Rate</option>
+										<option>AUC</option>
+									</select>
+								</div>
 
-								</div>
-								<div id="model_comparison_pane" class="tab-pane">
-									Comparison
-								</div>
 							</div>
 			        	</div>
 

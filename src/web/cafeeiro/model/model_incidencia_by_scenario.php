@@ -3,7 +3,7 @@
 
     # Read the GET parameters
     $scenario = $_GET['scenario'];
-
+    
     // $scenario  = 'Tudo-alta-tx5';
 
     # Connect to the Database
