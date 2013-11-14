@@ -11,3 +11,10 @@
  #search_type{
  	margin-left:40px;
  }
+
+#prediction_model_comparison_pane{
+	text-align: left;
+ 	margin-left:5px;
+ 	margin-bottom:5px;
+}
+
