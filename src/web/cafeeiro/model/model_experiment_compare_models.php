@@ -10,5 +10,5 @@
     $metrics  = 'Acurácia,AUC';
 
     # Run the R script!
-    exec("Rscript model/model_experiment_compare_models.R $scenario Satt_methods $metrics")
+    exec("Rscript model/model_experiment_compare_models.R $scenario Satt_methods $metrics");
 ?>
