@@ -98,8 +98,8 @@
 								</div>
 
 								<div id="model_comparison_pane" class="tab-pane row-fluid">
-									<form id="model_comparison_form">
-										<div id="parameters_submit" class="span3">
+									<div id="parameters_submit" class="span3">
+										<form id="model_comparison_form">
 									    	<p><strong>Atributos</strong></p>
 									    	<select id="att_list" name="att_list" multiple class="selectpicker" multiple data-selected-text-format="count>1">
 									    		<option>Subjetivo - Modelagem 1</option>
@@ -121,10 +121,11 @@
 										    <br>
 										    <button type="submit" id="model_comparison_submit_btn" class="btn btn-primary" data-loading-text="Carregando...">Envia
 										    </button>
-										</div>
-									</form>
+										</form>
+									</div>
 
-									<div id="comparison_plot" class="span10">
+									<div id="comparison_plot" class="span8">
+										<!-- <img src='img/plots/prediction-model_comparison-experiment.png'> -->
 									</div>
 								</div>
 							</div>

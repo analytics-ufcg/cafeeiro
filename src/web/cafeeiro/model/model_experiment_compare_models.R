@@ -1,4 +1,4 @@
-rm(list = ls())
+# rm(list = ls())
 
 ################################################################################
 # LIBRARY() and SOURCE()
@@ -12,7 +12,7 @@ source("model/global_model.R")
 ################################################################################
 
 # Read the parameters from the arguments 
-args <- commandArgs(T)
+args <- commandArgs()
 
 # args <- c('Varginha-alta-tx5', 'Subjetivo - Modelagem 1,Subjetivo - Modelagem 2', 'Acurácia,AUC');
 
@@ -75,7 +75,7 @@ ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_met
 
 # Persist the PLOT
 plot.dir <- "img/plots"
-dir.create(plot.dir, showWarnings=F)
+dir.create(plot.dir, showWarnings=T)
 
 plot.width = length(unique(ci.data$model)) * length(metrics) * 300 + 100
 plot.height = 400 * ceiling(length(metrics)/3) + 50
@@ -83,5 +83,3 @@ plot.height = 400 * ceiling(length(metrics)/3) + 50
 png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
 print(ic.plot)
 dev.off()
-
-print("aklkalal")
