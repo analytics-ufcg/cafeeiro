@@ -83,3 +83,5 @@ plot.height = 400 * ceiling(length(metrics)/3) + 50
 png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
 print(ic.plot)
 dev.off()
+
+print("aklkalal")
