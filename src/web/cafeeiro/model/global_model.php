@@ -20,13 +20,5 @@
 			'SELECT dia, incidencia, taxa_inf_m5
 			FROM incidencia
 			WHERE carga = \'alta\';',
-
-		//Used by: model_experiment_compare_models.php
-		"get_experiment_by_scenario_att_method" =>
-			'SELECT run, attribute_method, model, [METRICS]
-			FROM experiment
-			WHERE [ATT_METHODS];'
-
-
 	);
 ?>

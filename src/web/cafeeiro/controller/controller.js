@@ -3,10 +3,19 @@
 */
 function main_controller(){
 
+	$('.selectpicker').selectpicker();
+
 	$("#prediction_scenario_select").change(function(e){
 		// Avoid refreshing the page
 		get_incidencia_data();
 	});
+
+	$("#model_comparison_form").submit(function(e){
+		// Avoid refreshing the page
+		e.preventDefault(); 
+		compare_models_with_ic();
+	});
+
 }
 
 function get_incidencia_data(){
@@ -28,20 +37,25 @@ function get_incidencia_data(){
 	return false;
 }
 
-function get_experiment_data(){
+function compare_models_with_ic(){
+ 	// $("#model_comparison_submit_btn").button('loading');
+	
+	var call_data = 'scenario=' + $('#prediction_scenario_select').val() + 
+					'&att_methods=' + $("#att_list").val().join() + 
+					'&metrics=' + $("#metric_list").val().join();
 
-	var call_data = 'scenario=' + $('#prediction_scenario_select').val();
 	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
-		url: 'model/model_compare_models_ic.php',
-		async: false,
+		url: 'model/model_experiment_compare_models.php',
+		async: true,
 		data: call_data,
-		success: function(experiment_table) {
-			console.log(experiment_table);
-			view_prediction_model_comparison(experiment_table);
+		success: function(empty_response) {
+			// $("#model_comparison_submit_btn").button('reset');
+			console.log(empty_response);
+			view_prediction_model_comparison();
 		}
 	});
 }

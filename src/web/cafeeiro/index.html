@@ -11,10 +11,12 @@
 	<link href="css/cafeeiro.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/bootstrap-select.min.css" rel="stylesheet">
 	
 	<!-- LIBRARIES -->
 	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
 
 	<!-- CONTROLLER -->
 	<script type="text/javascript" src="controller/controller.js"></script>
@@ -87,108 +89,44 @@
 
 			        	<div id="central_bar" class="tabbable">
 			        		<ul class="nav nav-tabs">
-								<li class="active"><a href="#prediction_temporal_pane" data-toggle="tab">Análise Temporal</a></li>
-								<li><a href="#prediction_model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
+								<li class="active"><a href="#temporal_pane" data-toggle="tab">Análise Temporal</a></li>
+								<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 							</ul>
-							<div class="tab-content">
-								<div id="prediction_temporal_pane" class="tab-pane">
+							<div class="tab-content containter-fluid">
+
+								<div id="temporal_pane" class="tab-pane row-fluid">
 								</div>
-								<div id="prediction_model_comparison_pane" class="tab-pane">
-									<!--<select id="model_comparison_att" name="model_comparison_att" style='width:auto;'>
-					        			<option>Método de Seleção de Atributos</option>
-					        			<option disabled>------------</option>
-										<option>Subjetivo - Modelagem 1</option>
-										<option>Subjetivo - Modelagem 2</option>
-										<option>Subjetivo - Modelagem 3</option>
-									</select> 
-									
-									<select id="model_comparison_model" name="model_comparison_model" style='width:auto;'>
-					        			<option>Modelo</option>
-					        			<option disabled>------------</option>
-										<option>Random Forest - Dissertação</option>
-									</select>
-									<select id="model_comparison_metric" name="model_comparison_metric" style='width:auto;'>
-					        			<option>Métrica de Avaliação</option>
-					        			<option disabled>------------</option>
-										<option>Acurácia</option>
-										<option>Erro</option>
-										<option>Sensitividade</option>
-										<option>Especificidade</option>
-										<option>FP-Rate</option>
-										<option>TP-Rate</option>
-										<option>AUC</option>
-									</select>-->
 
-									<!--<br>Atributos:</br>
-									<input id="check_box_att1" type="checkbox" data-label="Att 1"/>
-									<input id="check_box_att2" type="checkbox" data-label="Att 2"/>
-									<input id="check_box_att3" type="checkbox" data-label="Att 3"/>
+								<div id="model_comparison_pane" class="tab-pane row-fluid">
+									<form id="model_comparison_form">
+										<div id="parameters_submit" class="span3">
+									    	<p><strong>Atributos</strong></p>
+									    	<select id="att_list" name="att_list" multiple class="selectpicker" multiple data-selected-text-format="count>1">
+									    		<option>Subjetivo - Modelagem 1</option>
+									    		<option>Subjetivo - Modelagem 2</option>
+									    		<option>Subjetivo - Modelagem 3</option>
+									    	</select>
+										    <br>
+									    	<p><strong>Métricas</strong></p>
+									    	<select id="metric_list" name="metric_list" class="selectpicker" multiple data-selected-text-format="count>2">
+												<option>Acurácia</option>
+												<option>Erro</option>
+												<option>Sensitividade</option>
+												<option>Especificidade</option>
+												<option>FP-Rate</option>
+												<option>TP-Rate</option>
+												<option>AUC</option>
+											</select>
+										    <br>
+										    <br>
+										    <button type="submit" id="model_comparison_submit_btn" class="btn btn-primary" data-loading-text="Carregando...">Envia
+										    </button>
+										</div>
+									</form>
 
-									<br>Modelos:</br>
-									<input id="check_box_model1" type="checkbox" data-label="Modelo 1"/>
-									<input id="check_box_model2" type="checkbox" data-label="Modelo 2"/>
-
-									<br>Métricas:</br>
-									<input id="check_box_metric1" type="checkbox" data-label="Métrica 1"/>
-									<input id="check_box_metric2" type="checkbox" data-label="Métrica 2"/>
-									<input id="check_box_metric3" type="checkbox" data-label="Métrica 3"/>
-									<input id="check_box_metric4" type="checkbox" data-label="Métrica 4"/>
-									<input id="check_box_metric5" type="checkbox" data-label="Métrica 5"/>
-									<input id="check_box_metric6" type="checkbox" data-label="Métrica 6"/>
-									-->
-
-									<div class="controls-group">
-									    <p class="pull-left">Atributos</p>
-									    <div class="controls span2">
-									        <label class="checkbox">
-									            <input type="checkbox" value="att1" id="CheckboxAtt1"> Att1
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="att2" id="CheckboxAtt2"> Att2
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="att3" id="CheckboxAtt13"> Att3
-									        </label>
-									    </div>
-									    <p class="pull-left">Métricas</p>
-									    <div class="controls span2">
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric1" id="CheckboxMetric1"> Métrica 1
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric2" id="CheckboxMetric2"> Métrica 2
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric3" id="CheckboxMetric3"> Métrica 3
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric4" id="CheckboxMetric4"> Métrica 4
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric5" id="CheckboxMetric5"> Métrica 5
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="metric6" id="CheckboxMetric6"> Métrica 6
-									        </label>
-									    </div>
-									  	<p class="pull-left">Modelos</p>
-									    <div class="controls span2">
-									        <label class="checkbox">
-									            <input type="checkbox" value="model1" id="CheckboxModel1"> Modelo 1
-									        </label>
-									        <label class="checkbox">
-									            <input type="checkbox" value="model2" id="CheckboxModel2"> Modelo 2
-									        </label>
-									    </div>
-									
-									    <div class="btn-group">
-									    <button class="btn">Submit</button>
-									    </div>
-
+									<div id="comparison_plot" class="span10">
 									</div>
-
 								</div>
-
 							</div>
 			        	</div>
 
