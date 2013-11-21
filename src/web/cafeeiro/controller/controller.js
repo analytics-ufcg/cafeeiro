@@ -3,6 +3,10 @@
 */
 function main_controller(){
 
+	//Error bars var
+	//xChart.setVis('error', errorBar);
+	//var myChart = new xChart('bar', data, '#comparison_plot');
+
 	$('.selectpicker').selectpicker();
 
 	$("#prediction_scenario_select").change(function(e){
