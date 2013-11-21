@@ -5,14 +5,14 @@
 ################################################################################
 library(RODBC)
 library(reshape)
-source("model/global_model.R")
+source("global_model.R")
 
 ################################################################################
 # MAIN
 ################################################################################
 
 # Read the parameters from the arguments 
-args <- commandArgs()
+args <- commandArgs(trailingOnly=TRUE)
 
 # args <- c('Varginha-alta-tx5', 'Subjetivo - Modelagem 1,Subjetivo - Modelagem 2', 'Acurácia,AUC');
 
@@ -33,6 +33,7 @@ query <- gsub("[METRICS]", metrics.in.query, fixed = T,
 # ------------------------------------------------------------------------------
 # Run the Query
 # ------------------------------------------------------------------------------
+
 conn <- odbcConnect(dsn)
 exp.data <- sqlQuery(conn, query)
 odbcClose(conn)
@@ -74,7 +75,7 @@ ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_met
   theme(strip.text.x = element_text(size = 15))
 
 # Persist the PLOT
-plot.dir <- "img/plots"
+plot.dir <- "../img/plots"
 dir.create(plot.dir, showWarnings=T)
 
 plot.width = length(unique(ci.data$model)) * length(metrics) * 300 + 100
