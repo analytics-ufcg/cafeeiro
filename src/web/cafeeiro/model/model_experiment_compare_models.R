@@ -81,4 +81,9 @@ plot.height = 450 * ceiling(length(metrics)/3) + 50
 
 png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
 print(ic.plot)
-dev.off()
+graphics.off()
+
+# ------------------------------------------------------------------------------
+# Send the CI Data as a JSON
+# ------------------------------------------------------------------------------
+cat(df2json(ci.data))

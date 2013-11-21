@@ -52,10 +52,11 @@ function compare_models_with_ic(){
 		url: 'model/model_experiment_compare_models.php',
 		async: true,
 		data: call_data,
-		success: function(empty_response) {
-			// $("#model_comparison_submit_btn").button('reset');
-			console.log(empty_response);
-			view_prediction_model_comparison();
+		success: function(ci_data_text) {
+			// We need to parse it again
+			var ci_data = $.parseJSON(ci_data_text.join(""));
+
+			view_prediction_model_comparison(ci_data);
 		}
 	});
 }

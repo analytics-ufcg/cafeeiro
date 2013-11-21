@@ -4,6 +4,7 @@
 library(plyr)
 library(ggplot2)
 library(boot)
+library(df2json)
 
 ################################################################################
 # FUNCTIONS
