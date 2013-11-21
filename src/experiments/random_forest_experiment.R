@@ -151,16 +151,18 @@ RunByScenario <- function(scenario, attributes, data){
 # Read the data
 # ------------------------------------------------------------------------------
 cat("Reading the data...\n")
-# # Libs
-# 
-# # DATABASE CONNECTION
-# my.conn <- odbcConnect("CafeeiroDSN")
-# # 
-# # # DATASET retrieval
-# query <- "SELECT * FROM incidencia;"
-# data <- sqlQuery(my.conn, query)
+ 
+# DATABASE CONNECTION
+my.conn <- odbcConnect("CafeeiroDSN", )
+ 
+# DATASET retrieval
+query <- "SELECT * FROM incidencia;"
+data <- sqlQuery(my.conn, query)
 
-data <- read.csv("data/dados_cafeeiro_db.csv")
+# DATABASE close the channel connection
+odbcClose(my.conn)
+
+# data <- read.csv("data/dados_cafeeiro_db.csv")
 
 # ------------------------------------------------------------------------------
 # Define the scenarios and attributes lists
@@ -189,12 +191,17 @@ attributes <- c("lavoura", "tmax_pinf", "tmin_pinf", "tmed_pinf",
                 "med_indpluvmax_pinf", "acdinf_pinf", "dmfi_pinf", "dfmfi_pinf",
                 "ddi_pinf", "nhur95_pinf", "smt_nhur95_pinf", "thur95_pinf",
                 "nhur95_pinf", "smt_nhnur95_pinf", "tmax_pi_pinf", "tmin_pi_pinf",
-                "tmed_pi_pinf", "vvento_pinf", "smt_vvento_pinf")
+                "tmed_pi_pinf", "vvento_pinf", "smt_vvento_pinf",
+                # New attributes added by us
+                "incidencia_w1")
 
 # PROBLEM: We did not added the Weka attribute selection methods: WRP, Chi2, CFS, IG and GR
-attribute.subsets <- list("Subjetivo-Modelagem1" = attributes,
-                          "Subjetivo-Modelagem2" = attributes[c(1:8, 14, 16:17, 19:21)],
-                          "Subjetivo-Modelagem3" = attributes[c(1:8, 19:21)])
+attribute.subsets <- list("Subjetivo-M1" = attributes[1:23],
+                          "Subjetivo-M2" = attributes[c(1:8, 14, 16:17, 19:21)],
+                          "Subjetivo-M3" = attributes[c(1:8, 19:21)],
+                          "Subjetivo-M1-IncW1" = attributes[1:24],
+                          "Subjetivo-M2-IncW1" = attributes[c(1:8, 14, 16:17, 19:21, 24)],
+                          "Subjetivo-M3-IncW1" = attributes[c(1:8, 19:21, 24)])
 
 # ------------------------------------------------------------------------------
 # RUN THE EXPERIMENT per Scenario

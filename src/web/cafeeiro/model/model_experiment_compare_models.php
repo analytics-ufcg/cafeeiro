@@ -10,7 +10,6 @@
     // $metrics  = 'Acurácia,AUC';
 
     # Run the R script!
-    exec("echo '$scenario' > ../img/b.out");
     exec("Rscript model_experiment_compare_models.R '$scenario' '$att_methods' '$metrics'");
 
     echo json_encode(array());
