@@ -1,5 +1,3 @@
-# rm(list = ls())
-
 ################################################################################
 # LIBRARY() and SOURCE()
 ################################################################################
@@ -14,7 +12,7 @@ source("global_model.R")
 # Read the parameters from the arguments 
 args <- commandArgs(trailingOnly=TRUE)
 
-# args <- c('Varginha-alta-tx5', 'Subjetivo - Modelagem 1,Subjetivo - Modelagem 2', 'Acurácia,AUC');
+# args <- c('Varginha-alta-tx5', 'Subjetivo - M1,Subjetivo - M2', 'Acurácia,AUC');
 
 # ------------------------------------------------------------------------------
 # Prepare the parameters and the query
@@ -78,8 +76,8 @@ ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_met
 plot.dir <- "../img/plots"
 dir.create(plot.dir, showWarnings=T)
 
-plot.width = length(unique(ci.data$model)) * length(metrics) * 300 + 100
-plot.height = 400 * ceiling(length(metrics)/3) + 50
+plot.width = length(unique(ci.data$model)) * length(metrics) * 400 + 100
+plot.height = 450 * ceiling(length(metrics)/3) + 50
 
 png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
 print(ic.plot)

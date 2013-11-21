@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS incidencia (
     lavoura                VARCHAR(15),
     carga                  VARCHAR(10),
     incidencia             NUMERIC,
+    incidencia_w1          NUMERIC,
     taxa_inf               NUMERIC,
     taxa_inf_m5            BOOLEAN,
     taxa_inf_m10           BOOLEAN,
