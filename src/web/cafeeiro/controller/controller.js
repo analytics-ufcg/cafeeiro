@@ -59,7 +59,7 @@ function compare_models_with_ic(){
 			data: call_data,
 			success: function(ci_data_text) {
 				// We need to parse it again
-				var ci_data = $.parseJSON(ci_data_text.join(""));
+				var ci_data = $.parseJSON(ci_data_text);
 
 				view_prediction_model_comparison(ci_data);
 
