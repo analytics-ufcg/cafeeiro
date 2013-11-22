@@ -3,12 +3,6 @@
 */
 function main_controller(){
 
-	//Error bars var
-	//xChart.setVis('error', errorBar);
-	//var myChart = new xChart('bar', data, '#comparison_plot');
-
-	$('.selectpicker').selectpicker();
-
 	$("#prediction_scenario_select").change(function(e){
 		// Avoid refreshing the page
 		get_incidencia_data();
@@ -42,25 +36,35 @@ function get_incidencia_data(){
 }
 
 function compare_models_with_ic(){
- 	// $("#model_comparison_submit_btn").button('loading');
 	
-	var call_data = 'scenario=' + $('#prediction_scenario_select').val() + 
-					'&att_methods=' + $("#att_list").val().join() + 
-					'&metrics=' + $("#metric_list").val().join();
+	scenario = $('#prediction_scenario_select').val();
+	att_list = $("#att_list").val();
+	metric_list = $("#metric_list").val();
 
-	console.log(call_data);
+	// Check the input parameters
+	if (scenario != "Cenário" && att_list != null && metric_list != null){
+	
+		var call_data = 'scenario=' + scenario + 
+						'&att_methods=' + att_list.join() + 
+						'&metrics=' + metric_list.join();
 
-	$.ajax({
-		type: 'GET',
-		dataType: 'json',
-		url: 'model/model_experiment_compare_models.php',
-		async: true,
-		data: call_data,
-		success: function(ci_data_text) {
-			// We need to parse it again
-			var ci_data = $.parseJSON(ci_data_text.join(""));
+		console.log(call_data);
 
-			view_prediction_model_comparison(ci_data);
-		}
-	});
+	 	$("#model_comparison_submit_btn").button('loading');
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: 'model/model_experiment_compare_models.php',
+			async: true,
+			data: call_data,
+			success: function(ci_data_text) {
+				// We need to parse it again
+				var ci_data = $.parseJSON(ci_data_text.join(""));
+
+				view_prediction_model_comparison(ci_data);
+
+				$("#model_comparison_submit_btn").button('reset');
+			}
+		});
+	}
 }

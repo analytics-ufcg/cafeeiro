@@ -3,18 +3,13 @@
  * Hp / Ufcg - FRH Analytics
  */
 
- #titulo{
-	text-align:center;
-	margin-top:-40px;
- }
-
- #search_type{
- 	margin-left:40px;
- }
-
-#prediction_model_comparison_pane{
-	text-align: left;
- 	margin-left:5px;
- 	margin-bottom:5px;
+#prediction_pane #central_bar #model_comparison_pane #parameters_submit #att_list, 
+#prediction_pane #central_bar #model_comparison_pane #parameters_submit #metric_list {
+	height:150px; 
+	width:100%;
 }
 
+.hero-unit {
+	text-align:center;
+  	padding: 30px !important; /* default is 60px; */
+}

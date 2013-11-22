@@ -61,14 +61,14 @@ ci.data$model_and_att_method <- do.call(paste, c(ci.data[ , c("model", "attribut
 # Generate the Plot output
 # ------------------------------------------------------------------------------
 # Create the GGPLOT Confidence Interval
-theme_set(theme_bw(base_size = 15))
+theme_set(theme_bw(base_size = 20))
 limits <- aes(ymin=lower_ci, ymax=upper_ci)
 pd <- position_dodge(.3 * length(att.methods), 1)
 
 ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_method")) +
-  geom_point(position=pd) + 
-  geom_errorbar(limits, width=.2, position=pd) + # Move the ICs .05 to the left/right
-  facet_wrap(~metric, scales="free_y", ncol=3) +
+  geom_point(position=pd, size=4) + 
+  geom_errorbar(limits, size=2, width=.2, position=pd) + # Move the ICs .05 to the left/right
+  facet_wrap(~metric, scales="free_y", ncol=2) +
   labs(list(x = "Modelo", y = "", colour = "Atributos", title = "")) +
   theme(strip.text.x = element_text(size = 15))
 
@@ -76,8 +76,8 @@ ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_met
 plot.dir <- "../img/plots"
 dir.create(plot.dir, showWarnings=T)
 
-plot.width = length(unique(ci.data$model)) * length(metrics) * 400 + 100
-plot.height = 450 * ceiling(length(metrics)/3) + 50
+plot.width = length(unique(ci.data$model)) * length(metrics) * 450 + 100
+plot.height = 500 * ceiling(length(metrics)/2) + 50
 
 png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
 print(ic.plot)
