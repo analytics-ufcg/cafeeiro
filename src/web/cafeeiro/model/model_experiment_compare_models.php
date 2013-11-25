@@ -11,5 +11,5 @@
 
     # Run the R script!
     exec("Rscript model_experiment_compare_models.R '$scenario' '$att_methods' '$metrics'", $output, $ret);
-    echo json_encode(join("", $output));
+    echo json_encode(join("", $output));    
 ?>
