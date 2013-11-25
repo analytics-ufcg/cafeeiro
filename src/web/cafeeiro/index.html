@@ -134,7 +134,36 @@
 									<!-- TODO PLOT -->
 									<div id="comparison_plot" class="span8">
 										<input name="updateButton" type="button" value="X-axis: Temp"/>
-										<script>
+
+						            </div>
+
+								</div>
+							</div>
+			        	</div>
+
+				    </div>
+				</div>
+			</div>
+	    </div>
+    </div>
+    <div id="footer">
+	    <div class="container">
+
+	        <p class="muted credit text-center">
+	        	<a class="text-success" target='_blank' href='https://sites.google.com/a/computacao.ufcg.edu.br/analytics/'> UFCG - FRH <em>Analytics </em><br>
+	        	</a>
+	        	Powered by <a class='text-success' target='_blank' href='http://twitter.github.io/bootstrap/'>Bootstrap</a>,
+	        	<a class='text-success' target='_blank' href='http://www.vertica.com/'>Vertica</a> |
+				<a class='text-success' target='_blank' href='https://github.com/analyticsUfcg/cafeeiro'>View source on GitHub</a>
+			</p>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" language="javascript">
+	$(document).ready(main_controller());
+
+										
 											var margin = {top: 10, right: 10, bottom: 100, left: 40},
 											    size = 5,
 											    width = 960 - margin.left - margin.right,
@@ -157,6 +186,7 @@
 
 											var color = d3.scale.category10();
 											 
+											//endereço do plot
 											var svg = d3.select("#comparison_plot").append("svg")
 											    .attr("width", width + margin.left + margin.right)
 											    .attr("height", height + margin.top + margin.bottom);
@@ -344,32 +374,6 @@
 											});    
 
 											});
-										</script>
-						            </div>
+										
 
-								</div>
-							</div>
-			        	</div>
-
-				    </div>
-				</div>
-			</div>
-	    </div>
-    </div>
-    <div id="footer">
-	    <div class="container">
-
-	        <p class="muted credit text-center">
-	        	<a class="text-success" target='_blank' href='https://sites.google.com/a/computacao.ufcg.edu.br/analytics/'> UFCG - FRH <em>Analytics </em><br>
-	        	</a>
-	        	Powered by <a class='text-success' target='_blank' href='http://twitter.github.io/bootstrap/'>Bootstrap</a>,
-	        	<a class='text-success' target='_blank' href='http://www.vertica.com/'>Vertica</a> |
-				<a class='text-success' target='_blank' href='https://github.com/analyticsUfcg/cafeeiro'>View source on GitHub</a>
-			</p>
-        </div>
-    </div>
-</body>
-</html>
-<script type="text/javascript" language="javascript">
-	$(document).ready(main_controller());
 </script>
