@@ -8,6 +8,7 @@ library(randomForest)
 library(plyr)
 library(ROCR)
 library(DMwR)
+library(FSelector)
 
 ################################################################################
 # FUNCTIONS
@@ -161,8 +162,6 @@ data <- sqlQuery(my.conn, query)
 
 # DATABASE close the channel connection
 odbcClose(my.conn)
-
-# data <- read.csv("data/dados_cafeeiro_db.csv")
 
 # ------------------------------------------------------------------------------
 # Define the scenarios and attributes lists
