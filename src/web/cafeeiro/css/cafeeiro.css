@@ -9,7 +9,36 @@
 	width:100%;
 }
 
+/*#comparison_plot {
+	height:150px; 
+	width:100%;
+}*/
+
 .hero-unit {
 	text-align:center;
   	padding: 30px !important; /* default is 60px; */
 }
+ 
+svg {
+  font: 10px sans-serif;
+}
+ 
+ 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ 
+path {
+  stroke-width: 1.5px;
+  stroke: darkgrey;
+  stroke-dasharray:"3, 3";
+}
+
+.legend{
+  stroke: "grey";
+}
+
+  
