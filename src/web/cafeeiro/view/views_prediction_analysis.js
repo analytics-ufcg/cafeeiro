@@ -10,4 +10,5 @@ function view_prediction_model_comparison(ci_data){
 	console.log(ci_data);
 	// TODO: ADD D3 graph
 
+	plotaIC(ci_data);
 }
