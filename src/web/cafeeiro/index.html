@@ -38,7 +38,15 @@
           			<small>Alerta de Progresso da Ferrugem do Cafeeiro</small>
           		</h1>
         	</div>
-
+	    	<form id ="scenario" class = "form-inline" method="GET">
+        		<fieldset>
+        			<label><strong>Cenário</strong></label>
+        			<select id = "the_scenario" name="search_scenario" style='width:auto;'>
+						<option>Varginha-alta-tx5</option>
+						<option>Tudo-alta-tx5</option>
+					</select> 
+        		</fieldset>
+        	</form>
         	<div id="central_bar" class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#att_pane" data-toggle="tab">Análise dos Atributos</a></li>
@@ -47,50 +55,70 @@
 				<div class="tab-content">
 					
 					<!-- Análise dos atributos -->
-					<div id="att_pane" class="tab-pane active">
-				    	<form id ="scenario_data_analysis" class = "form-inline" method="GET">
-			        		<fieldset>
-			        			<!-- <legend>Cenários apresentados</legend> -->
-			        			<select id = "id_scenario" name="search_scenario" style='width:auto;'>
-									<option>Cenário</option>
-									<option disabled>- - - - - - - -</option>
-								</select> 
-								<select id = "id_city" name="search_city" style='width:auto;'>
-									<option>Cidade</option>
-									<option disabled>- - - - - - - -</option>
-								</select> 
-								<select id = "id_month" name="search_month" style='width:auto;'>
-									<option>Mês</option>
-									<option disabled>- - - - - - - -</option>
-								</select> 
-								<select id = "id_farming" name="search_farming" style='width:auto;'>
-									<option>Lavoura</option>
-									<option disabled>- - - - - - - -</option>
-								</select> 
-			        		</fieldset>
-			        	</form>
-			        	<!-- <legend>Análise Temporal e Atemporal</legend> -->
-			        	<div id="central_bar" class="tabbable">
-			        		<ul class="nav nav-tabs">
-								<li class="active"><a href="#sub_pane1" data-toggle="tab">Temporal</a></li>
-								<li><a href="#sub_pane2" data-toggle="tab">Atemporal</a></li>
-							</ul>
-			        	</div>
+					<div id="att_pane" class="tab-pane active row-fluid">
 
-				    </div>
-
-					<!-- TAB TOP -->
-				    <div id="prediction_pane" class="tab-pane">
-				    	<div class="form-inline">
-					    	<label><strong>Cenário</strong></label>
-			        		<select id="prediction_scenario_select" name="prediction_scenario_select" style='width:auto;'>
-			        			<option>Cenário</option>
-			        			<option disabled>------------</option>
-								<option>Varginha-alta-tx5</option>
-								<option>Tudo-alta-tx5</option>
-							</select> 
+						<div id="atts_bar" class="span3">
+							<form id="atts_form" > <!-- class = "form" role="form" method="GET" -->
+								<label for="atts_general"><strong>Atributos Gerais</strong></label>
+									<div class="checkbox"><label><input type="checkbox" name="cidade">Cidade</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="lavoura">Lavoura</label></div>
+									<!-- <div class="checkbox"><label><input type="checkbox" disabled>Carga</label></div> -->
+								<label for="atts_meteorologic"><strong>Atributos Metereológicos</strong></label>
+									<div class="checkbox"><label><input type="checkbox" name="tmax_pinf">tmax_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmed_pinf">tmed_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="ur_pinf">ur_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="med_precip_pinf">med_precip_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="precip_pinf">precip_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="dchuv_pinf">dchuv_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="med_indpluvmax_pinf">med_indpluvmax_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="acdinf_pinf">acdinf_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="dmfi_pinf">dmfi_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="ddi_pinf">ddi_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="nhur95_pinf">nhur95_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="smt_nhur95_pinf">smt_nhur95_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="thur95_pinf">thur95_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="nhnur95_pinf">nhnur95_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="smt_nhnur95_pinf">smt_nhnur95_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmax_pi_pinf">tmax_pi_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmin_pi_pinf">tmin_pi_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmed_pi_pinf">tmed_pi_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="vvento_pinf">vvento_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="smt_vvento_pinf">smt_vvento_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="dfmfi_pinf">dfmfi_pinf</label></div>
+								<label for="atts_target"><strong>Atributos Meta e Derivados</strong></label>
+									<div class="checkbox"><label><input type="checkbox" name="incidencia">incidencia</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="taxa_inf">taxa_inf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="taxa_inf_m5" checked>taxa_inf_m5</label></div>
+								<br>
+							    <button type="submit" id="atts_submit_btn" class="btn btn-primary btn-block" data-loading-text="Carregando...">
+							    	Enviar
+							    </button>
+							</form>
 						</div>
-						<br>
+
+						<div id="atts_analysis" class="span9">
+				        	<div id="central_bar" class="tabbable">
+				        		<ul class="nav nav-tabs">
+									<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
+									<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
+								</ul>
+								<div class="tab-content containter-fluid">
+
+									<div id="temporal_pane" class="tab-pane row-fluid">
+										TEMPORAL
+									</div>
+
+									<div id="atemporal_pane" class="tab-pane row-fluid">
+										ATEMPORAL
+									</div>
+								</div>
+				        	</div>
+					    </div>
+					</div>	
+
+					<!-- Análise das predições -->
+				    <div id="prediction_pane" class="tab-pane">
 			        	<div id="central_bar" class="tabbable">
 			        		<ul class="nav nav-tabs">
 								<li class="active"><a href="#temporal_pane" data-toggle="tab">Análise Temporal</a></li>
@@ -126,16 +154,12 @@
 											</select>
 										    <br>
 										    <button type="submit" id="model_comparison_submit_btn" class="btn btn-primary btn-block" data-loading-text="Carregando...">
-										    	Envia
+										    	Enviar
 										    </button>
 										</form>
 									</div>
-
-									<!-- TODO PLOT -->
 									<div id="comparison_plot" class="span9">
-
 						            </div>
-
 								</div>
 							</div>
 			        	</div>
