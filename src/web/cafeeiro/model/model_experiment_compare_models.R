@@ -24,7 +24,8 @@ att.methods.in.query <- paste("attribute_method = '", att.methods, "'", sep = ""
 
 query <- gsub("[METRICS]", metrics.in.query, fixed = T,
               gsub("[ATT_METHODS]", att.methods.in.query, fixed = T,
-                   query.map["get_experiment_by_parameter"]))
+              		gsub("[SCENARIO]", scenario, fixed=T,
+              			query.map["get_experiment_by_parameter"])))
 
 # ------------------------------------------------------------------------------
 # Run the Query

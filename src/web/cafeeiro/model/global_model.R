@@ -35,4 +35,4 @@ metrics.to.english <- c("Acurácia" = "accuracy", "Erro" = "Error",
 query.map <- c("get_experiment_by_parameter" = 
                  "SELECT run, attribute_method, model, [METRICS] 
                   FROM experiment 
-                  WHERE [ATT_METHODS];")
+                  WHERE [ATT_METHODS] and scenario = '[SCENARIO]';")

@@ -19,6 +19,6 @@
       	"get_scenario_tudo_alta_tx5" =>
 			'SELECT dia, incidencia, taxa_inf_m5
 			FROM incidencia
-			WHERE carga = \'alta\';',
+			WHERE carga = \'alta\';'
 	);
 ?>
