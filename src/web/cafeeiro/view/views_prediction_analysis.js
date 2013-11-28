@@ -10,6 +10,7 @@ function view_prediction_model_comparison(ci_data){
 	console.log(ci_data);
 	// TODO: ADD D3 graph
 
+
 	plotaIC(ci_data, 0);
 }
 
@@ -49,7 +50,7 @@ function plotaIC(data, yPos) {
 	  
 	  color.domain(d3.keys(data[0]).filter(function(key) { return key == "attribute_method"; }));
 	 
-	  x.domain([d3.min(data.map(function(d,i) {return i*50+50}))-0.2,d3.max(data.map(function(d,i) { return i*50+50; }))+0.2]);
+	  x.domain([d3.min(data.map(function(d,i) {return x(i*50+50)}))-0.2,d3.max(data.map(function(d,i) { return x(i*50+50); }))+0.2]);
 	  y.domain([d3.min(data.map(function(d) {return (d.lower_ci)})), d3.max(data.map(function(d) { return (d.upper_ci); }))]);
 
 	var circles = plot.selectAll("g")
@@ -57,7 +58,7 @@ function plotaIC(data, yPos) {
 	      .enter().append("g"); 
 	      
 	var plotErrorbar = circles.append("g")
-	      .attr("transform", function(d,i) {return "translate("+ (i*50+50) +","+ y(d.mean_ci) +")"})
+	      .attr("transform", function(d,i) {return "translate("+ (i*50+50) +","+ (d.mean_ci) +")"})
 	      .style("stroke-dasharray", ("3, 3"))
 	      .call(eb);
 
@@ -99,8 +100,8 @@ function plotaIC(data, yPos) {
 	      .attr('height', 50)
 	      .attr('text-anchor', 'middle')
 	      .attr('font-size', '25px')
-	      //.text(function(d) { console.log(d.metric); return toString(d.metric); }); //Aqui vai o nome do gŕafico com base na métrica selecionada
-	      ;
+	      .text(function(d) { return "Título"; }); //Aqui vai o nome do gŕafico com base na métrica selecionada
+	      //;
 
 	//Select and update the circles
 
