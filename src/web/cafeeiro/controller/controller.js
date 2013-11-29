@@ -3,10 +3,11 @@
 */
 function main_controller(){
 
-	$("#prediction_scenario_select").change(function(e){
+	$("#atts_form").submit(function(e){
 		// Avoid refreshing the page
-		get_incidencia_data();
-	});
+		e.preventDefault(); 
+		get_incidencia_atts();
+	})
 
 	$("#model_comparison_form").submit(function(e){
 		// Avoid refreshing the page
@@ -14,35 +15,37 @@ function main_controller(){
 		compare_models_with_ic();
 	});
 
+	// $("#prediction_scenario_select").change(function(e){
+	// 	// Avoid refreshing the page
+	// 	get_incidencia_data();
+	// });
+
 }
 
-function get_incidencia_data(){
-	// $("#go_search").button('loading');
-	var call_data = 'scenario=' + $('#prediction_scenario_select').val();
+function get_incidencia_atts(){
+	var call_data = $("#atts_form").serialize();
+	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
-		url: 'model/model_incidencia_by_scenario.php',
+		url: 'model/model_incidencia_atts_by_scenario.php',
 		async: true,
 		data: call_data,
 		success: function(incidencia_table) {
 			console.log(incidencia_table);
-			view_prediction_temporal_analysis(incidencia_table);
 		}
 	});
-
-	return false;
 }
 
 function compare_models_with_ic(){
 	
-	scenario = $('#prediction_scenario_select').val();
+	scenario = $('#the_scenario').val();
 	att_list = $("#att_list").val();
 	metric_list = $("#metric_list").val();
 
 	// Check the input parameters
-	if (scenario != "Cenário" && att_list != null && metric_list != null){
+	if (att_list != null && metric_list != null){
 	
 		var call_data = 'scenario=' + scenario + 
 						'&att_methods=' + att_list.join() + 
@@ -68,3 +71,22 @@ function compare_models_with_ic(){
 		});
 	}
 }
+
+// function get_incidencia_data(){
+// 	// $("#go_search").button('loading');
+// 	var call_data = 'scenario=' + $('#prediction_scenario_select').val();
+
+// 	$.ajax({
+// 		type: 'GET',
+// 		dataType: 'json',
+// 		url: 'model/model_incidencia_by_scenario.php',
+// 		async: true,
+// 		data: call_data,
+// 		success: function(incidencia_table) {
+// 			console.log(incidencia_table);
+// 			view_prediction_temporal_analysis(incidencia_table);
+// 		}
+// 	});
+
+// 	return false;
+// }
