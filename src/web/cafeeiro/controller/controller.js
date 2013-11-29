@@ -22,10 +22,52 @@ function main_controller(){
 
 }
 
-function get_incidencia_atts(){
-	var call_data = $("#atts_form").serialize();
-	console.log(call_data);
+function get_att_map(atts_serialized){
+	var result = {};
+	result['general'] = []
+	result['meteorological'] = []
+	result['target'] = [];	
 
+	if (atts_serialized == ""){
+		return result;
+	} else{
+		var all_atts = atts_serialized.split("&");
+
+		for (var i = all_atts.length - 1; i >= 0; i--) {
+			var att = all_atts[i].replace("=on", "");
+			
+			if (att == 'cidade' || att == 'lavoura'){
+				result['general'].push(att);
+			}else if (att == 'incidencia' || att == 'taxa_inf' || att == 'taxa_inf_m5'){
+				result['target'].push(att);
+			}else{
+				result['meteorological'].push(att);
+			}
+		}
+		return result;
+	}
+}
+
+function get_incidencia_atts(){
+	var att_map = get_att_map($("#atts_form").serialize());
+
+	var scenario = $('#the_scenario').val();
+	var atts = [];
+
+	if (att_map["general"].length > 0){
+		atts = atts.concat(att_map['general']);
+	}
+	if (att_map["meteorological"].length > 0){
+		atts = atts.concat(att_map['meteorological']);
+	}
+	if (att_map["target"].length > 0){
+		atts = atts.concat(att_map['target']);
+	}
+	atts.push("taxa_inf_m5");
+
+	var call_data = "scenario=" + scenario + "&atts=" + atts.join(",");	
+	console.log(call_data);
+	
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',
@@ -34,6 +76,7 @@ function get_incidencia_atts(){
 		data: call_data,
 		success: function(incidencia_table) {
 			console.log(incidencia_table);
+			show_atemporal_analysis(incidencia_table, atts);
 		}
 	});
 }

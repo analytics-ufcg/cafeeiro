@@ -12,6 +12,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="css/parallel_coord.css" rel="stylesheet">
 	
 	<!-- LIBRARIES -->
 	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -24,7 +25,9 @@
 	
 	<!-- VIEW -->
 	<script type="text/javascript" src="view/views_prediction_analysis.js"></script>
+	<script type="text/javascript" src="view/views_attribute_analysis.js"></script>
 	<script type="text/javascript" src="view/errorbar.js"></script>
+	<script type="text/javascript" src="view/chart_parallel.js"></script>
 	
 </head>
 <body>
@@ -64,8 +67,8 @@
 									<div class="checkbox"><label><input type="checkbox" name="lavoura">Lavoura</label></div>
 									<!-- <div class="checkbox"><label><input type="checkbox" disabled>Carga</label></div> -->
 								<label for="atts_meteorologic"><strong>Atributos Metereológicos</strong></label>
-									<div class="checkbox"><label><input type="checkbox" name="tmax_pinf">tmax_pinf</label></div>
-									<div class="checkbox"><label><input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmax_pinf" checked>tmax_pinf</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="tmin_pinf" checked>tmin_pinf</label></div>
 									<div class="checkbox"><label><input type="checkbox" name="tmed_pinf">tmed_pinf</label></div>
 									<div class="checkbox"><label><input type="checkbox" name="ur_pinf">ur_pinf</label></div>
 									<div class="checkbox"><label><input type="checkbox" name="med_precip_pinf">med_precip_pinf</label></div>
@@ -89,7 +92,7 @@
 								<label for="atts_target"><strong>Atributos Meta e Derivados</strong></label>
 									<div class="checkbox"><label><input type="checkbox" name="incidencia">incidencia</label></div>
 									<div class="checkbox"><label><input type="checkbox" name="taxa_inf">taxa_inf</label></div>
-									<div class="checkbox"><label><input type="checkbox" name="taxa_inf_m5" checked>taxa_inf_m5</label></div>
+									<div class="checkbox"><label><input type="checkbox" name="taxa_inf_m5" checked disabled>taxa_inf_m5</label></div>
 								<br>
 							    <button type="submit" id="atts_submit_btn" class="btn btn-primary btn-block" data-loading-text="Carregando...">
 							    	Enviar
@@ -110,7 +113,6 @@
 									</div>
 
 									<div id="atemporal_pane" class="tab-pane row-fluid">
-										ATEMPORAL
 									</div>
 								</div>
 				        	</div>
