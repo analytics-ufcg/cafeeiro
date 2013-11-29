@@ -32,9 +32,9 @@ function plotaIC(data, yPos) {
 	          .oldYScale(y)
 	          .yScale(y)
 	          .yValue(function(d){return d.mean_ci})
-	          .xValue(function(d){return null})
+	          .xValue(function(i){return i*50+50})
 	          .xError(function(d){return null})
-	          .yError(function(d){return d.lower_ci});
+	          .yError(function(d){return (d.upper_ci-d.mean_ci)}); //fix
 
 
 	var color = d3.scale.category10();
@@ -50,23 +50,25 @@ function plotaIC(data, yPos) {
 	  
 	  color.domain(d3.keys(data[0]).filter(function(key) { return key == "attribute_method"; }));
 	 
-	  x.domain([d3.min(data.map(function(d,i) {return x(i*50+50)}))-0.2,d3.max(data.map(function(d,i) { return x(i*50+50); }))+0.2]);
-	  y.domain([d3.min(data.map(function(d) {return (d.lower_ci)})), d3.max(data.map(function(d) { return (d.upper_ci); }))]);
+	  x.domain([d3.min(data.map(function(d,i) {return (i*50+50);}))-0.2,
+	  			d3.max(data.map(function(d,i) { return (i*50+50); }))+0.2]);
+	  y.domain([d3.min(data.map(function(d) {return (d.lower_ci);})), 
+	  	d3.max(data.map(function(d) { return (d.upper_ci); }))]);
 
 	var circles = plot.selectAll("g")
 	        .data(data)
 	      .enter().append("g"); 
 	      
 	var plotErrorbar = circles.append("g")
-	      .attr("transform", function(d,i) {return "translate("+ (i*50+50) +","+ (d.mean_ci) +")"})
+	      .attr("transform", function(d,i) {return "translate("+ x(i*50+50) +","+ y(d.mean_ci) +")"})
 	      .style("stroke-dasharray", ("3, 3"))
 	      .call(eb);
 
 	var plotCircles = circles.append("circle")
 	      .attr("class","circle")
-	      .attr("cx", function(d,i) {return i*50+50;})
+	      .attr("cx", function(d,i) {return x(i*50+50);})
 	      .attr("cy", function(d){return y(d.mean_ci);})
-	      .attr("r",5)
+	      .attr("r",2)
 	      .attr("fill",function(d) {return color(d.attribute_method);})
 	      .style("stroke", "darkgrey");       
 
@@ -100,22 +102,22 @@ function plotaIC(data, yPos) {
 	      .attr('height', 50)
 	      .attr('text-anchor', 'middle')
 	      .attr('font-size', '25px')
-	      .text(function(d) { return "Título"; }); //Aqui vai o nome do gŕafico com base na métrica selecionada
+	      .text( data[0].metric ); //Aqui vai o nome do gŕafico com base na métrica selecionada
 	      //;
 
-	//Select and update the circles
+	//Select the circles
 
-	    plotCircles.selectAll("circle")
+	    /*plotCircles.selectAll("circle")
 	      .data(data)
 	      .enter().append("circle")
 	      .attr("class","circle")
-	      //.attr("cx", function(d) {return x(d.temp);})
+	      .attr("cx", function(d, i) {return x(i*50+50);})
 	      .attr("cy", function(d){return y(d.mean_ci);})
-	      .attr("r",5)
+	      .attr("r",1)
 	      .attr("fill",function(d, i) {return color(i*50);})
 	      .style("stroke", "darkgrey");
 	 
-	//Select and update the rectangles in legend
+	//Select the rectangles in legend
 
 	    plotRect.selectAll("rect")
 	      .data(data)
@@ -127,7 +129,7 @@ function plotaIC(data, yPos) {
 	      .attr('height', 10)
 	      .style('fill', function(d, i) {return color(i*50);});
 
-	//Select and update the text in legend
+	//Select the text in legend
 
 	    plotText.selectAll("text")
 	      .data(data)
@@ -142,9 +144,9 @@ function plotaIC(data, yPos) {
 	      .data(data)
 	      .enter()
 	      .append("g")
-	      //.attr("transform", function(d) {return "translate("+ x(d.temp) +","+ y(d.mean_ci) +")"})
+	      .attr("transform", function(d, i) {return "translate("+ x(i*50+50) +","+ y(d.mean_ci) +")"})
 	      .style("stroke-dasharray", ("3, 3"))
-	      .call(eb);
+	      .call(eb);*/
 
 	}
 
