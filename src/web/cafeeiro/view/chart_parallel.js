@@ -1,10 +1,5 @@
-var global_att_names = [];
-
 function plot_parallel_coord(att_data, att_names) {
   
-  console.log(att_names);
-  global_att_names = att_names;
-
   var div_width = $("#atts_analysis #central_bar #atemporal_pane").width(),
       div_height = 700; //$("#atts_analysis #central_bar #atemporal_pane").height();
   
@@ -95,30 +90,30 @@ function plot_parallel_coord(att_data, att_names) {
       .attr("width", 16);
 
   function dragstart(d) {
-    i = global_att_names.indexOf(d);
+    i = incidencia_atts.indexOf(d);
   }
 
   function drag(d) {
     x.range()[i] = d3.event.x;
-    global_att_names.sort(function(a, b) { return x(a) - x(b); });
+    incidencia_atts.sort(function(a, b) { return x(a) - x(b); });
     g.attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     foreground.attr("d", path);
   }
 
   function dragend(d) {
-    x.domain(global_att_names).rangePoints([0, w]);
+    x.domain(incidencia_atts).rangePoints([0, w]);
     var t = d3.transition().duration(500);
     t.selectAll(".attribute").attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     t.selectAll(".foreground path").attr("d", path);
   }
   // Returns the path for a given data point.
   function path(d) {
-    return line(global_att_names.map(function(p) { return [x(p), y[p](d[p])]; }));
+    return line(incidencia_atts.map(function(p) { return [x(p), y[p](d[p])]; }));
   }
 
   // Handles a brush event, toggling the display of foreground lines.
   function brush() {
-    var actives = global_att_names.filter(function(p) { return !y[p].brush.empty(); }),
+    var actives = incidencia_atts.filter(function(p) { return !y[p].brush.empty(); }),
         extents = actives.map(function(p) { return y[p].brush.extent(); });
     foreground.classed("fade", function(d) {
       return !actives.every(function(p, i) {
