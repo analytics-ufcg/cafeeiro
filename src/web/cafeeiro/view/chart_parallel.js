@@ -1,11 +1,12 @@
 var global_att_names = [];
 
-function plot_parallel_coord(flowers_data, att_names) {
+function plot_parallel_coord(att_data, att_names) {
+  
   console.log(att_names);
   global_att_names = att_names;
 
   var div_width = $("#atts_analysis #central_bar #atemporal_pane").width(),
-      div_height = 600; //$("#atts_analysis #central_bar #atemporal_pane").height();
+      div_height = 700; //$("#atts_analysis #central_bar #atemporal_pane").height();
   
   var m = {left:70, right:70, top:40, bottom:20},
       w = div_width - m.left - m.right,
@@ -25,17 +26,18 @@ function plot_parallel_coord(flowers_data, att_names) {
       .attr("transform", "translate(" + m.left + "," + m.top + ")");
 
   // Create a scale and brush for each att_name.
-  att_names.forEach(function(d) {
-    // Coerce values to numbers.
-    flowers_data.forEach(function(p) { p[d] = +p[d]; });
+  att_names.forEach(function(col_name) {
 
-    y[d] = d3.scale.linear()
-        .domain(d3.extent(flowers_data, function(p) { return p[d]; }))
+    // Coerce values to numbers.
+    att_data.forEach(function(p) { p[col_name] = +p[col_name]; });
+
+    y[col_name] = d3.scale.linear()
+        .domain(d3.extent(att_data, function(p) { return p[col_name]; }))
         .range([h, 0]);
 
-    y[d].brush = d3.svg.brush()
-        .y(y[d])
-        .on("brush", brush);
+    y[col_name].brush = d3.svg.brush()
+        .y(y[col_name])
+        .on("brush", brush);     
  });
 
   // Add a legend.
@@ -58,7 +60,7 @@ function plot_parallel_coord(flowers_data, att_names) {
   foreground = svg.append("svg:g")
       .attr("class", "foreground")
     .selectAll("path")
-      .data(flowers_data)
+      .data(att_data)
     .enter().append("svg:path")
       .attr("d", path)
       .attr("class", function(d) { return "unique_path" ;});

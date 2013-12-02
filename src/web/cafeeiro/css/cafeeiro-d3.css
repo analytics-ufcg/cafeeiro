@@ -1,6 +1,6 @@
-svg {
+/*svg {
   font-size: 14px;
-}
+}*/
 
 .foreground path {
   fill: none;
@@ -13,14 +13,14 @@ svg {
   stroke-opacity: .05;
 }
 
-.legend {
+/*.legend {
   font-size: 18px;
   font-style: oblique;
 }
 
 .legend line {
   stroke-width: 2px;
-}
+}*/
 
 .unique_path {
   stroke: #63C74A;
