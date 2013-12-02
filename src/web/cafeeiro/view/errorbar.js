@@ -1,4 +1,4 @@
-function errorBar(){
+function errorBar(barColor){
     //TODO
     //- Think of an additional way to represent error bars, maybe just the orthognal case (i.e. use width not height)
     //- Does ordinal scale even make sense here?  May need to remove.
@@ -29,7 +29,7 @@ function errorBar(){
 
             switch (errormarker) {                               
             case null: {
-                errEnter = err.enter().append("path").attr("class","err")
+                errEnter = err.enter().append("path").attr("class","err").style("stroke-width", "2.5px").style("stroke", barColor)
                 errExit = d3.transition(err.exit()).remove(), 
                 errUpdate = d3.transition(err),
                 errTransform = function(selection,a,b){
