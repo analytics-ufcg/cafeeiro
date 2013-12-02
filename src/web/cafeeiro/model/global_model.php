@@ -21,16 +21,9 @@
 			FROM incidencia
 			WHERE carga = \'alta\';',
 
-		// Used by: model_incidencia_atts_by_scenario.php
-		"get_incidencia_atts_scenario_varginha_alta_tx5" =>
+		"get_incidencia_atts_with_conditions" =>
 			"SELECT [ATT_COLUMNS]
 			FROM incidencia
-			WHERE (cidade = 'Varginha-antigo' OR
-      			  cidade = 'Varginha') AND carga = 'alta';",
-
-		"get_incidencia_atts_scenario_tudo_alta_tx5" =>
-			"SELECT [ATT_COLUMNS]
-			FROM incidencia
-			WHERE carga = 'alta';"
+			WHERE ([CITY_CONDITIONS]) AND ([FARMING_CONDITIONS]) AND carga = 'alta';"
 	);
 ?>

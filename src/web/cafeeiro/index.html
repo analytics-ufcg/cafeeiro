@@ -45,7 +45,7 @@
         		<fieldset>
         			<label><strong>Cenário</strong></label>
         			<select id = "the_scenario" name="search_scenario" style='width:auto;'>
-						<option>Varginha-alta-tx5</option>
+						<option selected>Varginha-alta-tx5</option>
 						<option>Tudo-alta-tx5</option>
 					</select> 
         		</fieldset>
@@ -61,11 +61,15 @@
 					<div id="att_pane" class="tab-pane active row-fluid">
 
 						<div id="atts_bar" class="span3">
+							<label for="atts_general"><strong>Atributos Gerais</strong></label>
+								Cidade 
+								<select id="cidade_list" name="cidade" multiple style="width:auto">
+								</select>
+								<br>
+								Lavoura 
+								<select id="lavoura_list" name="lavoura" multiple style="width:auto; height:50px">
+								</select>
 							<form id="atts_form" > <!-- class = "form" role="form" method="GET" -->
-								<label for="atts_general"><strong>Atributos Gerais</strong></label>
-									<div class="checkbox"><label><input type="checkbox" name="cidade">Cidade</label></div>
-									<div class="checkbox"><label><input type="checkbox" name="lavoura">Lavoura</label></div>
-									<!-- <div class="checkbox"><label><input type="checkbox" disabled>Carga</label></div> -->
 								<label for="atts_meteorologic"><strong>Atributos Metereológicos (PINF)</strong></label>
 									<div class="checkbox"><label><input type="checkbox" name="tmax_pinf" checked>tmax_pinf</label></div>
 									<div class="checkbox"><label><input type="checkbox" name="tmin_pinf" checked>tmin_pinf</label></div>
@@ -103,7 +107,7 @@
 						<div id="atts_analysis" class="span9">
 				        	<div id="central_bar" class="tabbable">
 				        		<ul class="nav nav-tabs">
-									<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
+									<li class="active show"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
 									<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
 								</ul>
 								<div class="tab-content containter-fluid">
