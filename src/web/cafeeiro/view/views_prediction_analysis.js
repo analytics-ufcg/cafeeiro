@@ -5,27 +5,18 @@ function view_prediction_temporal_analysis(incidencia_table){
 
 function view_prediction_model_comparison(ci_data){
 	//  Add the GGPLOT image
-	$("#model_comparison_pane #comparison_plot").html("<img src='img/plots/prediction-model_comparison-experiment.png'>");
+	//$("#model_comparison_pane #comparison_plot").html("<img src='img/plots/prediction-model_comparison-experiment.png'>");
 	
-	console.log(ci_data);
-	// TODO: ADD D3 graph
-
 	var mapa = {};
 	for (var i = 0; i <= ci_data.length-1; i++) {
 		if(mapa[ci_data[i]["metric"]]==null) {
 			mapa[ci_data[i]["metric"]] = [];
 		}
 		mapa[ci_data[i]["metric"]].push(ci_data[i]);
-
-		// if(ci_data[i]["metric"] == array[i-1]["metric"]) {
-		// 	array.push(ci_data[i]);
-		// } else {
-		// 	array = []
-		// }
 	};
-	
-	for (m in mapa) {
-		console.log("aqui");
+
+	for (var m in mapa) {
+		plotaIC(mapa[m]);
 	};
 }
 
