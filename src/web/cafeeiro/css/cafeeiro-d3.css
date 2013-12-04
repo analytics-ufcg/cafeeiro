@@ -22,8 +22,16 @@
   stroke-width: 2px;
 }*/
 
-.unique_path {
+/*.unique_path {
   stroke: #63C74A;
+}*/
+
+.inf_greater_m5 {
+ stroke: #E03535; 
+}
+
+.inf_smaller_m5 {
+ stroke: #2BAD3A; 
 }
 
 /*.setosa {

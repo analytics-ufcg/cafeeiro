@@ -3,6 +3,7 @@
 */
 var incidencia_data = [];
 var incidencia_atts = [];
+var target_att = "taxa_inf_m5";
 
 var scenario_cities_map = {};
 scenario_cities_map['Varginha-alta-tx5'] = ["Varginha", "Varginha-antigo"];
@@ -15,11 +16,9 @@ lavoura_types = ["larga", "adensada"];
 */
 function main_controller(){
 
-	$("#atts_form").submit(function(e){
-		e.preventDefault(); 
-		get_incidencia_atts();
-	})
-
+ 	/*
+ 	 	START DEFINITIONS
+ 	*/
 	$("#model_comparison_form").submit(function(e){
 		e.preventDefault(); 
 		compare_models_with_ic();
@@ -34,17 +33,27 @@ function main_controller(){
 	$("#the_scenario").change(function() {
 		// Redefine the cities
 		redefine_options_select_list($('#att_pane #atts_bar #cidade_list'), 
-									 scenario_cities_map[$(this).val()], 
-									 true);
+									 scenario_cities_map[$(this).val()]);
 	});
 
-	// Define the defaults: cidade and lavoura
+	// On change atts bar
+	$("#atts_bar").change( function(e){
+		get_incidencia_atts();
+	});
+
+
+ 	/*
+ 	 	START RUNS
+ 	*/
+ 	// Define the defaults: cidade and lavoura
 	redefine_options_select_list($('#att_pane #atts_bar #cidade_list'), 
-								 scenario_cities_map[$("#the_scenario").val()], 
-								 true);
+								 scenario_cities_map[$("#the_scenario").val()]);
 	redefine_options_select_list($('#att_pane #atts_bar #lavoura_list'), 
-									 lavoura_types, 
-									 true);
+									 lavoura_types);
+
+	// Plot the all Attribute Analysis
+    get_incidencia_atts();
+
 }
 
 /*
@@ -55,41 +64,17 @@ function get_incidencia_atts(){
 	var att_map = get_att_map();
 
 	// Prepare the call data
-
-	// CIDADEs
-	var cidades = $('#att_pane #atts_bar #cidade_list').val();
-
-	if (cidades === null){
-		redefine_options_select_list($('#att_pane #atts_bar #cidade_list'), 
-									 scenario_cities_map[$("#the_scenario").val()], 
-									 true);
-		cidades = $('#att_pane #atts_bar #cidade_list').val();
-	}
-
-	// LAVOURAs
-	var lavouras = $('#att_pane #atts_bar #lavoura_list').val();
-
-	if (lavouras === null){
-		redefine_options_select_list($('#att_pane #atts_bar #lavoura_list'), 
-							 lavoura_types, 
-							 true);
-		lavouras = $('#att_pane #atts_bar #lavoura_list').val();
-	}
-
-	// OUTPUT ATTRIBUTEs
+	var city = $('#att_pane #atts_bar #cidade_list').val();
+	var farm = $('#att_pane #atts_bar #lavoura_list').val();
+	
 	var atts = [];
-
 	if (att_map["meteorological"].length > 0){
 		atts = atts.concat(att_map['meteorological']);
 	}
-	if (att_map["target"].length > 0){
-		atts = atts.concat(att_map['target']);
-	}
-	atts.push("taxa_inf_m5");
 
-	var call_data = "cities=" + cidades.join(",") + "&farming_cond=" + lavouras.join(",") + "&atts=" + atts.join(",");	
-	
-	console.log(call_data);
+	atts.push(target_att);
+
+	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");	
 
 	// Disable the button
 	$("#atts_submit_btn").button('loading');
@@ -105,7 +90,7 @@ function get_incidencia_atts(){
 			incidencia_data = incidencia_table;
 			incidencia_atts = atts;
 			
-			show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
+			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 
 			// Release the button
 			$("#atts_submit_btn").button('reset');
@@ -156,7 +141,6 @@ function get_att_map(){
 
 	var result = {};
 	result['meteorological'] = []
-	result['target'] = [];	
 
 	if (atts_serialized == ""){
 		return result;
@@ -164,27 +148,20 @@ function get_att_map(){
 		var all_atts = atts_serialized.split("&");
 
 		for (var i = all_atts.length - 1; i >= 0; i--) {
-			var att = all_atts[i].replace("=on", "");
-			
-			if (att == 'incidencia' || att == 'taxa_inf' || att == 'taxa_inf_m5'){
-				result['target'].push(att);
-			}else{
-				result['meteorological'].push(att);
-			}
+			result['meteorological'].push(all_atts[i].replace("=on", ""));
 		}
 		return result;
 	}
 }
 
 
-function redefine_options_select_list(select_list, options, all_selected){
+function redefine_options_select_list(select_list, options){
 	select_list.empty();
 
 	$.each(options, function(key, value) {   
 	     select_list
 	     	.append($("<option></option>")
 	        .attr("value", value)
-	        .attr("selected", all_selected)
 	        .text(value)); 
 	});
 }

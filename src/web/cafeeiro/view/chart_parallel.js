@@ -1,7 +1,7 @@
-function plot_parallel_coord(att_data, att_names) {
+function plot_parallel_coord(att_data, att_names, target_att) {
   
   var div_width = $("#atts_analysis #central_bar #atemporal_pane").width(),
-      div_height = 700; //$("#atts_analysis #central_bar #atemporal_pane").height();
+      div_height = 600;
   
   var m = {left:70, right:70, top:40, bottom:20},
       w = div_width - m.left - m.right,
@@ -58,7 +58,12 @@ function plot_parallel_coord(att_data, att_names) {
       .data(att_data)
     .enter().append("svg:path")
       .attr("d", path)
-      .attr("class", function(d) { return "unique_path" ;});
+      .attr("class", function(d) { 
+        if (d["taxa_inf_m5"] <= 0){
+          return "inf_smaller_m5";
+        }else{
+          return "inf_greater_m5";
+        }});
 
   // Add a group element for each att_name.
   var g = svg.selectAll(".attribute")
