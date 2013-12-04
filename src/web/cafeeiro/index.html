@@ -28,6 +28,9 @@
 	<script type="text/javascript" src="view/views_attribute_analysis.js"></script>
 	<script type="text/javascript" src="view/errorbar.js"></script>
 	<script type="text/javascript" src="view/chart_parallel.js"></script>
+
+	<!-- ADD LIB -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script> 
 	
 </head>
 <body>
@@ -112,8 +115,8 @@
 								</ul>
 								<div class="tab-content containter-fluid">
 
-									<div id="temporal_pane" class="tab-pane row-fluid">
-										TEMPORAL
+									<div id="temporal_pane" class="tab-pane row-fluid" class="span8">
+										
 									</div>
 
 									<div id="atemporal_pane" class="tab-pane row-fluid">
@@ -127,12 +130,12 @@
 				    <div id="prediction_pane" class="tab-pane">
 			        	<div id="central_bar" class="tabbable">
 			        		<ul class="nav nav-tabs">
-								<li class="active"><a href="#temporal_pane" data-toggle="tab">Análise Temporal</a></li>
+								<li class="active"><a href="#temporal_pane2" data-toggle="tab">Análise Temporal</a></li>
 								<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 							</ul>
 							<div class="tab-content containter-fluid">
 
-								<div id="temporal_pane" class="tab-pane row-fluid">
+								<div id="temporal_pane2" class="tab-pane row-fluid">
 								</div>
 
 								<div id="model_comparison_pane" class="tab-pane row-fluid">
@@ -187,8 +190,53 @@
 			</p>
         </div>
     </div>
+
+    <!-- Dados das series -->
+    <script src="./sample_data.js"></script>
+
 </body>
 </html>
 <script type="text/javascript" language="javascript">
 	$(document).ready(main_controller());
+
+    //Series Temporais
+      'use strict';
+    
+        $(function () {
+
+            requirejs.config({
+                "baseUrl": "./",
+                "paths": {
+                    "app": "./",
+                    'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min',
+                    'underscore': 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min'                    
+                }
+            });
+
+
+            require(['app/d3.chart'], function (d3Chart) {
+                d3Chart.init({ container: '#temporal_pane', xDim: 'DateTime' });
+              //d3Chart.addGraph({ id: 'Speed', type: 'horizon', name: 'Speed', dataId: 512, yVal: ['Value'], data: speedData });
+                d3Chart.addGraph({ id: 'Imps', type: 'analog', name: 'RPM', dataId: 513, yVal: ['Value'], data: imps1 });
+                d3Chart.addGraph({ id: 'Clicks', type: 'analog', name: 'RPM2', dataId: 513, yVal: ['Value'], data: imps2 });
+                d3Chart.addGraph({ id: 'CTR', type: 'analog', name: 'CTR', dataId: 513, yVal: ['Value'], data: CTR });
+              //d3Chart.addGraph({ id: 'DI', type: 'digital', name: 'Digital Input', dataId: 522, data: diData });
+                
+              //d3Chart.addGraph({ id: 'Accel', type: 'analog', name: 'Accel', dataId: 522, yVal: ['X', 'Y', 'Z'], data: accelData });
+                d3Chart.render();                              
+
+                setTimeout(function () {  
+                    d3Chart.reorderGraph('Accel', 'up');
+                    
+                    //window.setTimeout(function () {
+                    //    d3Chart.removeGraph('RPM');
+                    //}, 2000);
+                    
+                }, 3000);
+
+
+            });
+
+        });
+
 </script>
