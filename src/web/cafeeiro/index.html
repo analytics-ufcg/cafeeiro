@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
 	<script type="text/javascript" src="js/d3.v3.min.js"></script>
+	<script type="text/javascript" src="js/require.min.js"></script>
 
 	<!-- CONTROLLER -->
 	<script type="text/javascript" src="controller/controller.js"></script>
@@ -29,9 +30,6 @@
 	<script type="text/javascript" src="view/errorbar.js"></script>
 	<script type="text/javascript" src="view/chart_parallel.js"></script>
 
-	<!-- ADD LIB -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script> 
-	
 </head>
 <body>
 	<!-- Part 1: Wrap all page content here -->
@@ -257,7 +255,7 @@
             requirejs.config({
                 "baseUrl": "./",
                 "paths": {
-                    "app": "./",
+                    "app": "./js/",
                     'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min',
                     'underscore': 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min'                    
                 }
