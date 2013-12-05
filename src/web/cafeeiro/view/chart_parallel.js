@@ -59,7 +59,7 @@ function plot_parallel_coord(att_data, att_names, target_att) {
     .enter().append("svg:path")
       .attr("d", path)
       .attr("class", function(d) { 
-        if (d["taxa_inf_m5"] <= 0){
+        if (d[target_att] <= 0){
           return "inf_smaller_m5";
         }else{
           return "inf_greater_m5";
