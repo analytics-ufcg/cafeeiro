@@ -21,14 +21,16 @@ library(FSelector)
 cat("Reading the data...\n")
 
 # DATABASE CONNECTION
-my.conn <- odbcConnect("CafeeiroDSN", readOnlyOptimize = T)
+# my.conn <- odbcConnect("CafeeiroDSN", readOnlyOptimize = T)
+# 
+# # DATASET retrieval
+# query <- "SELECT * FROM incidencia;"
+# data <- sqlQuery(my.conn, query)
+# 
+# # DATABASE close the channel connection
+# odbcClose(my.conn)
 
-# DATASET retrieval
-query <- "SELECT * FROM incidencia;"
-data <- sqlQuery(my.conn, query)
-
-# DATABASE close the channel connection
-odbcClose(my.conn)
+data <- read.csv("data/dados_cafeeiro_db.csv")
 
 # Select the input variables only
 input <- c("lavoura", "tmax_pinf", "tmin_pinf", "tmed_pinf", 

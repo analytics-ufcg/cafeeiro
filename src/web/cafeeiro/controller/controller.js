@@ -4,12 +4,13 @@
 var incidencia_data = [];
 var incidencia_atts = [];
 var target_att = "taxa_inf_m5";
+var date_time_att = "dia";
 
 var scenario_cities_map = {};
 scenario_cities_map['Varginha-alta-tx5'] = ["Varginha", "Varginha-antigo"];
 scenario_cities_map['Tudo-alta-tx5'] = ["Boa-esperanca", "Carmo-de-minas", "Varginha", "Varginha-antigo"];
 
-lavoura_types = ["larga", "adensada"];
+lavoura_types = ["Adensada", "Larga"];
 
 /*
 	MAIN CONTROLLER METHOD
@@ -54,6 +55,10 @@ function main_controller(){
 	// Plot the all Attribute Analysis
     get_incidencia_atts();
 
+
+    // $('#tab-content').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({placement: "right"});
+
 }
 
 /*
@@ -65,8 +70,9 @@ function get_incidencia_atts(){
 
 	// Prepare the call data
 	var city = $('#att_pane #atts_bar #cidade_list').val();
-	var farm = $('#att_pane #atts_bar #lavoura_list').val();
+	var farm = $('#att_pane #atts_bar #lavoura_list').val().toLowerCase();
 	
+	// var atts = [date_time_att];
 	var atts = [];
 	if (att_map["meteorological"].length > 0){
 		atts = atts.concat(att_map['meteorological']);
@@ -77,7 +83,7 @@ function get_incidencia_atts(){
 	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");	
 
 	// Disable the button
-	$("#atts_submit_btn").button('loading');
+	// $("#atts_submit_btn").button('loading');
 
 	$.ajax({
 		type: 'GET',
@@ -93,7 +99,7 @@ function get_incidencia_atts(){
 			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 
 			// Release the button
-			$("#atts_submit_btn").button('reset');
+			// $("#atts_submit_btn").button('reset');
 		}
 	});
 }
