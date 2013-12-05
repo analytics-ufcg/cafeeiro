@@ -2,7 +2,7 @@
     include 'global_model.php';
 
     # Read the GET parameters
-    $cities = $_GET['cities'];
+    $city = $_GET['city'];
     $farming_cond = $_GET['farming_cond'];
     $atts = $_GET['atts'];
     
@@ -13,22 +13,11 @@
     # Connect to the Database
     $conn = odbc_connect($dsn, '', '') or die ("ODBC CONNECTION ERROR!\n");
 
-
     # Prepare the query
     $query = $query_map['get_incidencia_atts_with_conditions'];
     
-    $city_clauses = array();
-    foreach (split(',', $cities) as $city) {
-        array_push($city_clauses, "cidade = '$city'");
-    }
-
-    $farming_clauses = array();
-    foreach (split(',', $farming_cond) as $farm_cond) {
-        array_push($farming_clauses, "lavoura = '$farm_cond'");
-    }
-    
-    $query = str_replace('[FARMING_CONDITIONS]', join(" OR ", $farming_clauses), 
-                str_replace('[CITY_CONDITIONS]', join(" OR ", $city_clauses), 
+    $query = str_replace('[FARMING_COND]', $farming_cond, 
+                str_replace('[CITY]', $city, 
                     str_replace('[ATT_COLUMNS]', $atts, $query)));
 
     # Execute the query

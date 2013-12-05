@@ -3,10 +3,16 @@ function view_prediction_temporal_analysis(incidencia_table){
 	
 }
 
+function remove_ic(){
+  d3.select("#comparison_plot").selectAll("svg").remove();
+}
+
 function view_prediction_model_comparison(ci_data){
 	//  Add the GGPLOT image
 	//$("#model_comparison_pane #comparison_plot").html("<img src='img/plots/prediction-model_comparison-experiment.png'>");
 	
+	remove_ic();
+
 	var mapa = {};
 	for (var i = 0; i <= ci_data.length-1; i++) {
 		if(mapa[ci_data[i]["metric"]]==null) {

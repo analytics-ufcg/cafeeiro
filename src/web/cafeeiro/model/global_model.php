@@ -24,6 +24,6 @@
 		"get_incidencia_atts_with_conditions" =>
 			"SELECT [ATT_COLUMNS]
 			FROM incidencia
-			WHERE ([CITY_CONDITIONS]) AND ([FARMING_CONDITIONS]) AND carga = 'alta';"
+			WHERE cidade = '[CITY]' AND lavoura = '[FARMING_COND]' AND carga = 'alta';"
 	);
 ?>
