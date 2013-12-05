@@ -4,7 +4,7 @@ function view_prediction_temporal_analysis(incidencia_table){
 }
 
 function remove_ic(){
-  d3.select("#comparison_plot").selectAll("svg").remove();
+  d3.select("#comparison_plot_carousel").selectAll("svg").remove();
 }
 
 function view_prediction_model_comparison(ci_data){
@@ -52,7 +52,7 @@ function plotaIC(data) {
 	var color = d3.scale.category10();
 	 
 	//endereço do plot
-	var svg = d3.select("#comparison_plot").append("svg")
+	var svg = d3.select("#comparison_plot_carousel").append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom);
 
