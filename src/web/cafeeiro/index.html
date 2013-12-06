@@ -31,6 +31,7 @@
 	<script type="text/javascript" src="view/views_attribute_analysis.js"></script>
 	<script type="text/javascript" src="view/errorbar.js"></script>
 	<script type="text/javascript" src="view/chart_parallel.js"></script>
+	<script type="text/javascript" src="view/chart_time_series"></script>
 
 </head>
 <body>
@@ -249,51 +250,10 @@
     </div>
 
     <!-- Dados das series -->
-    <script src="./sample_data.js"></script>
+    <script src="./sample_data2.js"></script>
 
 </body>
 </html>
 <script type="text/javascript" language="javascript">
 	$(document).ready(main_controller());
-
-    //Series Temporais
-      'use strict';
-    
-        $(function () {
-
-            requirejs.config({
-                "baseUrl": "./",
-                "paths": {
-                    "app": "./js/",
-                    'moment': 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min',
-                    'underscore': 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min'                    
-                }
-            });
-
-
-            require(['app/d3.chart'], function (d3Chart) {
-                d3Chart.init({ container: '#temporal_pane', xDim: 'DateTime' });
-              //d3Chart.addGraph({ id: 'Speed', type: 'horizon', name: 'Speed', dataId: 512, yVal: ['Value'], data: speedData });
-                d3Chart.addGraph({ id: 'Imps', type: 'analog', name: 'RPM', dataId: 513, yVal: ['Value'], data: imps1 });
-                d3Chart.addGraph({ id: 'Clicks', type: 'analog', name: 'RPM2', dataId: 513, yVal: ['Value'], data: imps2 });
-                d3Chart.addGraph({ id: 'CTR', type: 'analog', name: 'CTR', dataId: 513, yVal: ['Value'], data: CTR });
-              //d3Chart.addGraph({ id: 'DI', type: 'digital', name: 'Digital Input', dataId: 522, data: diData });
-                
-              //d3Chart.addGraph({ id: 'Accel', type: 'analog', name: 'Accel', dataId: 522, yVal: ['X', 'Y', 'Z'], data: accelData });
-                d3Chart.render();                              
-
-                setTimeout(function () {  
-                    d3Chart.reorderGraph('Accel', 'up');
-                    
-                    //window.setTimeout(function () {
-                    //    d3Chart.removeGraph('RPM');
-                    //}, 2000);
-                    
-                }, 3000);
-
-
-            });
-
-        });
-
 </script>
