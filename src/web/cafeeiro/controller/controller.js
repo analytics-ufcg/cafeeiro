@@ -93,10 +93,10 @@ function get_incidencia_atts(){
 			// Copy the data/atts to the client memory
 			incidencia_data = incidencia;
 			incidencia_atts = atts;
-			console.log(incidencia);
-			incidencia_table = incidencia_data.slice(0);
+			// console.log(incidencia);
+			// incidencia_table = incidencia_data.slice(0);
 
-			show_atts_atemporal_analysis(incidencia_table, incidencia_atts, target_att);
+			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 		}
 	});
 }
