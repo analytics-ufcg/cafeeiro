@@ -3,6 +3,9 @@
 
 $(function () {
 
+    //Dados das series
+    //<script src="./sample_data2.js"></script>
+
     requirejs.config({
         "baseUrl": "./",
         "paths": {
@@ -13,16 +16,24 @@ $(function () {
     });
 
 
+
+
     require(['app/d3.chart'], function (d3Chart) {
         d3Chart.init({ container: '#temporal_pane', xDim: 'DateTime' });
-      //d3Chart.addGraph({ id: 'Speed', type: 'horizon', name: 'Speed', dataId: 512, yVal: ['Value'], data: speedData });
-      //d3Chart.addGraph({ id: 'Imps', type: 'analog', name: 'RPM', dataId: 513, yVal: ['Value'], data: imps1 });
-      //d3Chart.addGraph({ id: 'Clicks', type: 'analog', name: 'RPM2', dataId: 513, yVal: ['Value'], data: imps2 });
-      //d3Chart.addGraph({ id: 'CTR', type: 'analog', name: 'CTR', dataId: 513, yVal: ['Value'], data: CTR });
-      //d3Chart.addGraph({ id: 'DI', type: 'digital', name: 'Digital Input', dataId: 522, data: diData });
-        d3Chart.addGraph({ id: 'chuva', type: 'analog', name: 'grafico da chuva', dataId: 513, yVal: ['dchuv_pinf'], data: chuva });
-        d3Chart.addGraph({ id: 'chuvinha', type: 'analog', name: 'grafico chuvinha', dataId: 513, yVal: ['dchuv_pinf'], data: chuva });
-      //d3Chart.addGraph({ id: 'Accel', type: 'analog', name: 'Accel', dataId: 522, yVal: ['X', 'Y', 'Z'], data: accelData });
+      
+        d3Chart.addGraph({ id: 'Incidência', type: 'analog', name: 'Incidência', dataId: 513, yVal: ['incidencia'], data: incidencia_data });
+
+
+        console.log(incidencia_atts[0]);
+        for (var i in incidencia_atts){
+            console.log(incidencia_atts[i]);
+            d3Chart.addGraph({ id: incidencia_data[i], type: 'analog', name: incidencia_data[i], dataId: 513, yVal: [incidencia_data[i]], data: incidencia_data});
+        };        
+
+        //d3Chart.addGraph({ id: 'tmin_pinf', type: 'analog', name: 'tmin_pinf', dataId: 513, yVal: ['tmin_pinf'], data: incidencia_data});
+        //d3Chart.addGraph({ id: 'tmax_pinf', type: 'analog', name: 'tmax_pinf', dataId: 513, yVal: ['tmax_pinf'], data: incidencia_data });
+        //d3Chart.addGraph({ id: 'taxa_inf_m5', type: 'analog', name: 'taxa_inf_m5', dataId: 513, yVal: ['taxa_inf_m5'], data: incidencia_data });
+
         d3Chart.render();                              
 
         setTimeout(function () {  
