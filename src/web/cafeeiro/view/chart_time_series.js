@@ -3,9 +3,6 @@
 
 $(function () {
 
-    //Dados das series
-    //<script src="./sample_data2.js"></script>
-
     requirejs.config({
         "baseUrl": "./",
         "paths": {
@@ -14,9 +11,6 @@ $(function () {
             'underscore': 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min'                    
         }
     });
-
-
-
 
     require(['app/d3.chart'], function (d3Chart) {
         d3Chart.init({ container: '#temporal_pane', xDim: 'DateTime' });

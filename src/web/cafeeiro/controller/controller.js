@@ -63,7 +63,6 @@ function main_controller(){
 
     // Plot the Model Comparison
 	get_ic_data_compare_models();
-
 }
 
 /*
@@ -97,6 +96,7 @@ function get_incidencia_atts(){
 			incidencia_data = incidencia;
 			incidencia_atts = atts;
 
+			show_atts_temporal_analysis();
 			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 		}
 	});

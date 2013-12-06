@@ -127,7 +127,3 @@ function plot_parallel_coord(att_data, att_names) {
     });
   }
 }
-
-function remove_parallel_coord(){
-  d3.select("#atts_analysis #central_bar #atemporal_pane").selectAll("svg").remove();
-}
