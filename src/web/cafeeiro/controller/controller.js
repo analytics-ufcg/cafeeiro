@@ -77,10 +77,8 @@ function get_incidencia_atts(){
 		atts = atts.concat(att_map['meteorological']);
 	}
 	atts.push(target_att);
-	
-	var call_atts = [date_time_att].concat(atts);
 
-	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + call_atts.join(",");
+	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");
 	console.log(call_data);
 
 	$.ajax({
@@ -94,9 +92,8 @@ function get_incidencia_atts(){
 			incidencia_data = incidencia;
 			incidencia_atts = atts;
 			console.log(incidencia);
-			incidencia_table = incidencia_data.slice(0);
 
-			show_atts_atemporal_analysis(incidencia_table, incidencia_atts, target_att);
+			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 		}
 	});
 }

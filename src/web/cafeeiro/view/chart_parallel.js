@@ -1,4 +1,4 @@
-function plot_parallel_coord(att_data, att_names, target_att) {
+function plot_parallel_coord(att_data, att_names) {
   
   var div_width = $("#atts_analysis #central_bar #atemporal_pane").width(),
       div_height = 600;

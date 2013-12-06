@@ -6,8 +6,8 @@
     $farming_cond = $_GET['farming_cond'];
     $atts = $_GET['atts'];
     
-    // $cities = 'Varginha,Varginha-antigo';
-    // $farming_cond = 'larga,adensada';
+    // $city = 'Varginha';
+    // $farming_cond = 'larga';
     // $atts = 'taxa_inf_m5,lavoura,cidade,tmin_pi_pinf,smt_nhnur95_pinf,taxa_inf,incidencia';
 
     # Connect to the Database
@@ -26,6 +26,19 @@
 
     $incidencia_rows = array();
     while ($row = odbc_fetch_array($resultset)) {
+
+        # Remove the time from DateTime
+        $new_date = split(' ', $row['DateTime']);
+        $row['DateTime'] = $new_date[0];
+
+        
+        # Cast all the other attributes to float
+        $atts_to_float = split(',', $atts);
+        array_push($atts_to_float, 'incidencia');
+        foreach ($atts_to_float as $key => $value) {            
+            $row[$value] = (float) $row[$value];
+        }
+
         array_push($incidencia_rows, $row);
     }
 

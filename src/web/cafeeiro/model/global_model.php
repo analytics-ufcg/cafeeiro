@@ -22,7 +22,7 @@
 			WHERE carga = \'alta\';',
 
 		"get_incidencia_atts_with_conditions" =>
-			"SELECT [ATT_COLUMNS]
+			"SELECT data as DateTime, incidencia, [ATT_COLUMNS]
 			FROM incidencia
 			WHERE cidade = '[CITY]' AND lavoura = '[FARMING_COND]' AND carga = 'alta';"
 	);
