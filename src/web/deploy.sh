@@ -15,7 +15,7 @@ zip -r cafeeiro.zip cafeeiro
 scp cafeeiro.zip ${user}@${target_host}:~/
 
 # IN the "target_host": Remove the previous cafeeiro web files and add the new ones
-ssh ${user}@${target_host} "cd /var/www/; rm -rf cafeeiro/*; unzip ~/cafeeiro.zip -d .; chmod -R 777 cafeeiro/img"
+ssh ${user}@${target_host} "cd /var/www/; rm -rf cafeeiro/*; unzip ~/cafeeiro.zip -d ."
 
 # Remove the created cafeeiro.zip file
 rm -rf cafeeiro.zip

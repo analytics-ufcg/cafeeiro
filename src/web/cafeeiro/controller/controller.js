@@ -4,7 +4,6 @@
 var incidencia_data = [];
 var incidencia_atts = [];
 var target_att = "taxa_inf_m5";
-var date_time_att = "data";
 
 var scenario_cities_map = {};
 scenario_cities_map['Varginha-alta-tx5'] = ["Varginha", "Varginha-antigo"];
@@ -20,15 +19,6 @@ function main_controller(){
  	/*
  	 	START DEFINITIONS
  	*/
-	$("#model_comparison_form").submit(function(e){
-		e.preventDefault(); 
-		compare_models_with_ic();
-	});
-
-	// Draw the parallel coordinate on demand (when the atemporal tab is selected)
-	$('#atts_analysis #central_bar a[href="#atemporal_pane"]').on('shown', function (e) {
-		show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
-	});
 
 	// Actions when the scenario changes
 	$("#the_scenario").change(function() {
@@ -37,27 +27,42 @@ function main_controller(){
 									 scenario_cities_map[$(this).val()]);
 	});
 
-	// On change atts bar
+	// Draw the parallel coordinate on demand (when the atemporal tab is selected)
+	$('#atts_analysis #central_bar a[href="#atemporal_pane"]').on('shown', function (e) {
+		show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
+	});
+
+	// On change: Attributes
 	$("#atts_bar").change( function(e){
 		get_incidencia_atts();
 	});
+
+	// On change: Model selection
+	$("#model_comparison_pane #parameters_bar").change( function(e){
+		get_ic_data_compare_models();
+	});
+
+	// Add the tooltips
+    $('[data-toggle="tooltip"]').tooltip({placement: "right"});
 
 
  	/*
  	 	START RUNS
  	*/
+
+ 	$('#atts_analysis #central_bar a[href="#temporal_pane"]').tab('show');
+
  	// Define the defaults: cidade and lavoura
 	redefine_options_select_list($('#att_pane #atts_bar #cidade_list'), 
 								 scenario_cities_map[$("#the_scenario").val()]);
 	redefine_options_select_list($('#att_pane #atts_bar #lavoura_list'), 
 									 lavoura_types);
 
-	// Plot the all Attribute Analysis
+	// Plot the Attribute Analysis
     get_incidencia_atts();
 
-
-    // $('#tab-content').tooltip();
-    $('[data-toggle="tooltip"]').tooltip({placement: "right"});
+    // Plot the Model Comparison
+	get_ic_data_compare_models();
 
 }
 
@@ -91,14 +96,13 @@ function get_incidencia_atts(){
 			// Copy the data/atts to the client memory
 			incidencia_data = incidencia;
 			incidencia_atts = atts;
-			console.log(incidencia);
 
 			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 		}
 	});
 }
 
-function compare_models_with_ic(){
+function get_ic_data_compare_models(){
 	
 	scenario = $('#the_scenario').val();
 	att_list = $("#att_list").val();
@@ -111,9 +115,6 @@ function compare_models_with_ic(){
 						'&att_methods=' + att_list.join() + 
 						'&metrics=' + metric_list.join();
 
-		console.log(call_data);
-
-	 	$("#model_comparison_submit_btn").button('loading');
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
@@ -125,8 +126,6 @@ function compare_models_with_ic(){
 				var ci_data = $.parseJSON(ci_data_text);
 
 				view_prediction_model_comparison(ci_data);
-
-				$("#model_comparison_submit_btn").button('reset');
 			}
 		});
 	}

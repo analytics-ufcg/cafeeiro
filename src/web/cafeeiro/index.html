@@ -189,13 +189,13 @@
 								</div>
 
 								<div id="model_comparison_pane" class="tab-pane row-fluid">
-									<div id="parameters_submit" class="span3">
+									<div id="parameters_bar" class="span3">
 										<form id="model_comparison_form">
 											<label for="compare_models_att" ><strong>Método de Seleção de Atributos</strong></label>
 									    	<select id="att_list" name="att_list" multiple>
-									    		<option>Subjetivo - M1</option>
-									    		<option>Subjetivo - M2</option>
-									    		<option>Subjetivo - M3</option>
+									    		<option selected>Subjetivo - M1</option>
+									    		<option selected>Subjetivo - M2</option>
+									    		<option selected>Subjetivo - M3</option>
 									    		<option>Subjetivo - M1 - IncW1</option>
 									    		<option>Subjetivo - M2 - IncW1</option>
 									    		<option>Subjetivo - M3 - IncW1</option>
@@ -203,7 +203,7 @@
 										    <br>
 									    	<label for="compare_models_att"><strong>Métricas</strong></p></label>
 									    	<select id="metric_list" name="metric_list" multiple>
-												<option>Acurácia</option>
+												<option selected>Acurácia</option>
 												<option>Erro</option>
 												<option>Sensitividade</option>
 												<option>Especificidade</option>
@@ -211,10 +211,6 @@
 												<option>TP-Rate</option>
 												<option>AUC</option>
 											</select>
-										    <br>
-										    <button type="submit" id="model_comparison_submit_btn" class="btn btn-primary btn-block" data-loading-text="Carregando...">
-										    	Enviar
-										    </button>
 										</form>
 									</div>
 									<div id="comparison_plot" class="span9">
