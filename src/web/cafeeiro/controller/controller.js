@@ -4,7 +4,7 @@
 var incidencia_data = [];
 var incidencia_atts = [];
 var target_att = "taxa_inf_m5";
-var date_time_att = "dia";
+var date_time_att = "data";
 
 var scenario_cities_map = {};
 scenario_cities_map['Varginha-alta-tx5'] = ["Varginha", "Varginha-antigo"];
@@ -72,18 +72,16 @@ function get_incidencia_atts(){
 	var city = $('#att_pane #atts_bar #cidade_list').val();
 	var farm = $('#att_pane #atts_bar #lavoura_list').val().toLowerCase();
 	
-	// var atts = [date_time_att];
-	var atts = [];
+	var atts = []
 	if (att_map["meteorological"].length > 0){
 		atts = atts.concat(att_map['meteorological']);
 	}
-
 	atts.push(target_att);
+	
+	var call_atts = [date_time_att].concat(atts);
 
-	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");	
-
-	// Disable the button
-	// $("#atts_submit_btn").button('loading');
+	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + call_atts.join(",");
+	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
@@ -91,15 +89,14 @@ function get_incidencia_atts(){
 		url: 'model/model_incidencia_atts_with_conditions.php',
 		async: true,
 		data: call_data,
-		success: function(incidencia_table) {
+		success: function(incidencia) {
 			// Copy the data/atts to the client memory
-			incidencia_data = incidencia_table;
+			incidencia_data = incidencia;
 			incidencia_atts = atts;
-			
-			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
+			console.log(incidencia);
+			incidencia_table = incidencia_data.slice(0);
 
-			// Release the button
-			// $("#atts_submit_btn").button('reset');
+			show_atts_atemporal_analysis(incidencia_table, incidencia_atts, target_att);
 		}
 	});
 }

@@ -8,7 +8,6 @@ library(randomForest)
 library(plyr)
 library(ROCR)
 library(DMwR)
-library(FSelector)
 
 ################################################################################
 # FUNCTIONS
