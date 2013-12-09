@@ -4,7 +4,7 @@ function view_prediction_temporal_analysis(incidencia_table){
 }
 
 function remove_ic(){
-  d3.select("#comparison_plot").selectAll("svg").remove();
+  d3.select("#comparison_plot_carousel").selectAll("svg").remove();
 }
 
 function view_prediction_model_comparison(ci_data){
@@ -52,9 +52,11 @@ function plotaIC(data) {
 	var color = d3.scale.category10();
 	 
 	//endereço do plot
-	var svg = d3.select("#comparison_plot").append("svg")
+	var svg = d3.select("#comparison_plot_carousel").append("div").attr("class", "item").append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom);
+
+	$( "div .item" ).first().addClass( "active" );
 
 	var plot = svg.append("g")
 	      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -118,11 +120,11 @@ function plotaIC(data) {
 
 	svg.append("text")
 	      .attr("x",margin.left * 9)
-	      .attr('y',margin.top - 20)
+	      .attr('y',height + 70)
 	      .attr('width', 100)
 	      .attr('height', margin.bottom - 10)
 	      .attr('text-anchor', 'middle')
-	      .attr('font-size', '25px')
-	      .text(  data[0].model_and_att_method );
+	      .attr('font-size', '15px')
+	      .text(  data[0].model );
 
 	}
