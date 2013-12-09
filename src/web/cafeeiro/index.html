@@ -204,12 +204,12 @@
 						<li><a href="#prediction_pane" data-toggle="tab">Análise da Predição</a></li>
 					</ul>
 					<div class="tab-content">
-
+						<br>
 						<!-- Análise dos atributos -->
 						<div id="att_pane" class="tab-pane active row-fluid">
 							<div id="atts_analysis">
 					        	<div id="central_bar" class="tabbable">
-					        		<ul class="nav nav-tabs">
+					        		<ul class="nav nav-pills nav-justified">
 										<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
 										<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
 									</ul>
@@ -226,12 +226,12 @@
 						<!-- Análise das predições -->
 					    <div id="prediction_pane" class="tab-pane">
 				        	<div id="central_bar" class="tabbable">
-				        		<ul class="nav nav-tabs">
+				        		<ul class="nav nav-pills nav-justified">
 									<li class="active"><a href="#temporal_pane2" data-toggle="tab">Análise Temporal</a></li>
 									<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 								</ul>
 								<div class="tab-content containter-fluid">
-
+									<br>
 									<div id="temporal_pane2" class="tab-pane row-fluid">
 									</div>
 
@@ -239,7 +239,7 @@
 										<div id="parameters_bar" class="span3">
 											<form id="model_comparison_form">
 												<label for="compare_models_att" ><strong>Método de Seleção de Atributos</strong></label>
-										    	<select id="att_list" name="att_list" multiple>
+										    	<select id="att_list" class="form-control" name="att_list" multiple>
 										    		<option selected>Subjetivo - M1</option>
 										    		<option selected>Subjetivo - M2</option>
 										    		<option selected>Subjetivo - M3</option>
@@ -249,7 +249,7 @@
 										    	</select>
 											    <br>
 										    	<label for="compare_models_att"><strong>Métricas</strong></p></label>
-										    	<select id="metric_list" name="metric_list" multiple>
+										    	<select id="metric_list" class="form-control" name="metric_list" multiple>
 													<option selected>Acurácia</option>
 													<option>Erro</option>
 													<option>Sensitividade</option>
