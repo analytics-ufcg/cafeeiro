@@ -83,7 +83,6 @@ function get_incidencia_atts(){
 	atts.push(target_att);
 
 	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");
-	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',

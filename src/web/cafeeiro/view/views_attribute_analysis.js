@@ -7,7 +7,7 @@ function show_atts_atemporal_analysis(incidencia_table, att_names, target_att_na
 }
 
 has_time_series_chart = false;
-time_series_ids_atts = [];
+old_incidencia_atts = [];
 
 function create_atts_temporal_analysis(){
 	remove_all_d3_svg("#atts_analysis #central_bar #temporal_pane");
@@ -45,15 +45,17 @@ function show_atts_temporal_analysis(){
 
     require(['app/d3.chart'], function (d3Chart) {
 
-    	for (var i = time_series_ids_atts.length - 1; i >= 0; i--) {
-    		old_att_id = time_series_ids_atts[i];
+        atts_to_remove = _.difference(old_incidencia_atts, incidencia_atts);
+        atts_to_add = _.difference(incidencia_atts, old_incidencia_atts);
 
-    		d3Chart.removeGraph(old_att_id);
+    	for (var i = 0; i < atts_to_add.length; i++) {
+            att = atts_to_remove[i];
+
+    		d3Chart.removeGraph(att);
     	};
-      	time_series_ids_atts = [];
 
-		for (var i = 0; i < incidencia_atts.length; i++) {
-			att = incidencia_atts[i];
+		for (var i = 0; i < atts_to_add.length; i++) {
+			att = atts_to_add[i];
             
             d3Chart.addGraph({ 
             	id: att, 
@@ -63,11 +65,12 @@ function show_atts_temporal_analysis(){
             	yVal: [att], 
             	data: incidencia_data
             });
-
-    		time_series_ids_atts.push(att);
 		};
         
         d3Chart.render();
+
+        // Keep the selected atts to compare with the ones in the next call
+        old_incidencia_atts = incidencia_atts;
     });
 }
 
