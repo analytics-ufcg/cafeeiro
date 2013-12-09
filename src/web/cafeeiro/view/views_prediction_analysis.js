@@ -114,6 +114,15 @@ function plotaIC(data) {
 	      .attr('height', 50)
 	      .attr('text-anchor', 'middle')
 	      .attr('font-size', '25px')
-	      .text( data[0].metric ); 
+	      .text( data[0].metric );
+
+	svg.append("text")
+	      .attr("x",margin.left * 9)
+	      .attr('y',margin.top - 20)
+	      .attr('width', 100)
+	      .attr('height', margin.bottom - 10)
+	      .attr('text-anchor', 'middle')
+	      .attr('font-size', '25px')
+	      .text(  data[0].model_and_att_method );
 
 	}
