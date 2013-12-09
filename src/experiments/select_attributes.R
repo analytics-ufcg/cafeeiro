@@ -5,7 +5,7 @@ rm(list = ls())
 ################################################################################
 library(RODBC)
 library(plyr)
-library(FSelector)
+library(randomForest)
 
 ################################################################################
 # FUNCTIONS
@@ -21,16 +21,16 @@ library(FSelector)
 cat("Reading the data...\n")
 
 # DATABASE CONNECTION
-# my.conn <- odbcConnect("CafeeiroDSN", readOnlyOptimize = T)
-# 
-# # DATASET retrieval
-# query <- "SELECT * FROM incidencia;"
-# data <- sqlQuery(my.conn, query)
-# 
-# # DATABASE close the channel connection
-# odbcClose(my.conn)
+my.conn <- odbcConnect("CafeeiroDSN", readOnlyOptimize = T)
 
-data <- read.csv("data/dados_cafeeiro_db.csv")
+# DATASET retrieval
+query <- "SELECT * FROM incidencia;"
+data <- sqlQuery(my.conn, query)
+
+# DATABASE close the channel connection
+odbcClose(my.conn)
+
+# data <- read.csv("data/dados_cafeeiro_db.csv")
 
 # Select the input variables only
 input <- c("lavoura", "tmax_pinf", "tmin_pinf", "tmed_pinf", 
@@ -46,17 +46,17 @@ output <- c("taxa_inf_m5", "taxa_inf_m10")
 # Cast the factors to numeric
 data$lavoura <- as.numeric(data$lavoura)
 
-# Select features with:
-# CFS
-cfs.subset <- cfs(taxa_inf_m5~., data[,c(input, output[1])])
-print(cfs.subset)
+# Select features with Random Forest Importance
+r.tree <- randomForest(data[,input], as.factor(data[,output[1]]), ntree = 100, mtry = 8)
 
-# Consistency
-consistence.subset <- consistency(taxa_inf_m5~., data[,c(input[-1], output[1])])
-print(consistence.subset)
+importance.data <- r.tree$importance
+importance.data <- as.data.frame(importance.data[order(importance.data[,"MeanDecreaseGini"], decreasing=T),])
 
-# TODO: Select more 2 and run!
+importance.data$attribute <- rownames(importance.data)
+colnames(importance.data)[1] <- "MeanDecreaseGini"
+importance.data <- importance.data[,c(2,1)]
+rownames(importance.data) <- NULL
 
-
-
+cat("Atributte importance by the RandomForest:\n")
+print(importance.data)
 

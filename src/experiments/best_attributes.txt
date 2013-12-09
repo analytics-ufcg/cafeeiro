@@ -1,0 +1,27 @@
+Atributte importance measured by the RandomForest (higher the decrease in gini better the attribute)
+
+                   MeanDecreaseGini
+incidencia_w1             53.010337
+thur95_pinf               33.993743
+ddi_pinf                  29.327962
+tmed_pinf                 14.272768
+lavoura                   12.740332
+smt_nhnur95_pinf          12.552533
+tmin_pinf                 11.512734
+dfmfi_pinf                11.203812
+med_indpluvmax_pinf       10.586781
+precip_pinf                9.668224
+smt_vvento_pinf            9.351616
+ur_pinf                    9.200422
+tmin_pi_pinf               9.068754
+tmax_pi_pinf               8.870234
+med_precip_pinf            8.554403
+dmfi_pinf                  8.550517
+smt_nhur95_pinf            8.535513
+nhur95_pinf                8.409029
+tmed_pi_pinf               8.271222
+vvento_pinf                7.927970
+nhur95_pinf.1              7.387711
+tmax_pinf                  7.321818
+acdinf_pinf                6.760091
+dchuv_pinf                 6.379189
