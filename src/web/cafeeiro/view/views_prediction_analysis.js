@@ -4,6 +4,7 @@ function view_prediction_temporal_analysis(incidencia_table){
 }
 
 function remove_ic(){
+	$("#comparison_plot_carousel").html("");
   d3.select("#comparison_plot_carousel").selectAll("svg").remove();
 }
 
@@ -29,7 +30,7 @@ function view_prediction_model_comparison(ci_data){
 //plota grafico de erro      
 function plotaIC(data) {
 		//Função dos intervalos
-	var div_width = $("#central_bar").width();
+	var div_width = 800;
 	
 	var margin = {top: 40, right: 350, bottom: 100, left: 50},
 	    size = 5,

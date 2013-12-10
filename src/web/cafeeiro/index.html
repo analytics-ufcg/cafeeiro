@@ -8,7 +8,6 @@
 	<meta name="author" content="">
 	
 	<!-- CSS -->
-	<link href="css/cafeeiro.css" rel="stylesheet">
 	<link href="css/cafeeiro-d3.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -199,7 +198,7 @@
 				        	</div>
 				   		</div>
 					</div>
-					<div class="panel panel-default">
+					<div id="accordion_model_atts" class="panel panel-default" style="display: none">
         				<div class="panel-heading">
         					<span class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_model_atts">
@@ -219,7 +218,7 @@
 							    		<option>Subjetivo - M2 - IncW1</option>
 							    		<option>Subjetivo - M3 - IncW1</option>
 							    	</select>
-
+							    	<br>
 							    	<strong>Métricas</strong>
 							    	<select id="metric_list" class="form-control" name="metric_list" multiple>
 										<option selected>Acurácia</option>
@@ -252,6 +251,7 @@
 										<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
 										<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
 									</ul>
+									<br>
 									<div class="tab-content containter-fluid">
 										<div id="temporal_pane" class="tab-pane active row-fluid">
 										</div>
@@ -266,55 +266,30 @@
 					    <div id="prediction_pane" class="tab-pane">
 				        	<div id="central_bar" class="tabbable">
 				        		<ul class="nav nav-pills nav-justified">
-									<li class="active"><a href="#temporal_pane2" data-toggle="tab">Análise Atemporal</a></li>
+									<li class="active"><a href="#atemporal_pane2" data-toggle="tab">Análise Atemporal</a></li>
 									<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 								</ul>
+								<br>
 								<div class="tab-content containter-fluid">
 									<br>
-									<div id="temporal_pane2" class="tab-pane row-fluid">
+									<div id="atemporal_pane2" class="tab-pane">
 									</div>
 
 									<div id="model_comparison_pane" class="tab-pane row-fluid">
-										<div id="parameters_bar" class="span3">
-											<form id="model_comparison_form">
-												<label for="compare_models_att" ><strong>Método de Seleção de Atributos</strong></label>
-										    	<select id="att_list" class="form-control" name="att_list" multiple>
-										    		<option selected>Subjetivo - M1</option>
-										    		<option selected>Subjetivo - M2</option>
-										    		<option selected>Subjetivo - M3</option>
-										    		<option>Subjetivo - M1 - IncW1</option>
-										    		<option>Subjetivo - M2 - IncW1</option>
-										    		<option>Subjetivo - M3 - IncW1</option>
-										    	</select>
-											    <br>
-										    	<label for="compare_models_att"><strong>Métricas</strong></p></label>
-										    	<select id="metric_list" class="form-control" name="metric_list" multiple>
-													<option selected>Acurácia</option>
-													<option>Erro</option>
-													<option>Sensitividade</option>
-													<option>Especificidade</option>
-													<option>FP-Rate</option>
-													<option>TP-Rate</option>
-													<option>AUC</option>
-												</select>
-											</form>
-										</div>
-										<div id="comparison_plot" class="span9">
-											<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-	                                            <!-- Wrapper for slides -->
-	                                            <div id="comparison_plot_carousel" class="carousel-inner">
-	                                            </div>
-	                                            <!-- Controls -->
-	                                            <div align="center">
-		                                            <a class="left" href="#carousel-example-generic" data-slide="prev">
-		                                              <span class="glyphicon glyphicon-chevron-left"></span>
-		                                            </a>
-		                                            <a class="right" href="#carousel-example-generic" data-slide="next">
-		                                                <span class="glyphicon glyphicon-chevron-right"></span>
-		                                            </a>
-	                                            </div>
-	                                        </div>
-							            </div>
+										<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+                                            <!-- Wrapper for slides -->
+                                            <div id="comparison_plot_carousel" class="carousel-inner">
+                                            </div>
+                                            <!-- Controls -->
+                                            <div align="center">
+	                                            <a class="left" href="#carousel-example-generic" data-slide="prev">
+	                                              <span class="glyphicon glyphicon-chevron-left"></span>
+	                                            </a>
+	                                            <a class="right" href="#carousel-example-generic" data-slide="next">
+	                                                <span class="glyphicon glyphicon-chevron-right"></span>
+	                                            </a>
+                                            </div>
+                                        </div>
 									</div>
 								</div>
 				        	</div>

@@ -11,6 +11,8 @@ scenario_cities_map['Tudo-alta-tx5'] = ["Boa-esperanca", "Carmo-de-minas", "Varg
 
 lavoura_types = ["Adensada", "Larga"];
 
+model_ci_data = [];
+
 /*
 	MAIN CONTROLLER METHOD
 */
@@ -32,13 +34,18 @@ function main_controller(){
 		show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
 	});
 
+	// Draw the ic on demand (when the atemporal tab is selected)
+	// $('#prediction_pane #central_bar a[href="#model_comparison_pane"]').on('shown', function (e) {
+	// 	view_prediction_model_comparison(model_ci_data);
+	// });
+
 	// On change: Attributes
-	$("#atts_bar").change( function(e){
+	$("#parameter_bar_accordion").change( function(e){
 		get_incidencia_atts();
 	});
 
 	// On change: Model selection
-	$("#model_comparison_pane #parameters_bar").change( function(e){
+	$("#collapse_model_atts").change( function(e){
 		get_ic_data_compare_models();
 	});
 
@@ -47,12 +54,26 @@ function main_controller(){
 
     // Add the model selection items to the accordion
     $('#central_bar a[href="#prediction_pane"]').click(function(e){
-    	
+
+    	// Hide all accordion
+		$("#parameter_bar_accordion").find('.panel-collapse').each(function(index){
+            $(this).removeAttr('style');
+            if ($(this).hasClass('in')) {
+                // alert('hide - '+$(this).attr('id')+" : "+index);
+                $(this).collapse('hide');
+            }
+        });
+		
+		// TODO improve
+		setTimeout(function () {
+	    	$("#accordion_model_atts").find('.panel-collapse').collapse("show");
+	    	$("#accordion_model_atts").show();
+	    }, 400);
     });
 
 	// Remove the model selection items to the accordion
 	$('#central_bar a[href="#att_pane"]').click(function(e){
-    	
+    	$("#accordion_model_atts").hide();
     });
 
  	/*
@@ -115,40 +136,40 @@ function get_ic_data_compare_models(){
 	att_list = $("#att_list").val();
 	metric_list = $("#metric_list").val();
 
-	var ci_data = [{"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.194023787358787,"lower_ci":0.191513177211681,"upper_ci":0.196534397505894,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
-                                {"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.804433405068936,"lower_ci":0.800721444980571,"upper_ci":0.808145365157301,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
-                                {"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.190371779990066,"lower_ci":0.186650225860727,"upper_ci":0.194093334119406,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
-                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.193078193943944,"lower_ci":0.190564406633085,"upper_ci":0.195591981254803,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
-                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.805807811555861,"lower_ci":0.802416728728805,"upper_ci":0.809198894382917,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
-                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.189397181506724,"lower_ci":0.184801425068348,"upper_ci":0.1939929379451,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
-                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.190472970970971,"lower_ci":0.186010878254776,"upper_ci":0.194935063687165,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"},
-                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.803298765585172,"lower_ci":0.79829724487755,"upper_ci":0.808300286292793,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"},
-                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.182465574308485,"lower_ci":0.175174192770056,"upper_ci":0.189756955846914,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"}];
+	// model_ci_data = [{"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.194023787358787,"lower_ci":0.191513177211681,"upper_ci":0.196534397505894,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
+ //                                {"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.804433405068936,"lower_ci":0.800721444980571,"upper_ci":0.808145365157301,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
+ //                                {"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.190371779990066,"lower_ci":0.186650225860727,"upper_ci":0.194093334119406,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
+ //                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.193078193943944,"lower_ci":0.190564406633085,"upper_ci":0.195591981254803,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
+ //                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.805807811555861,"lower_ci":0.802416728728805,"upper_ci":0.809198894382917,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
+ //                                {"attribute_method":"Subjetivo-M3","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.189397181506724,"lower_ci":0.184801425068348,"upper_ci":0.1939929379451,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3"},
+ //                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.190472970970971,"lower_ci":0.186010878254776,"upper_ci":0.194935063687165,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"},
+ //                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.803298765585172,"lower_ci":0.79829724487755,"upper_ci":0.808300286292793,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"},
+ //                                {"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.182465574308485,"lower_ci":0.175174192770056,"upper_ci":0.189756955846914,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"}];
 
 
-    view_prediction_model_comparison(ci_data);
+    // view_prediction_model_comparison(model_ci_data);
 
 	// Check the input parameters
-	// if (att_list != null && metric_list != null){
+	if (att_list != null && metric_list != null){
 	
-	// 	var call_data = 'scenario=' + scenario + 
-	// 					'&att_methods=' + att_list.join() + 
-	// 					'&metrics=' + metric_list.join();
+		var call_data = 'scenario=' + scenario + 
+						'&att_methods=' + att_list.join() + 
+						'&metrics=' + metric_list.join();
+		console.log(call_data);
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: 'model/model_experiment_compare_models.php',
+			async: true,
+			data: call_data,
+			success: function(ci_data_text) {
+				// We need to parse it again
+				model_ci_data = $.parseJSON(ci_data_text);
 
-	// 	$.ajax({
-	// 		type: 'GET',
-	// 		dataType: 'json',
-	// 		url: 'model/model_experiment_compare_models.php',
-	// 		async: true,
-	// 		data: call_data,
-	// 		success: function(ci_data_text) {
-	// 			// We need to parse it again
-	// 			var ci_data = $.parseJSON(ci_data_text);
-
-	// 			view_prediction_model_comparison(ci_data);
-	// 		}
-	// 	});
-	// }
+				view_prediction_model_comparison(model_ci_data);
+			}
+		});
+	}
 }
 
 /*
