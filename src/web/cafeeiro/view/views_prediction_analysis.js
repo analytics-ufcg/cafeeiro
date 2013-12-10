@@ -28,10 +28,12 @@ function view_prediction_model_comparison(ci_data){
 
 //plota grafico de erro      
 function plotaIC(data) {
-		//Função dos intervalos								
-	var margin = {top: 40, right: 150, bottom: 100, left: 40},
+		//Função dos intervalos
+	var div_width = $("#central_bar").width();
+	
+	var margin = {top: 40, right: 350, bottom: 100, left: 50},
 	    size = 5,
-	    width = 800 - margin.left - margin.right,
+	    width = div_width - margin.left - margin.right,
 	    height = 500 - margin.top - margin.bottom,
 	    x = d3.scale.linear().range([0, width]),
 	    y = d3.scale.linear().range([height, 0]),
@@ -110,21 +112,21 @@ function plotaIC(data) {
 	      .call(yAxis);
 
 	svg.append("text")
-	      .attr("x",margin.left * 9)
+	      .attr("x",margin.left * 7)
 	      .attr('y',margin.top - 20)
 	      .attr('width', 100)
 	      .attr('height', 50)
 	      .attr('text-anchor', 'middle')
-	      .attr('font-size', '25px')
+	      .attr('font-size', '22px')
 	      .text( data[0].metric );
 
 	svg.append("text")
-	      .attr("x",margin.left * 9)
+	      .attr("x",margin.left * 7)
 	      .attr('y',height + 70)
 	      .attr('width', 100)
 	      .attr('height', margin.bottom - 10)
 	      .attr('text-anchor', 'middle')
-	      .attr('font-size', '15px')
+	      .attr('font-size', '12px')
 	      .text(  data[0].model );
 
 	}
