@@ -1,36 +1,27 @@
-function view_prediction_temporal_analysis(incidencia_table){
-
-	
-}
-
-function remove_ic(){
-	$("#comparison_plot_carousel").html("");
-  d3.select("#comparison_plot_carousel").selectAll("svg").remove();
-}
-
 function view_prediction_model_comparison(ci_data){
-	//  Add the GGPLOT image
-	//$("#model_comparison_pane #comparison_plot").html("<img src='img/plots/prediction-model_comparison-experiment.png'>");
-	
-	remove_ic();
+	var model_ic_div = "#prediction_pane #model_comparison_pane #comparison_plot_carousel";
 
-	var mapa = {};
-	for (var i = 0; i <= ci_data.length-1; i++) {
-		if(mapa[ci_data[i]["metric"]]==null) {
-			mapa[ci_data[i]["metric"]] = [];
-		}
-		mapa[ci_data[i]["metric"]].push(ci_data[i]);
-	};
+	if ($(model_ic_div).is(":visible")){
+		// Remove all the html from the model_ic_div
+		$(model_ic_div).html("");
 
-	for (var m in mapa) {
-		plotaIC(mapa[m]);
-	};
+		var mapa = {};
+		for (var i = 0; i <= ci_data.length-1; i++) {
+			if(mapa[ci_data[i]["metric"]]==null) {
+				mapa[ci_data[i]["metric"]] = [];
+			}
+			mapa[ci_data[i]["metric"]].push(ci_data[i]);
+		};
+
+		for (var m in mapa) {
+			plotaIC(mapa[m], model_ic_div);
+		};
+	}
 }
 
-//plota grafico de erro      
-function plotaIC(data) {
-		//Função dos intervalos
-	var div_width = $("#central_bar").width();
+function plotaIC(data, model_ic_div) {
+	//Função dos intervalos
+	var div_width = $(model_ic_div).width();
 	
 	var margin = {top: 40, right: (div_width-(div_width*0.8)), bottom: 100, left: (div_width-(div_width*0.9))},
 	    size = 5,
@@ -55,7 +46,7 @@ function plotaIC(data) {
 	var color = d3.scale.category10();
 	 
 	//endereço do plot
-	var svg = d3.select("#comparison_plot_carousel").append("div").attr("class", "item").append("svg")
+	var svg = d3.select(model_ic_div).append("div").attr("class", "item").append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom);
 

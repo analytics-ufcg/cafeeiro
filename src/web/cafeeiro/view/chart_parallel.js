@@ -1,6 +1,6 @@
-function plot_parallel_coord(att_data, att_names) {
+function plot_parallel_coord(att_data, att_names, plot_div) {
   
-  var div_width = $("#atts_analysis #central_bar #atemporal_pane").width(),
+  var div_width = $(plot_div).width(),
       div_height = 600;
   
   var m = {left:70, right:70, top:40, bottom:20},
@@ -14,7 +14,7 @@ function plot_parallel_coord(att_data, att_names) {
       axis = d3.svg.axis().orient("left"),
       foreground;
 
-  var svg = d3.select("#atts_analysis #central_bar #atemporal_pane").append("svg:svg")
+  var svg = d3.select(plot_div).append("svg:svg")
       .attr("width", "100%")
       .attr("height", div_height + m.top + m.bottom)
     .append("svg:g")

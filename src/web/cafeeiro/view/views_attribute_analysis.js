@@ -1,16 +1,17 @@
-function show_atts_atemporal_analysis(incidencia_table, att_names, target_att_name){
-	if ($('#atts_analysis #central_bar #atemporal_pane').is(":visible") && att_names.length > 0){
-		remove_all_d3_svg("#atts_analysis #central_bar #atemporal_pane");
+function show_atts_atemporal_analysis(incidencia_table, att_names){
+    var atemporal_div = '#att_pane #atemporal_pane';
 
-		plot_parallel_coord(incidencia_table, att_names, target_att_name);
+	if ($(atemporal_div).is(":visible") && att_names.length > 0){
+		remove_all_d3_svg(atemporal_div);
+		plot_parallel_coord(incidencia_table, att_names, atemporal_div);
 	}
 }
 
 has_time_series_chart = false;
 old_incidencia_atts = [];
 
-function create_atts_temporal_analysis(){
-	remove_all_d3_svg("#atts_analysis #central_bar #temporal_pane");
+function create_atts_temporal_analysis(plot_div){
+	// remove_all_d3_svg(plot_div);
 
 	requirejs.config({
         "baseUrl": "./",
@@ -22,7 +23,7 @@ function create_atts_temporal_analysis(){
     });
 
     require(['app/d3.chart'], function (d3Chart) {
-        d3Chart.init({ container: '#atts_analysis #central_bar #temporal_pane', xDim: 'DateTime' });
+        d3Chart.init({ container: plot_div, xDim: 'DateTime' });
       
         d3Chart.addGraph({ 
         	id: 'incidencia', 
@@ -37,9 +38,11 @@ function create_atts_temporal_analysis(){
 }
 
 function show_atts_temporal_analysis(){
+    var temporal_div = "#att_pane #temporal_pane";
+
 	if (!has_time_series_chart){
 		// Create the temporal analysis time series OBJECT (based on requireJS)
-		create_atts_temporal_analysis();
+		create_atts_temporal_analysis(temporal_div);
 		has_time_series_chart = true;
 	}
 

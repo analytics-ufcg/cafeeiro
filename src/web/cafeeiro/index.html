@@ -41,12 +41,12 @@
           		<p>Alerta de Progresso da Ferrugem do Cafeeiro</p>
         	</div>
         	<div id="body_bar" class="row-fluid">
-        		<div id="parameter_bar_accordion" class="panel-group span3">
+        		<div id="parameter_bar_collapse" class="panel-group span3">
         			<!-- <legend>1) Selecione os Atributos</legend> -->
         			<div class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_scenario_atts">
+        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_scenario_atts">
         							Cenário
         						</a>
         					</span>
@@ -67,7 +67,7 @@
 				    <div class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_general_atts">
+        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_general_atts">
         							Atributos Gerais
         						</a>
         					</span>
@@ -92,7 +92,7 @@
 					<div class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title" data-toggle="tooltip" title="Atributos meteorológicos no Período de INFecção (PINF)">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_meteorologic_atts">
+        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_meteorologic_atts">
         							Atributos Metereológicos (PINF)
         						</a>
         					</span>
@@ -120,7 +120,7 @@
 													<input type="checkbox" name="tmax_pinf">tmax_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Média das temperaturas médias diárias (PINF)">
-													<input type="checkbox" name="tmed_pinf" checked>tmed_pinf</label></div>
+													<input type="checkbox" name="tmed_pinf">tmed_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias (PINF)">
 													<input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
@@ -145,7 +145,7 @@
 													<input type="checkbox" name="nhur95_pinf">nhur95_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Somatório de nhur95_pinf (PINF)">
-													<input type="checkbox" name="smt_nhur95_pinf" checked>smt_nhur95_pinf</label></div>
+													<input type="checkbox" name="smt_nhur95_pinf">smt_nhur95_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Média diária do número de horas noturnas com umidade relativa do ar ≥ 95% (PINF)">
 													<input type="checkbox" name="nhnur95_pinf">nhnur95_pinf</label></div>
@@ -167,7 +167,7 @@
 					<div class="panel panel-default">
         				<div class="panel-heading">
         					<h5 class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_special_atts">
+        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_special_atts">
         							Atributos Derivados 
         						</a>
         					</h5>
@@ -201,7 +201,7 @@
 					<div id="accordion_model_atts" class="panel panel-default" style="display: none">
         				<div class="panel-heading">
         					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_model_atts">
+        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_model_atts">
         							Seleção dos Modelos
         						</a>
         					</span>
@@ -241,56 +241,50 @@
 						<li class="active"><a href="#att_pane" data-toggle="tab">Análise dos Atributos</a></li>
 						<li><a href="#prediction_pane" data-toggle="tab">Análise da Predição</a></li>
 					</ul>
+					<br>
 					<div class="tab-content">
-						<br>
 						<!-- Análise dos atributos -->
-						<div id="att_pane" class="tab-pane active row-fluid">
-							<div id="atts_analysis">
-					        	<div id="central_bar" class="tabbable">
-					        		<ul class="nav nav-pills nav-justified">
-										<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
-										<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
-									</ul>
-									<br>
-									<div class="tab-content containter-fluid">
-										<div id="temporal_pane" class="tab-pane active row-fluid">
-										</div>
-										<div id="atemporal_pane" class="tab-pane row-fluid">
-										</div>
-									</div>
-					        	</div>
-						    </div>
+						<div id="att_pane" class="tab-pane active row-fluid tabbable">
+			        		<ul class="nav nav-pills nav-justified">
+								<li class="active"><a href="#temporal_pane" data-toggle="tab">Temporal</a></li>
+								<li><a href="#atemporal_pane" data-toggle="tab">Atemporal</a></li>
+							</ul>
+							<br>
+							<div class="tab-content containter-fluid">
+								<div id="temporal_pane" class="tab-pane active">
+								</div>
+								<div id="atemporal_pane" class="tab-pane">
+								</div>
+							</div>
 						</div>	
 
 						<!-- Análise das predições -->
-					    <div id="prediction_pane" class="tab-pane">
-				        	<div id="central_bar" class="tabbable">
-				        		<ul class="nav nav-pills nav-justified">
-									<li class="active"><a href="#atemporal_pane2" data-toggle="tab">Análise Atemporal</a></li>
-									<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
-								</ul>
+					    <div id="prediction_pane" class="tab-pane tabbable">
+			        		<ul class="nav nav-pills nav-justified">
+								<li class="active"><a href="#atemporal_prediction_pane" data-toggle="tab">Análise Atemporal</a></li>
+								<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
+							</ul>
+							<br>
+							<div class="tab-content containter-fluid">
 								<br>
-								<div class="tab-content containter-fluid">
-									<br>
-									<div id="atemporal_pane2" class="tab-pane">
-									</div>
+								<div id="atemporal_prediction_pane" class="tab-pane">
+								</div>
 
-									<div id="model_comparison_pane" class="tab-pane row-fluid">
-										<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-                                            <!-- Wrapper for slides -->
-                                            <div id="comparison_plot_carousel" class="carousel-inner">
-                                            </div>
-                                            <!-- Controls -->
-                                            <div align="center">
-	                                            <a class="left" href="#carousel-example-generic" data-slide="prev">
-	                                              <span class="glyphicon glyphicon-chevron-left"></span>
-	                                            </a>
-	                                            <a class="right" href="#carousel-example-generic" data-slide="next">
-	                                                <span class="glyphicon glyphicon-chevron-right"></span>
-	                                            </a>
-                                            </div>
+								<div id="model_comparison_pane" class="tab-pane">
+									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+                                        <!-- Wrapper for slides -->
+                                        <div id="comparison_plot_carousel" class="carousel-inner">
                                         </div>
-									</div>
+                                        <!-- Controls -->
+                                        <div align="center">
+                                            <a class="left" href="#carousel-example-generic" data-slide="prev">
+                                              <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </a>
+                                            <a class="right" href="#carousel-example-generic" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </a>
+                                        </div>
+                                    </div>
 								</div>
 				        	</div>
 						</div>
