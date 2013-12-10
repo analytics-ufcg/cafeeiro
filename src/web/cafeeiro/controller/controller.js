@@ -45,6 +45,15 @@ function main_controller(){
 	// Add the tooltips
     $('[data-toggle="tooltip"]').tooltip({placement: "right", container:"body"});
 
+    // Add the model selection items to the accordion
+    $('#central_bar a[href="#prediction_pane"]').click(function(e){
+    	
+    });
+
+	// Remove the model selection items to the accordion
+	$('#central_bar a[href="#att_pane"]').click(function(e){
+    	
+    });
 
  	/*
  	 	START RUNS
@@ -82,7 +91,7 @@ function get_incidencia_atts(){
 	atts.push(target_att);
 
 	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");
-
+console.log(call_data);
 	$.ajax({
 		type: 'GET',
 		dataType: 'json',

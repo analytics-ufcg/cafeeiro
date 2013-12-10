@@ -124,7 +124,7 @@
 													<input type="checkbox" name="tmed_pinf" checked>tmed_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias (PINF)">
-													<input type="checkbox" name="tmin_pinf" checked>tmin_pinf</label></div>
+													<input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
 											<div class="checkbox">
 												<label data-toggle='tooltip' title="Temperatura média diária durante as horas com umidade relativa ≥ 95% (PINF)">
 													<input type="checkbox" name="thur95_pinf" checked>thur95_pinf</label></div>
@@ -167,9 +167,9 @@
 					</div>
 					<div class="panel panel-default">
         				<div class="panel-heading">
-        					<h5 class="panel-title" data-toggle='tooltip' title="Atributos especiais derivados das condições diárias no Período de INFecção (PINF)">
+        					<h5 class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_accordion" href="#collapse_special_atts">
-        							Atributos Especiais (PINF)
+        							Atributos Derivados 
         						</a>
         					</h5>
         				</div>
@@ -177,7 +177,7 @@
         					<div class="panel-body">
 						    	<form id="special_atts_form" >
 						    		<fieldset>
-						    			<strong>Condição Diária</strong>
+						    			<strong data-toggle='tooltip' title="Atributos especiais derivados das condições diárias no Período de INFecção (PINF)">Condição Diária (PINF)</strong>
 										<div class="checkbox">
 											<label data-toggle='tooltip' title="Somatório dos índices de condição diária de infecção (PINF)">
 												<input type="checkbox" name="acdinf_pinf">acdinf_pinf</label></div>
@@ -189,7 +189,11 @@
 												<input type="checkbox" name="ddi_pinf" checked>ddi_pinf</label></div>
 										<div class="checkbox">
 											<label data-toggle='tooltip' title="Número de dias favoráveis e muito favoráveis à infecção (PINF)">
-												<input type="checkbox" name="dfmfi_pinf" checked>dfmfi_pinf</label></div>
+												<input type="checkbox" name="dfmfi_pinf">dfmfi_pinf</label></div>
+										<strong data-toggle='tooltip' title="Atributos baseados no histórico passado dos dados">Incidências Passadas</strong>
+										<div class="checkbox">
+											<label data-toggle='tooltip' title="Incidência do mês anterior">
+												<input type="checkbox" name="incidencia_w1" checked>incidencia_mes_anterior</label></div>
 									</fieldset>
 								</form>
 				        	</div>
@@ -227,7 +231,7 @@
 					    <div id="prediction_pane" class="tab-pane">
 				        	<div id="central_bar" class="tabbable">
 				        		<ul class="nav nav-pills nav-justified">
-									<li class="active"><a href="#temporal_pane2" data-toggle="tab">Análise Temporal</a></li>
+									<li class="active"><a href="#temporal_pane2" data-toggle="tab">Análise Atemporal</a></li>
 									<li><a href="#model_comparison_pane" data-toggle="tab">Comparação de Modelos</a></li>
 								</ul>
 								<div class="tab-content containter-fluid">
