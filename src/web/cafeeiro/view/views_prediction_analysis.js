@@ -13,13 +13,15 @@ function view_prediction_model_comparison(ci_data){
 			mapa[ci_data[i]["metric"]].push(ci_data[i]);
 		};
 
+		var indicator_index = 0;
 		for (var m in mapa) {
-			plotaIC(mapa[m], model_ic_div);
+			plotaIC(mapa[m], model_ic_div, indicator_index);
+			indicator_index = indicator_index + 1;
 		};
 	}
 }
 
-function plotaIC(data, model_ic_div) {
+function plotaIC(data, model_ic_div, indicator_i) {
 	//Função dos intervalos
 	var div_width = $(model_ic_div).width();
 	
@@ -44,9 +46,15 @@ function plotaIC(data, model_ic_div) {
 
 
 	var color = d3.scale.category10();
-	 
+
+	var svg = d3.select("#prediction_pane #model_comparison_pane #comparison_plot_indicators")
+		.append("li").attr("data-target", "#carousel-example-generic")
+					 .attr("data-slide-to", indicator_i);
+
+	$( "ol li" ).first().addClass( "active" );
+
 	//endereço do plot
-	var svg = d3.select(model_ic_div).append("div").attr("class", "item").append("svg")
+	svg = d3.select(model_ic_div).append("div").attr("class", "item").append("svg")
 	    .attr("width", width + margin.left + margin.right)
 	    .attr("height", height + margin.top + margin.bottom);
 
