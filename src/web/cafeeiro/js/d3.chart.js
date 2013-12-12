@@ -224,7 +224,6 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
             cursorIndex = dataIndex;
         });
         
-        
         return map;
     }
 
@@ -253,14 +252,14 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
             });
         }
 
-        //setup graph data
-        graph.order = _graphs.length;        
-
+        // Setup graph data
         graph.map = getLookupMap(graph, _xScale);
-        _graphs.push(graph);        
+        _graphs.push(graph);
         
-        
-        //zoom scale, this needs to be rendered here as brush event triggers render which cannot change the brush itself
+        // Reorder the graphs
+        _.chain(_graphs).sortBy(function (g) { return g.order; }).each(function (g, i) { g.order = i; });
+
+        // Zoom scale, this needs to be rendered here as brush event triggers render which cannot change the brush itself
         var zoomScale = d3.time.scale().range([0, width]).domain(_xScale.domain());
         var brush = d3.svg.brush()
             .x(zoomScale)
@@ -290,6 +289,12 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
         adjustChartHeight();
 
         render();
+
+        // Added by Augusto (Cafeeiro 2013)
+        // When all graphs are removed we assume the _xDomain can change.
+        if (_graphs.length == 0){
+            _xDomain = [Infinity, -Infinity];
+        }
     };
 
     this.reorderGraph = function (graphId, updown) { 
@@ -348,6 +353,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
             });
         newGraphs.each(function (d) { d3.select(this).call(selectChart(d)); });
     };
+
 
     return this;
 });

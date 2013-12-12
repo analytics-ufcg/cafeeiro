@@ -2,16 +2,23 @@
 	Global Variables
 */
 var incidencia_data = [];
-var incidencia_atts = [];
+var incidencia_atts = {'cidade' : [],
+					   'lavoura' : [],
+					   'atts' : []};
 var target_att = "taxa_inf_m5";
 
-var scenario_cities_map = {};
-scenario_cities_map['Varginha-alta-tx5'] = ["Varginha", "Varginha-antigo"];
-scenario_cities_map['Tudo-alta-tx5'] = ["Boa-esperanca", "Carmo-de-minas", "Varginha", "Varginha-antigo"];
+var scenario_cities_map = {'Varginha-alta-tx5' : ["Varginha", "Varginha-antigo"],
+						   'Tudo-alta-tx5' : ["Boa-esperanca", "Carmo-de-minas", "Varginha", "Varginha-antigo"]};
 
-lavoura_types = ["Adensada", "Larga"];
+var lavoura_types = ["Adensada", "Larga"];
 
-model_ci_data = [];
+var model_ci_data = [];
+
+// Time series variables
+var has_time_series_chart = false;
+var old_incidencia_atts = {'cidade' : [],
+						   'lavoura' : [],
+						   'atts' : []};
 
 /*
 	MAIN CONTROLLER METHOD
@@ -31,7 +38,7 @@ function main_controller(){
 
 	// Draw the parallel coordinate on demand (when the atemporal tab is selected)
 	$('#att_pane a[href="#atemporal_pane"]').on('shown.bs.tab', function (e) {
-		show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
+		show_atts_atemporal_analysis(incidencia_data, incidencia_atts['atts']);
 	});
 
 	// Draw the ic on demand (when the atemporal tab is selected)
@@ -118,10 +125,12 @@ function get_incidencia_atts(){
 		success: function(incidencia) {
 			// Copy the data/atts to the client memory
 			incidencia_data = incidencia;
-			incidencia_atts = atts;
+			incidencia_atts['cidade'] = city;
+			incidencia_atts['lavoura'] = farm;
+			incidencia_atts['atts'] = atts;
 
 			show_atts_temporal_analysis();
-			show_atts_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
+			show_atts_atemporal_analysis(incidencia_data, incidencia_atts['atts']);
 		}
 	});
 }

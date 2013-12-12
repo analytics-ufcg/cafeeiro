@@ -106,19 +106,19 @@ function plot_parallel_coord(att_data, att_names, plot_div) {
   }
 
   function dragend(d) {
-    x.domain(incidencia_atts).rangePoints([0, w]);
+    x.domain(incidencia_atts['atts']).rangePoints([0, w]);
     var t = d3.transition().duration(500);
     t.selectAll(".attribute").attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     t.selectAll(".foreground path").attr("d", path);
   }
   // Returns the path for a given data point.
   function path(d) {
-    return line(incidencia_atts.map(function(p) { return [x(p), y[p](d[p])]; }));
+    return line(incidencia_atts['atts'].map(function(p) { return [x(p), y[p](d[p])]; }));
   }
 
   // Handles a brush event, toggling the display of foreground lines.
   function brush() {
-    var actives = incidencia_atts.filter(function(p) { return !y[p].brush.empty(); }),
+    var actives = incidencia_atts['atts'].filter(function(p) { return !y[p].brush.empty(); }),
         extents = actives.map(function(p) { return y[p].brush.extent(); });
     foreground.classed("fade", function(d) {
       return !actives.every(function(p, i) {
