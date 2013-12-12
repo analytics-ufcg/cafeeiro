@@ -10,7 +10,6 @@ function show_atts_atemporal_analysis(incidencia_table, att_names){
 function show_atts_temporal_analysis(){
 
     function create_atts_temporal_analysis(plot_div){
-    	// remove_all_d3_svg(plot_div);
 
     	requirejs.config({
             "baseUrl": "./",

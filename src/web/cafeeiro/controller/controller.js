@@ -42,7 +42,10 @@ function main_controller(){
 	});
 
 	// Draw the ic on demand (when the atemporal tab is selected)
-	$('#prediction_pane a[href="#model_comparison_pane"]').on('shown.bs.tab', function (e) {
+	// $('#prediction_pane a[href="#model_comparison_pane"]').on('shown.bs.tab', function (e) {
+	// 	view_prediction_model_comparison(model_ci_data);
+	// });
+	$('#central_bar a[href="#prediction_pane"]').on('shown.bs.tab', function (e) {
 		view_prediction_model_comparison(model_ci_data);
 	});
 
@@ -131,9 +134,6 @@ function get_incidencia_atts(){
 
 			show_atts_temporal_analysis();
 			show_atts_atemporal_analysis(incidencia_data, incidencia_atts['atts']);
-
-			//TODO meu local nao é aqui, sou das predições
-			show_models_atemporal_analysis(incidencia_data, incidencia_atts, target_att);
 		}
 	});
 }

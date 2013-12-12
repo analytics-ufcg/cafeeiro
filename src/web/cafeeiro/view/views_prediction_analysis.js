@@ -1,9 +1,10 @@
 function view_prediction_model_comparison(ci_data){
 	var model_ic_div = "#prediction_pane #model_comparison_pane #comparison_plot_carousel";
+	var model_ic_indicators_div = "#prediction_pane #model_comparison_pane #comparison_plot_indicators";
 
 	if ($(model_ic_div).is(":visible")){
 		// Remove all the html from the model_ic_div
-		$("#prediction_pane #model_comparison_pane #comparison_plot_indicators").html("");
+		$(model_ic_indicators_div).html("");
 		$(model_ic_div).html("");
 
 		var mapa = {};
