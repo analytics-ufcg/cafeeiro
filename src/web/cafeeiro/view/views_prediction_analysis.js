@@ -15,6 +15,7 @@ function view_prediction_model_comparison(ci_data){
 
 	if ($(model_ic_div).is(":visible")){
 		// Remove all the html from the model_ic_div
+		$("#prediction_pane #model_comparison_pane #comparison_plot_indicators").html("");
 		$(model_ic_div).html("");
 
 		var mapa = {};
@@ -37,7 +38,7 @@ function plotaIC(data, model_ic_div, indicator_i) {
 	//Função dos intervalos
 	var div_width = $(model_ic_div).width();
 	
-	var margin = {top: 40, right: (div_width-(div_width*0.8)), bottom: 100, left: (div_width-(div_width*0.9))},
+	var margin = {top: 40, right: (div_width-(div_width*0.82)), bottom: 100, left: (div_width-(div_width*0.9))},
 	    size = 5,
 	    width = div_width - margin.left - margin.right,
 	    height = 500 - margin.top - margin.bottom,
