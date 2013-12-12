@@ -25,7 +25,7 @@ function show_atts_temporal_analysis(){
           
             d3Chart.addGraph({ 
             	id: 'incidencia', 
-            	type: 'analog', 
+            	// type: 'analog', 
             	name: 'Incidência', 
             	dataId: 512, 
             	yVal: ['incidencia'], 
@@ -77,7 +77,7 @@ function show_atts_temporal_analysis(){
 
             d3Chart.addGraph({ 
                 id: att, 
-                type: 'analog', 
+                // type: 'digital', 
                 name: att, 
                 dataId: 513 + i, 
                 yVal: [att], 

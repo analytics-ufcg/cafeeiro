@@ -10,9 +10,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+
+    Updated by Cafeeiro 2013
  */
 
-define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', 'app/d3.chart.horizon'], function (moment) {
+define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
 
     var _container, _graphs = [];
 
@@ -71,7 +73,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
         
         var timeLegend = _chartCanvas.append('text')
             .attr('class', 'legend-time')
-            .attr('x', width - 100)
+            .attr('x', width)
             .attr('y', -5) // push to the margin area below x-axis
             .attr('text-anchor', 'end')
             .text('time');
@@ -95,7 +97,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
                 hoverLine.attr('x1', mX).attr('x2', mX);
                 if (mX > 0 && mY > 0 && mX < width) { 
                     var dt = _xScale.invert(mX);
-                    var nearestDateVal = minDistanceDate(_.map(_graphs, function (d) { return d.map[mX] ? d.map[mX].date : null; }), dt);
+                    var nearestDateVal = minDistanceDate(_.map(_graphs, function (d) { return d.map[Math.round(mX)] ? d.map[Math.round(mX)].date : null; }), dt);
                     var graphIdswithDataAtNearestDate = _.chain(_graphs).filter(function(d) { return d.map[mX] && d.map[mX].date == nearestDateVal; }).pluck('id').value();
                     
                     if (nearestDateVal != null) {
@@ -114,7 +116,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
                             g.select('.legend').text(d.id + ' : ' + str);
                         });
                         //move plot line to stick to nearest time where any value found, then update time and value legends
-                        timeLegend.text(xMoment.format('DD MMM'));
+                        timeLegend.text(xMoment.format('MMM YYYY'));
                         
                         var moveX = _xScale(xMoment);
                         hoverLine.attr('x1', moveX).attr('x2', moveX);
@@ -126,23 +128,23 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
     
     //select and generate a chart plugin to render
     function selectChart(d) {
-        if (d.type == 'analog') {
+        // if (d.type == 'analog') {
             var chart = d3.analog().height(logChartHeight).gap(gap).color(color);
-        }
-        else if (d.type == 'digital') {
-            chart = d3.digital().height(graphHeight(d)).color(color)
-                .y(function (t) { return t.State ? 1 : 0; });// 0/1 generator as y function
-        }
-        if (d.type == 'horizon') {
-            var mean = d.data.map(function (t) { return t.Value; }).reduce(function (p, v) { return p + v; }, 0) / d.data.length;
-            chart = d3.horizon()
-                .width(width)
-                .height(logChartHeight)
-                .gap(gap)
-                .y(function (t) { return t.Value - mean; })
-                .bands(3)
-                .mode("offset");
-        }
+        // }
+        // else if (d.type == 'digital') {
+        //     chart = d3.digital().height(graphHeight(d)).color(color)
+        //         .y(function (t) { return t.State ? 1 : 0; });// 0/1 generator as y function
+        // }
+        // if (d.type == 'horizon') {
+        //     var mean = d.data.map(function (t) { return t.Value; }).reduce(function (p, v) { return p + v; }, 0) / d.data.length;
+        //     chart = d3.horizon()
+        //         .width(width)
+        //         .height(logChartHeight)
+        //         .gap(gap)
+        //         .y(function (t) { return t.Value - mean; })
+        //         .bands(3)
+        //         .mode("offset");
+        // }
         
         if(chart) {
             //config common features
@@ -153,12 +155,12 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
     }
 
     function graphHeight(d) {
-        if (d.type == 'analog')
+        if (d.type == 'analog'){
             return logChartHeight;
-        else if (d.type == 'digital') {
-            //calculate height
-            var cnt = _.uniq(d.data, false, function (t) { return t.Channel; }).length;
-            return diChartHeight * cnt;
+        // }else if (d.type == 'digital') {
+        //     //calculate height
+        //     var cnt = _.uniq(d.data, false, function (t) { return t.Channel; }).length;
+        //     return diChartHeight * cnt;
         } else {
             return 100;
         }
