@@ -34,11 +34,6 @@ function main_controller(){
 		show_atts_atemporal_analysis(incidencia_data, incidencia_atts);
 	});
 
-	// Draw the parallel coordinate on demand to analyse models (when the prediction models > atemporal tab is selected)
-	$('#prediction_pane a[href="#atemporal_prediction_pane"]').on('shown.bs.tab', function (e) {
-		show_models_atemporal_analysis(incidencia_data, incidencia_atts);
-	});
-
 	// Draw the ic on demand (when the atemporal tab is selected)
 	$('#prediction_pane a[href="#model_comparison_pane"]').on('shown.bs.tab', function (e) {
 		view_prediction_model_comparison(model_ci_data);

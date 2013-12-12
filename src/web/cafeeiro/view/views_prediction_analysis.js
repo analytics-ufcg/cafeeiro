@@ -1,15 +1,3 @@
-function show_models_atemporal_analysis(incidencia_table, att_names){
-    var atemporal_div = '#prediction_pane #atemporal_prediction_pane';
-
-	if ($(atemporal_div).is(":visible") && att_names.length > 0){
-		remove_all_d3_svg(atemporal_div);
-		plot_parallel_coord(incidencia_table, att_names, atemporal_div);
-	}
-}
-
-has_time_series_chart = false;
-old_incidencia_atts = [];
-
 function view_prediction_model_comparison(ci_data){
 	var model_ic_div = "#prediction_pane #model_comparison_pane #comparison_plot_carousel";
 
