@@ -71,10 +71,10 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
         
         var timeLegend = _chartCanvas.append('text')
             .attr('class', 'legend-time')
-            .attr('x', width)
+            .attr('x', width - 100)
             .attr('y', -5) // push to the margin area below x-axis
             .attr('text-anchor', 'end')
-            .text('time:');
+            .text('time');
         
 
         _svgContainer// mouse event not working on _chartCanvas
@@ -97,7 +97,8 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
                     var dt = _xScale.invert(mX);
                     var nearestDateVal = minDistanceDate(_.map(_graphs, function (d) { return d.map[mX] ? d.map[mX].date : null; }), dt);
                     var graphIdswithDataAtNearestDate = _.chain(_graphs).filter(function(d) { return d.map[mX] && d.map[mX].date == nearestDateVal; }).pluck('id').value();
-                    if (nearestDateVal!=null) {
+                    
+                    if (nearestDateVal != null) {
                         var xMoment = moment(nearestDateVal);
                         //update legend values 
                         d3.selectAll('.graph').data(_graphs, function (d) { return d.id; }).each(function (d) {
@@ -112,8 +113,9 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
                             }                            
                             g.select('.legend').text(d.id + ' : ' + str);
                         });
-                        //move plot line to stick to nearest time where any value found , then update time and value legends                    
+                        //move plot line to stick to nearest time where any value found, then update time and value legends
                         timeLegend.text(xMoment.format('DD MMM'));
+                        
                         var moveX = _xScale(xMoment);
                         hoverLine.attr('x1', moveX).attr('x2', moveX);
                     }                    
@@ -227,9 +229,9 @@ define(['moment', 'underscore', 'app/d3.chart.analog', 'app/d3.chart.digital', '
         return map;
     }
 
-
-
-    //public methods for clients of this module
+    /* 
+        Public methods for clients of this module
+    */
     this.addGraph = function (graph) {        
         //adjust x-axis domain
         var dates = _.map(graph.data, function (d) { return moment(d.DateTime).valueOf(); });

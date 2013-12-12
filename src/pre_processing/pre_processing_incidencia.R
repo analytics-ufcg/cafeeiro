@@ -8,7 +8,7 @@ data <- read.csv2("data/dados_cafeeiro.csv", header = T)
 # ------------------------------------------------------------------------------
 # TRANSFORM "mes", "ano" IN "dia"
 # ------------------------------------------------------------------------------
-fixed.day <- 28
+fixed.day <- 15
 
 # From month abbreviation in portuguese to month name in english
 MonthName = list("JAN" = "January", "FEV" = "February", "MAR" = "March", "ABR" = "April", 

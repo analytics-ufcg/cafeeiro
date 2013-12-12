@@ -45,6 +45,7 @@ function main_controller(){
 	// $('#prediction_pane a[href="#model_comparison_pane"]').on('shown.bs.tab', function (e) {
 	// 	view_prediction_model_comparison(model_ci_data);
 	// });
+	// Draw the ic on demand (when the prediction_pane tab is selected)
 	$('#central_bar a[href="#prediction_pane"]').on('shown.bs.tab', function (e) {
 		view_prediction_model_comparison(model_ci_data);
 	});
