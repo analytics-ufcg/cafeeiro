@@ -47,48 +47,33 @@
         				<div class="panel-heading">
         					<span class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_scenario_atts">
-        							Cenário
+        							Seleção da Base de Dados
         						</a>
         					</span>
         				</div>
-        				<div id="collapse_scenario_atts" class="panel-collapse collapse in">
+        				<div id="collapse_database_atts" class="panel-collapse collapse in">
         					<div class="panel-body">
 						    	<form id ="scenario" method="GET">
 					        		<fieldset>
+					        			<strong>Cenário</strong>
 					        			<select id="the_scenario" class="form-control" name="search_scenario">
 											<option selected>Varginha-alta-tx5</option>
 											<option>Tudo-alta-tx5</option>
+										</select>
+<!-- 										<hr>
+										<h5>Filtrar por:</h5> -->
+										<br>
+										<strong>Cidade</strong>
+										<select id="cidade_list" class="form-control" name="cidade" data-toggle='tooltip' title="Cidades do cenário"></select>
+										<br>
+										<strong>Lavoura</strong>
+										<select id="lavoura_list" class="form-control" name="lavoura" data-toggle='tooltip' title="Espaçamento da lavoura: Adensada ou Larga">
 										</select>
 					        		</fieldset>
 					        	</form>
 				        	</div>
 				        </div>
 				    </div>
-				    <div class="panel panel-default">
-        				<div class="panel-heading">
-        					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_general_atts">
-        							Atributos Gerais
-        						</a>
-        					</span>
-        				</div>
-        				<div id="collapse_general_atts" class="panel-collapse collapse in">
-        					<div class="panel-body">
-						    	<form id="general_atts_form" role="form">
-									<fieldset>
-										<div class="form-group">
-											<strong>Cidade</strong>
-											<select id="cidade_list" class="form-control" name="cidade" data-toggle='tooltip' title="Cidades do cenário"></select>
-											<br>
-											<strong>Lavoura</strong>
-											<select id="lavoura_list" class="form-control" name="lavoura" data-toggle='tooltip' title="Espaçamento da lavoura: Adensada ou Larga">
-											</select>
-										</div>
-									</fieldset>
-								</form>
-				        	</div>
-				   		</div>
-					</div>
 					<div class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title" data-toggle="tooltip" title="Atributos meteorológicos no Período de INFecção (PINF)">

@@ -90,12 +90,10 @@ function main_controller(){
  	 	START RUNS
  	*/
 
- 	// $('#att_pane a[href="#temporal_pane"]').tab('show');
-
  	// Define the defaults: cidade and lavoura
-	redefine_options_select_list($('#parameter_bar_collapse #collapse_general_atts #cidade_list'), 
+	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #cidade_list'), 
 								 scenario_cities_map[$("#the_scenario").val()]);
-	redefine_options_select_list($('#parameter_bar_collapse #collapse_general_atts #lavoura_list'), 
+	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #lavoura_list'), 
 									 lavoura_types);
 
 	// Plot the Attribute Analysis
@@ -111,8 +109,8 @@ function main_controller(){
 function get_incidencia_atts(){
 	
 	// Prepare the call data
-	var city = $('#parameter_bar_collapse #collapse_general_atts #cidade_list').val();
-	var farm = $('#parameter_bar_collapse #collapse_general_atts #lavoura_list').val().toLowerCase();
+	var city = $('#parameter_bar_collapse #collapse_database_atts #cidade_list').val();
+	var farm = $('#parameter_bar_collapse #collapse_database_atts #lavoura_list').val().toLowerCase();
 	
 	var atts = get_att_map();
 	atts.push(target_att);

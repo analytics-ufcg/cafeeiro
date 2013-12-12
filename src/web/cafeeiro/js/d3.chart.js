@@ -26,7 +26,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
     var margin = { top: 40, right: 50, bottom: 30, left: 60 },
     width = containerWidth - margin.left - margin.right,
     height = containerHeight - margin.top - margin.bottom;
-    var logChartHeight = 120, diChartHeight = 20;
+    var logChartHeight = 100, diChartHeight = 20;
     var gap = 30;
     var color = d3.scale.category10();
 
