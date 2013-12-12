@@ -26,7 +26,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
     var margin = { top: 40, right: 50, bottom: 30, left: 60 },
     width = containerWidth - margin.left - margin.right,
     height = containerHeight - margin.top - margin.bottom;
-    var logChartHeight = 100, diChartHeight = 20;
+    var logChartHeight = 120, diChartHeight = 20;
     var gap = 30;
     var color = d3.scale.category10();
 
@@ -128,28 +128,10 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
     
     //select and generate a chart plugin to render
     function selectChart(d) {
-        // if (d.type == 'analog') {
-            var chart = d3.analog().height(logChartHeight).gap(gap).color(color);
-        // }
-        // else if (d.type == 'digital') {
-        //     chart = d3.digital().height(graphHeight(d)).color(color)
-        //         .y(function (t) { return t.State ? 1 : 0; });// 0/1 generator as y function
-        // }
-        // if (d.type == 'horizon') {
-        //     var mean = d.data.map(function (t) { return t.Value; }).reduce(function (p, v) { return p + v; }, 0) / d.data.length;
-        //     chart = d3.horizon()
-        //         .width(width)
-        //         .height(logChartHeight)
-        //         .gap(gap)
-        //         .y(function (t) { return t.Value - mean; })
-        //         .bands(3)
-        //         .mode("offset");
-        // }
-        
-        if(chart) {
-            //config common features
-            chart.timeScale(_xScale).x(function (t) { return moment(t.DateTime).toDate(); });
-        }        
+        var chart = d3.analog().height(logChartHeight).gap(gap).color(color);
+
+        //config common features
+        chart.timeScale(_xScale).x(function (t) { return moment(t.DateTime).toDate(); });
 
         return chart;
     }
@@ -157,10 +139,6 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
     function graphHeight(d) {
         if (d.type == 'analog'){
             return logChartHeight;
-        // }else if (d.type == 'digital') {
-        //     //calculate height
-        //     var cnt = _.uniq(d.data, false, function (t) { return t.Channel; }).length;
-        //     return diChartHeight * cnt;
         } else {
             return 100;
         }
