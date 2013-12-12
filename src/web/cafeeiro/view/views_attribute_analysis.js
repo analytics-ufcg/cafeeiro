@@ -7,36 +7,36 @@ function show_atts_atemporal_analysis(incidencia_table, att_names){
 	}
 }
 
-function create_atts_temporal_analysis(plot_div){
-	// remove_all_d3_svg(plot_div);
-
-	requirejs.config({
-        "baseUrl": "./",
-        "paths": {
-            "app": "./js/",
-            'moment': './js/moment.min',
-            'underscore': './js/underscore-min'
-        }
-    });
-
-    require(['app/d3.chart'], function (d3Chart) {
-        d3Chart.init({ container: plot_div, xDim: 'DateTime' });
-      
-        d3Chart.addGraph({ 
-        	id: 'incidencia', 
-        	type: 'analog', 
-        	name: 'Incidência', 
-        	dataId: 512, 
-        	yVal: ['incidencia'], 
-        	data: incidencia_data,
-            order: 0
-        });
-		
-		d3Chart.render();
-    });
-}
-
 function show_atts_temporal_analysis(){
+
+    function create_atts_temporal_analysis(plot_div){
+    	// remove_all_d3_svg(plot_div);
+
+    	requirejs.config({
+            "baseUrl": "./",
+            "paths": {
+                "app": "./js/",
+                'moment': './js/moment.min',
+                'underscore': './js/underscore-min'
+            }
+        });
+
+        require(['app/d3.chart'], function (d3Chart) {
+            d3Chart.init({ container: plot_div, xDim: 'DateTime' });
+          
+            d3Chart.addGraph({ 
+            	id: 'incidencia', 
+            	type: 'analog', 
+            	name: 'Incidência', 
+            	dataId: 512, 
+            	yVal: ['incidencia'], 
+            	data: incidencia_data,
+                order: 0
+            });
+    		
+    		d3Chart.render();
+        });
+    }
 
     var temporal_div = "#att_pane #temporal_pane";
 
