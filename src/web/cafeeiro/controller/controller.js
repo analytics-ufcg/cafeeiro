@@ -63,27 +63,27 @@ function main_controller(){
 	// Add the tooltips
     $('[data-toggle="tooltip"]').tooltip({placement: "right", container:"body"});
 
-    // Add the model selection items to the accordion
+    // Events on Tab changes of central_bar
     $('#central_bar a[href="#prediction_pane"]').click(function(e){
+    	
+    	// Collapse the database and meteorological selection to improve readability
+    	$("#collapse_database_selection").find('.panel-collapse').collapse('hide');
+    	$("#collapse_meteorological_selection").find('.panel-collapse').collapse('hide');
 
-    	// Hide all accordion
-		$("#parameter_bar_collapse").find('.panel-collapse').each(function(index){
-            $(this).removeAttr('style');
-            if ($(this).hasClass('in')) {
-                $(this).collapse('hide');
-            }
-        });
-		
-		// TODO improve
-		setTimeout(function () {
-	    	$("#accordion_model_atts").find('.panel-collapse').collapse("show");
-	    	$("#accordion_model_atts").show();
-	    }, 400);
+    	// Hide the DIV of the meteorological and special attributes
+		$("#collapse_meteorological_selection").hide();
+		$("#collapse_special_selection").hide();
+	    
+	    // Show the model selection
+	    $("#collapse_model_selection").show();
     });
-
-	// Remove the model selection items to the accordion
 	$('#central_bar a[href="#att_pane"]').click(function(e){
-    	$("#accordion_model_atts").hide();
+		// Show the meteorological and special selection DIVs
+		$("#collapse_meteorological_selection").show();
+		$("#collapse_special_selection").show();
+
+		// Hide the model selection DIV
+    	$("#collapse_model_selection").hide();
     });
 
  	/*

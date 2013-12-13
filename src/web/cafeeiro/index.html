@@ -43,7 +43,7 @@
         	<div id="body_bar" class="row-fluid">
         		<div id="parameter_bar_collapse" class="panel-group span3">
         			<!-- <legend>1) Selecione os Atributos</legend> -->
-        			<div class="panel panel-default">
+        			<div id="collapse_database_selection" class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_database_atts">
@@ -60,8 +60,6 @@
 											<option selected>Varginha-alta-tx5</option>
 											<option>Tudo-alta-tx5</option>
 										</select>
-<!-- 										<hr>
-										<h5>Filtrar por:</h5> -->
 										<br>
 										<strong>Cidade</strong>
 										<select id="cidade_list" class="form-control" name="cidade" data-toggle='tooltip' title="Cidades do cenário"></select>
@@ -74,7 +72,7 @@
 				        	</div>
 				        </div>
 				    </div>
-					<div class="panel panel-default">
+					<div id="collapse_meteorological_selection" class="panel panel-default">
         				<div class="panel-heading">
         					<span class="panel-title" data-toggle="tooltip" title="Atributos meteorológicos no Período de INFecção (PINF)">
         						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_meteorologic_atts">
@@ -149,7 +147,7 @@
 				        	</div>
 				   		</div>
 					</div>
-					<div class="panel panel-default">
+					<div id="collapse_special_selection" class="panel panel-default">
         				<div class="panel-heading">
         					<h5 class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_special_atts">
@@ -183,7 +181,7 @@
 				        	</div>
 				   		</div>
 					</div>
-					<div id="accordion_model_atts" class="panel panel-default" style="display: none">
+					<div id="collapse_model_selection" class="panel panel-default" style="display: none">
         				<div class="panel-heading">
         					<span class="panel-title">
         						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_model_atts">
