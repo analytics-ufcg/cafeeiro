@@ -153,8 +153,9 @@ function get_incidencia_atts(){
 function get_ic_data_compare_models(){
 	
 	scenario = $('#the_scenario').val();
-	att_list = $("#att_list").val();
-	metric_list = $("#metric_list").val();
+
+	att_list = get_model_map("#att_selection_form");
+	metric_list = get_model_map("#metric_selection_form");
 
 	// model_ci_data = [{"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Erro","mean_ci":0.194023787358787,"lower_ci":0.191513177211681,"upper_ci":0.196534397505894,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
 	// 					{"attribute_method":"Subjetivo-M2","model":"Random Forest - Dissertation","metric":"Sensitividade","mean_ci":0.804433405068936,"lower_ci":0.800721444980571,"upper_ci":0.808145365157301,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M2"},
@@ -169,12 +170,11 @@ function get_ic_data_compare_models(){
 	// view_prediction_model_comparison(model_ci_data);
 
 	// Check the input parameters
-	if (att_list != null && metric_list != null){
+	if (att_list != null && metric_list != null && att_list.length > 0 && metric_list.length > 0){
 	
 		var call_data = 'scenario=' + scenario + 
-						'&att_methods=' + att_list.join() + 
-						'&metrics=' + metric_list.join();
-		// console.log(call_data);
+						'&att_methods=' + att_list.join(",") + 
+						'&metrics=' + metric_list.join(",");
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',
@@ -200,6 +200,22 @@ function get_att_map(){
 	var result = [];
 
 	var atts_serialized = $("#meteorologic_atts_form").serialize() + "&" + $("#special_atts_form").serialize();
+	var all_atts = atts_serialized.split("&");
+
+	for (var i = 0; i < all_atts.length; i++) {
+		att = all_atts[i];
+		if (att != ""){
+			result.push(att.replace("=on", ""));
+		}
+	}
+	return result;
+}
+
+function get_model_map(form){
+
+	var result = [];
+
+	var atts_serialized = $(form).serialize() + "";
 	var all_atts = atts_serialized.split("&");
 
 	for (var i = 0; i < all_atts.length; i++) {

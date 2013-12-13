@@ -191,38 +191,67 @@
         				</div>
         				<div id="collapse_model_atts" class="panel-collapse collapse in">
         					<div class="panel-body">
-						    	<form id="model_comparison_form">
-									<strong>Método de Seleção de Atributos</strong>
-							    	<select id="att_list" class="form-control" name="att_list" multiple>
-							    		<option selected>Subjetivo - M1</option>
-							    		<option selected>Subjetivo - M2</option>
-							    		<option selected>Subjetivo - M3</option>
-							    		<option selected>Subjetivo - M1 - IncW1</option>
-							    		<option selected>Subjetivo - M2 - IncW1</option>
-							    		<option selected>Subjetivo - M3 - IncW1</option>
-							    	</select>
-							    	<br>
-							    	<strong>Métricas</strong>
-							    	<select id="metric_list" class="form-control" name="metric_list" multiple>
-										<option selected>Acurácia</option>
-										<option selected>Erro</option>
-										<option>Sensitividade</option>
-										<option>Especificidade</option>
-										<option>FP-Rate</option>
-										<option>TP-Rate</option>
-										<option>AUC</option>
-									</select>
-									<br>
-							    	<strong>Algoritmo</strong>
-							    	<select id="algorithm_list" class="form-control" name="algorithm_list" multiple disabled>
-										<option selected>Random Forest - Dissertation</option>
-									</select>
+
+        						<form id="att_selection_form" >
+						    		<fieldset>
+						    			<strong title="Descrição">Método de Seleção de Atributos</strong>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M1" checked>Subjetivo - M1</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M2" checked>Subjetivo - M2</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M3" checked>Subjetivo - M3</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M1 - IncW1" checked>Subjetivo - M1 - IncW1</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M2 - IncW1" checked>Subjetivo - M2 - IncW1</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Subjetivo - M3 - IncW1" checked>Subjetivo - M3 - IncW1</label></div>
+									</fieldset>
+								</form>
+								<br>
+								<form id="metric_selection_form" >
+									<fieldset>
+						    			<strong title="Métricas">Métricas</strong>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Acurácia" checked>Acurácia</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Erro" checked>Erro</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Sensitividade">Sensitividade</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="Especificidade">Especificidade</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="FP-Rate">FP-Rate</label></div>
+										<div class="checkbox">
+											
+												<input type="checkbox" name="AUC">AUC</label></div>
+									</fieldset>
+								</form>
+								<br>
+								<form id="algorithm_selection_form" >
+									<fieldset>
+										<strong title="Algoritmo">Algoritmo</strong>
+											<div class="checkbox">
+												<label data-toggle='tooltip' title="desc1">
+													<input type="checkbox" name="Random Forest - Dissertation" checked multiple disabled>Random Forest - Dissertation</label></div>
+									</fieldset>
 								</form>
 				        	</div>
 				   		</div>
 					</div>
 	        	</div>
-
 	        	<div id="central_bar" class="tabbable span9">
 	        		<!-- <legend>2) Visualize a informação</legend> -->
 					<ul class="nav nav-tabs">
