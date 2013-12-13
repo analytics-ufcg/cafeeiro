@@ -10,7 +10,10 @@ var target_att = "taxa_inf_m5";
 var scenario_cities_map = {'Varginha-alta-tx5' : ["Varginha", "Varginha-antigo"],
 						   'Tudo-alta-tx5' : ["Boa-esperanca", "Carmo-de-minas", "Varginha", "Varginha-antigo"]};
 
-var lavoura_types = ["Adensada", "Larga"];
+var city_lavoura_types = {'Varginha' : ["Adensada", "Larga"],
+						 'Varginha-antigo' : ["Adensada", "Larga"],
+						 'Boa-esperanca' : ["Larga"],
+						 'Carmo-de-minas' : ["Adensada"]};
 
 var model_ci_data = [];
 
@@ -34,6 +37,16 @@ function main_controller(){
 		// Redefine the cities
 		redefine_options_select_list($('#parameter_bar_collapse #cidade_list'), 
 									 scenario_cities_map[$(this).val()]);
+		// Redefine the lavoura types
+		redefine_options_select_list($('#parameter_bar_collapse #lavoura_list'), 
+									 city_lavoura_types[$("#parameter_bar_collapse #collapse_database_atts #cidade_list").val()]);
+	});
+
+	// Actions when the city changes
+	$("#parameter_bar_collapse #collapse_database_atts #cidade_list").change(function() {
+		// Redefine the lavoura types
+		redefine_options_select_list($('#parameter_bar_collapse #lavoura_list'), 
+									 city_lavoura_types[$(this).val()]);
 	});
 
 	// Draw the parallel coordinate on demand (when the atemporal tab is selected)
@@ -94,7 +107,7 @@ function main_controller(){
 	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #cidade_list'), 
 								 scenario_cities_map[$("#the_scenario").val()]);
 	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #lavoura_list'), 
-									 lavoura_types);
+									 city_lavoura_types[$("#parameter_bar_collapse #collapse_database_atts #cidade_list").val()]);
 
 	// Plot the Attribute Analysis
     get_incidencia_atts();
