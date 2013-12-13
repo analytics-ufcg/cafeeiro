@@ -116,7 +116,7 @@ function get_incidencia_atts(){
 	atts.push(target_att);
 
 	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");
-	console.log(call_data);
+	// console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
@@ -161,7 +161,7 @@ function get_ic_data_compare_models(){
 		var call_data = 'scenario=' + scenario + 
 						'&att_methods=' + att_list.join() + 
 						'&metrics=' + metric_list.join();
-		console.log(call_data);
+		// console.log(call_data);
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',

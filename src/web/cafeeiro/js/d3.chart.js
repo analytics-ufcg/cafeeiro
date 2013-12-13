@@ -98,7 +98,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
                 if (mX > 0 && mY > 0 && mX < width) { 
                     var dt = _xScale.invert(mX);
                     var nearestDateVal = minDistanceDate(_.map(_graphs, function (d) { return d.map[Math.round(mX)] ? d.map[Math.round(mX)].date : null; }), dt);
-                    var graphIdswithDataAtNearestDate = _.chain(_graphs).filter(function(d) { return d.map[mX] && d.map[mX].date == nearestDateVal; }).pluck('id').value();
+                    var graphIdswithDataAtNearestDate = _.chain(_graphs).filter(function(d) { return d.map[Math.round(mX)] && d.map[Math.round(mX)].date == nearestDateVal; }).pluck('id').value();
                     
                     if (nearestDateVal != null) {
                         var xMoment = moment(nearestDateVal);
@@ -108,7 +108,7 @@ define(['moment', 'underscore', 'app/d3.chart.analog'], function (moment) {
                             var str = '';
                             //var v = _.findWhere(d.data, { DateTime: nearestDateVal });                            
                             if (graphIdswithDataAtNearestDate.indexOf(d.id) >= 0) {
-                                var v = d.data[d.map[mX].idx];
+                                var v = d.data[d.map[Math.round(mX)].idx];
                                 _.each(d.yVal, function (yDim, i) {
                                     str += d.yVal.length == 1 ? v[yDim] : ((i > 0 ? ', ' : ' ') + yDim + ':' + v[yDim]);
                                 });
