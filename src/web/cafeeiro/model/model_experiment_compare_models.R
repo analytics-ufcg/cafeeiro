@@ -57,32 +57,6 @@ ci.data <- ddply(exp.data, .(attribute_method, model, metric), function(df) Boot
 ci.data$model_and_att_method <- do.call(paste, c(ci.data[ , c("model", "attribute_method")], list(sep = ' / ')))
 
 # ------------------------------------------------------------------------------
-# Generate the Plot output
-# ------------------------------------------------------------------------------
-# Create the GGPLOT Confidence Interval
-# theme_set(theme_bw(base_size = 20))
-# limits <- aes(ymin=lower_ci, ymax=upper_ci)
-# pd <- position_dodge(.3 * length(att.methods), 1)
-
-# ic.plot <- ggplot(ci.data, aes_string(x="model", y="mean_ci", col="attribute_method")) +
-#   geom_point(position=pd, size=4) + 
-#   geom_errorbar(limits, size=2, width=.2, position=pd) + # Move the ICs .05 to the left/right
-#   facet_wrap(~metric, scales="free_y", ncol=2) +
-#   labs(list(x = "Modelo", y = "", colour = "Atributos", title = "")) +
-#   theme(strip.text.x = element_text(size = 15))
-
-# # Persist the PLOT
-# plot.dir <- "../img/plots"
-# dir.create(plot.dir, showWarnings=T)
-
-# plot.width = length(unique(ci.data$model)) * length(metrics) * 450 + 100
-# plot.height = 500 * ceiling(length(metrics)/2) + 50
-
-# png(paste(plot.dir, "/prediction-model_comparison-experiment.png", sep =""), width = plot.width, height = plot.height)
-# print(ic.plot)
-# graphics.off()
-
-# ------------------------------------------------------------------------------
 # Send the CI Data as a JSON
 # ------------------------------------------------------------------------------
 cat(df2json(ci.data))

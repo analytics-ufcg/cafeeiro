@@ -50,13 +50,13 @@ function main_controller(){
 		view_prediction_model_comparison(model_ci_data);
 	});
 
-	// On change: Attributes
-	$("#parameter_bar_collapse").change( function(e){
+	// On change: Database selection & Meteorological selection & Special selection
+	$("#collapse_database_selection, #collapse_meteorological_selection, #collapse_special_selection").change( function(e){
 		get_incidencia_atts();
 	});
 
-	// On change: Model selection
-	$("#collapse_model_atts").change( function(e){
+	// On change: Database selection & Model selection
+	$("#collapse_database_selection, #collapse_model_atts").change( function(e){
 		get_ic_data_compare_models();
 	});
 
