@@ -3,7 +3,10 @@ rm(list = ls())
 library(plyr)
 
 # Read the dataset
-data <- read.csv2("data/dados_cafeeiro.csv", header = T)
+data.classes <- c(rep("character", 2), "numeric", rep("character", 2), rep("numeric", 26))
+
+data <- read.csv2("data/dados_cafeeiro.csv", 
+                  header = T, colClasses=data.classes, dec=".")
 
 # ------------------------------------------------------------------------------
 # TRANSFORM "mes", "ano" IN "dia"

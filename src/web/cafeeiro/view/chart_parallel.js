@@ -95,12 +95,12 @@ function plot_parallel_coord(att_data, att_names, plot_div) {
       .attr("width", 16);
 
   function dragstart(d) {
-    i = incidencia_atts.indexOf(d);
+    i = incidencia_atts['atts'].indexOf(d);
   }
 
   function drag(d) {
     x.range()[i] = d3.event.x;
-    incidencia_atts.sort(function(a, b) { return x(a) - x(b); });
+    incidencia_atts['atts'].sort(function(a, b) { return x(a) - x(b); });
     g.attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     foreground.attr("d", path);
   }

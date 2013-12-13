@@ -45,7 +45,8 @@
                         if (chartConfig) {
                             g.select(".path." + c).transition().duration(1000) //update path
                                 .attr("d", valueline(d.data));
-                        } else {                            
+                        } else {
+
                             g.append("path") //add path 
                                 .attr('class', 'path ' + c)
                                 .attr("d", valueline(d.data))
