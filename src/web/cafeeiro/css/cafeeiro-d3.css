@@ -26,26 +26,32 @@
   stroke: #63C74A;
 }*/
 
-.inf_greater_m5 {
- stroke: #E03535; 
+
+.parallel_coord_taxa_inf_color1 {
+  stroke:#E03535;
 }
 
-.inf_smaller_m5 {
- stroke: #2BAD3A; 
+.parallel_coord_taxa_inf_color2 {
+  stroke:#2BAD3A;
 }
 
-/*.setosa {
-  stroke: #800;
+.parallel_coord_incidencia_color1 {
+  stroke:#5AB0FF;
 }
 
-.versicolor {
-  stroke: #080;
+.parallel_coord_incidencia_color2 {
+  stroke:#008B06;
 }
 
-.virginica {
-  stroke: #008;
+.parallel_coord_incidencia_color3 {
+  stroke:#F07F05;
 }
-*/
+
+.parallel_coord_incidencia_color4 {
+  stroke:#CF0D0D;
+}
+
+
 .brush .extent {
   fill-opacity: .3;
   stroke: #fff;

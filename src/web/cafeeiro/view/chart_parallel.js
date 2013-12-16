@@ -59,11 +59,26 @@ function plot_parallel_coord(att_data, att_names, plot_div) {
     .enter().append("svg:path")
       .attr("d", path)
       .attr("class", function(d) { 
-        if (d[target_att] <= 0){
-          return "inf_smaller_m5";
+        var target_att_name = incidencia_atts['target_att'][0];
+        if (target_att_name == 'incidencia'){
+          var target_value = d[target_att_name];
+          if (target_value <= 25){
+            return "parallel_coord_incidencia_color1";
+          }else if(target_value <= 50){
+            return "parallel_coord_incidencia_color2";
+          }else if(target_value <= 75){
+            return "parallel_coord_incidencia_color3";
+          }else{
+            return "parallel_coord_incidencia_color4";
+          }
         }else{
-          return "inf_greater_m5";
-        }});
+          if (d[target_att_name] <= 0){
+            return "parallel_coord_taxa_inf_color1";
+          }else{
+            return "parallel_coord_taxa_inf_color2";
+          }
+        } 
+      });
 
   // Add a group element for each att_name.
   var g = svg.selectAll(".attribute")
@@ -95,30 +110,40 @@ function plot_parallel_coord(att_data, att_names, plot_div) {
       .attr("width", 16);
 
   function dragstart(d) {
-    i = incidencia_atts['atts'].indexOf(d);
+    var att_names = incidencia_atts['target_att'].concat(incidencia_atts['atts']);
+
+    i = att_names.indexOf(d);
   }
 
   function drag(d) {
+    var att_names = incidencia_atts['target_att'].concat(incidencia_atts['atts']);
+
     x.range()[i] = d3.event.x;
-    incidencia_atts['atts'].sort(function(a, b) { return x(a) - x(b); });
+    att_names.sort(function(a, b) { return x(a) - x(b); });
     g.attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     foreground.attr("d", path);
   }
 
   function dragend(d) {
-    x.domain(incidencia_atts['atts']).rangePoints([0, w]);
+    var att_names = incidencia_atts['target_att'].concat(incidencia_atts['atts']);
+
+    x.domain(att_names).rangePoints([0, w]);
     var t = d3.transition().duration(500);
     t.selectAll(".attribute").attr("transform", function(d) { return "translate(" + x(d) + ")"; });
     t.selectAll(".foreground path").attr("d", path);
   }
   // Returns the path for a given data point.
   function path(d) {
-    return line(incidencia_atts['atts'].map(function(p) { return [x(p), y[p](d[p])]; }));
+    var att_names = incidencia_atts['target_att'].concat(incidencia_atts['atts']);
+
+    return line(att_names.map(function(p) { return [x(p), y[p](d[p])]; }));
   }
 
   // Handles a brush event, toggling the display of foreground lines.
   function brush() {
-    var actives = incidencia_atts['atts'].filter(function(p) { return !y[p].brush.empty(); }),
+    var att_names = incidencia_atts['target_att'].concat(incidencia_atts['atts']);
+
+    var actives = att_names.filter(function(p) { return !y[p].brush.empty(); }),
         extents = actives.map(function(p) { return y[p].brush.extent(); });
     foreground.classed("fade", function(d) {
       return !actives.every(function(p, i) {

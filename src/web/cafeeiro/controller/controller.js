@@ -4,23 +4,19 @@
 var incidencia_data = [];
 var incidencia_atts = {'cidade' : [],
 					   'lavoura' : [],
+					   'carga' : [],
 					   'atts' : []};
-var target_att = "taxa_inf_m5";
 
-var scenario_cities_map = {'Varginha-alta-tx5' : ["Varginha", "Varginha-antigo"],
-						   'Tudo-alta-tx5' : ["Boa-esperanca", "Carmo-de-minas", "Varginha", "Varginha-antigo"]};
-
-var city_lavoura_types = {'Varginha' : ["Adensada", "Larga"],
-						 'Varginha-antigo' : ["Adensada", "Larga"],
-						 'Boa-esperanca' : ["Larga"],
-						 'Carmo-de-minas' : ["Adensada"]};
-
+var city_lavoura_types = {};
+var all_scenarios = [];
 var model_ci_data = [];
 
 // Time series variables
 var has_time_series_chart = false;
 var old_incidencia_atts = {'cidade' : [],
 						   'lavoura' : [],
+						   'carga' : [],
+						   'target_att' : [],
 						   'atts' : []};
 
 /*
@@ -32,44 +28,44 @@ function main_controller(){
  	 	START DEFINITIONS
  	*/
 
-	// Actions when the scenario changes
-	$("#the_scenario").change(function() {
-		// Redefine the cities
-		redefine_options_select_list($('#parameter_bar_collapse #cidade_list'), 
-									 scenario_cities_map[$(this).val()]);
-		// Redefine the lavoura types
-		redefine_options_select_list($('#parameter_bar_collapse #lavoura_list'), 
-									 city_lavoura_types[$("#parameter_bar_collapse #collapse_database_atts #cidade_list").val()]);
+	// Actions when the city changes
+	$("#att_analysis_bar_collapse #collapse_database_atts #cidade_list").change(function() {
+		
+		var city_selected = $(this).val();
+		redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #lavoura_list'), 
+										 _.keys(city_lavoura_types[city_selected]));
+		
+		var lavoura_selected = $("#att_analysis_bar_collapse #collapse_database_atts #lavoura_list").val();
+		redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #carga_list'), 
+										 _.keys(city_lavoura_types[city_selected][lavoura_selected]));
 	});
 
-	// Actions when the city changes
-	$("#parameter_bar_collapse #collapse_database_atts #cidade_list").change(function() {
-		// Redefine the lavoura types
-		redefine_options_select_list($('#parameter_bar_collapse #lavoura_list'), 
-									 city_lavoura_types[$(this).val()]);
+	// Actions when the lavoura changes
+	$("#att_analysis_bar_collapse #collapse_database_atts #lavoura_list").change(function() {
+		
+		var city_selected = $("#att_analysis_bar_collapse #collapse_database_atts #cidade_list").val();
+		var lavoura_selected = $(this).val();
+		redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #carga_list'), 
+										 _.keys(city_lavoura_types[city_selected][lavoura_selected]));
 	});
 
 	// Draw the parallel coordinate on demand (when the atemporal tab is selected)
 	$('#att_pane a[href="#atemporal_pane"]').on('shown.bs.tab', function (e) {
-		show_atts_atemporal_analysis(incidencia_data, incidencia_atts['atts']);
+		show_atts_atemporal_analysis();
 	});
 
-	// Draw the ic on demand (when the atemporal tab is selected)
-	// $('#prediction_pane a[href="#model_comparison_pane"]').on('shown.bs.tab', function (e) {
-	// 	view_prediction_model_comparison(model_ci_data);
-	// });
 	// Draw the ic on demand (when the prediction_pane tab is selected)
 	$('#central_bar a[href="#prediction_pane"]').on('shown.bs.tab', function (e) {
 		view_prediction_model_comparison(model_ci_data);
 	});
 
-	// On change: Database selection & Meteorological selection & Special selection
-	$("#collapse_database_selection, #collapse_meteorological_selection, #collapse_special_selection").change( function(e){
+	// On change: Att Analysis Collapses
+	$("#att_analysis_bar_collapse").change( function(e){
 		get_incidencia_atts();
 	});
 
-	// On change: Database selection & Model selection
-	$("#collapse_database_selection, #collapse_model_atts").change( function(e){
+	// On change: Att Analysis Collapses
+	$("#prediction_analysis_bar_collapse").change( function(e){
 		get_ic_data_compare_models();
 	});
 
@@ -79,38 +75,42 @@ function main_controller(){
     // Events on Tab changes of central_bar
     $('#central_bar a[href="#prediction_pane"]').click(function(e){
     	
-    	// Collapse the database and meteorological selection to improve readability
-    	$("#collapse_database_selection").find('.panel-collapse').collapse('hide');
-    	$("#collapse_meteorological_selection").find('.panel-collapse').collapse('hide');
-
-    	// Hide the DIV of the meteorological and special attributes
-		$("#collapse_meteorological_selection").hide();
-		$("#collapse_special_selection").hide();
+    	// Hide the DIVs
+    	$("#att_analysis_bar_collapse").hide();
 	    
-	    // Show the model selection
-	    $("#collapse_model_selection").show();
+	    // Show the prediction analysis collapses
+	    $("#prediction_analysis_bar_collapse").show();
     });
+
 	$('#central_bar a[href="#att_pane"]').click(function(e){
 		// Show the meteorological and special selection DIVs
-		$("#collapse_meteorological_selection").show();
-		$("#collapse_special_selection").show();
+    	$("#att_analysis_bar_collapse").show();
 
 		// Hide the model selection DIV
-    	$("#collapse_model_selection").hide();
+    	$("#prediction_analysis_bar_collapse").hide();
     });
 
  	/*
  	 	START RUNS
  	*/
+ 	get_incidencia_database();
 
  	// Define the defaults: cidade and lavoura
-	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #cidade_list'), 
-								 scenario_cities_map[$("#the_scenario").val()]);
-	redefine_options_select_list($('#parameter_bar_collapse #collapse_database_atts #lavoura_list'), 
-									 city_lavoura_types[$("#parameter_bar_collapse #collapse_database_atts #cidade_list").val()]);
+	redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #cidade_list'), 
+								 _.keys(city_lavoura_types));
+	
+	var city_selected = $("#att_analysis_bar_collapse #collapse_database_atts #cidade_list").val();
+	redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #lavoura_list'), 
+									 _.keys(city_lavoura_types[city_selected]));
+	
+	var lavoura_selected = $("#att_analysis_bar_collapse #collapse_database_atts #lavoura_list").val();
+	redefine_options_select_list($('#att_analysis_bar_collapse #collapse_database_atts #carga_list'), 
+									 _.keys(city_lavoura_types[city_selected][lavoura_selected]));
 
 	// Plot the Attribute Analysis
     get_incidencia_atts();
+
+    get_experiment_scenarios();
 
     // Plot the Model Comparison
 	get_ic_data_compare_models();
@@ -119,17 +119,61 @@ function main_controller(){
 /*
 	Model call functions
 */
+
+function get_incidencia_database(){
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: 'model/model_incidencia_cidade_lavoura_carga.php',
+		async: false,
+		data: '',
+		success: function(city_table) {
+			// Copy the data to the client memory			
+			for (var i = 0; i < city_table.length; i++) {
+				var city_row = city_table[i];
+				var cidade = city_row['cidade'];
+				var lavoura = city_row['lavoura'];
+				var carga = city_row['carga'];
+
+				if (_.isUndefined(city_lavoura_types[cidade])){
+					city_lavoura_types[cidade] = {};
+				}
+				if(_.isUndefined(city_lavoura_types[cidade][lavoura])){
+					city_lavoura_types[cidade][lavoura] = {};
+				}
+				if(_.isUndefined(city_lavoura_types[cidade][lavoura][carga])){
+					city_lavoura_types[cidade][lavoura][carga] = [];
+				}
+			};
+		}
+	});
+}
+
+function get_experiment_scenarios(){
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: 'model/model_experiment_scenarios.php',
+		async: false,
+		data: '',
+		success: function(scenarios) {
+			redefine_options_select_list($('#the_scenario'), 
+									 scenarios);
+		}
+	});
+}
+
 function get_incidencia_atts(){
 	
 	// Prepare the call data
-	var city = $('#parameter_bar_collapse #collapse_database_atts #cidade_list').val();
-	var farm = $('#parameter_bar_collapse #collapse_database_atts #lavoura_list').val().toLowerCase();
-	
+	var city = $('#att_analysis_bar_collapse #collapse_database_atts #cidade_list').val();
+	var farm = $('#att_analysis_bar_collapse #collapse_database_atts #lavoura_list').val();
+	var carga = $('#att_analysis_bar_collapse #collapse_database_atts #carga_list').val();
+	var target_att_val = $("#target_att_form").serialize().split("=")[1];
 	var atts = get_att_map();
-	atts.push(target_att);
 
-	var call_data = "city=" + city + "&farming_cond=" + farm + "&atts=" + atts.join(",");
-	// console.log(call_data);
+	var call_data = "city=" + city + "&farming_cond=" + farm + "&load=" + carga + "&target_att=" + target_att_val + "&atts=" + atts.join(",");
+	console.log(call_data);
 
 	$.ajax({
 		type: 'GET',
@@ -138,14 +182,17 @@ function get_incidencia_atts(){
 		async: true,
 		data: call_data,
 		success: function(incidencia) {
+			
 			// Copy the data/atts to the client memory
 			incidencia_data = incidencia;
 			incidencia_atts['cidade'] = city;
 			incidencia_atts['lavoura'] = farm;
+			incidencia_atts['carga'] = carga;
+			incidencia_atts['target_att'] = [target_att_val];
 			incidencia_atts['atts'] = atts;
 
 			show_atts_temporal_analysis();
-			show_atts_atemporal_analysis(incidencia_data, incidencia_atts['atts']);
+			show_atts_atemporal_analysis();
 		}
 	});
 }
@@ -168,13 +215,14 @@ function get_ic_data_compare_models(){
 	// 					{"attribute_method":"Subjetivo-M3-IncW1","model":"Random Forest - Dissertation","metric":"FP-Rate","mean_ci":0.182465574308485,"lower_ci":0.175174192770056,"upper_ci":0.189756955846914,"model_and_att_method":"Random Forest - Dissertation / Subjetivo-M3-IncW1"}];
 
 	// view_prediction_model_comparison(model_ci_data);
-
 	// Check the input parameters
 	if (att_list != null && metric_list != null && att_list.length > 0 && metric_list.length > 0){
 	
 		var call_data = 'scenario=' + scenario + 
 						'&att_methods=' + att_list.join(",") + 
 						'&metrics=' + metric_list.join(",");
+		console.log(call_data);
+
 		$.ajax({
 			type: 'GET',
 			dataType: 'json',

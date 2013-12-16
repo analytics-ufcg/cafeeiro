@@ -8,22 +8,20 @@
 	# Queries
 	$query_map = array(
 
-		// Used by: model_incidencia_by_scenario.php
-		"get_scenario_varginha_alta_tx5" =>
-			'SELECT dia, incidencia, taxa_inf_m5
+		"get_incidencia_cidade_lavoura_carga" =>
+			"SELECT distinct cidade, lavoura, carga
 			FROM incidencia
-			WHERE (cidade = \'Varginha-antigo\' OR
-      			  cidade = \'Varginha\') AND
-      			  carga = \'alta\';',
-      
-      	"get_scenario_tudo_alta_tx5" =>
-			'SELECT dia, incidencia, taxa_inf_m5
-			FROM incidencia
-			WHERE carga = \'alta\';',
+			ORDER BY cidade;",
 
+		"get_experiment_scenarios" =>
+			"SELECT distinct scenario
+			FROM experiment
+			ORDER BY scenario;",
+
+		// Used by model_incidencia_atts_with_conditions.php
 		"get_incidencia_atts_with_conditions" =>
-			"SELECT data as DateTime, incidencia, [ATT_COLUMNS]
+			"SELECT data as DateTime, [ATT_COLUMNS]
 			FROM incidencia
-			WHERE cidade = '[CITY]' AND lavoura = '[FARMING_COND]' AND carga = 'alta';"
+			WHERE cidade = '[CITY]' AND lavoura = '[FARMING_COND]' AND carga = '[LOAD]';"
 	);
 ?>

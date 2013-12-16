@@ -41,206 +41,260 @@
           		<p>Análise do Progresso da Ferrugem do Cafeeiro</p>
         	</div>
         	<div id="body_bar" class="row-fluid">
-        		<div id="parameter_bar_collapse" class="panel-group span3">
-        			<!-- <legend>1) Selecione os Atributos</legend> -->
-        			<div id="collapse_database_selection" class="panel panel-default">
-        				<div class="panel-heading">
-        					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_database_atts">
-        							Seleção da Base de Dados
-        						</a>
-        					</span>
-        				</div>
-        				<div id="collapse_database_atts" class="panel-collapse collapse in">
-        					<div class="panel-body">
-						    	<form id ="scenario" method="GET">
-					        		<fieldset>
-					        			<strong>Cenário</strong>
-					        			<select id="the_scenario" class="form-control" name="search_scenario">
-											<option selected>Varginha-alta-tx5</option>
-											<option>Tudo-alta-tx5</option>
-										</select>
-										<br>
-										<strong>Cidade</strong>
-										<select id="cidade_list" class="form-control" name="cidade" data-toggle='tooltip' title="Cidades do cenário"></select>
-										<br>
-										<strong>Lavoura</strong>
-										<select id="lavoura_list" class="form-control" name="lavoura" data-toggle='tooltip' title="Espaçamento da lavoura: Adensada ou Larga">
-										</select>
-					        		</fieldset>
-					        	</form>
-				        	</div>
-				        </div>
-				    </div>
-					<div id="collapse_meteorological_selection" class="panel panel-default">
-        				<div class="panel-heading">
-        					<span class="panel-title" data-toggle="tooltip" title="Atributos meteorológicos no Período de INFecção (PINF)">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_meteorologic_atts">
-        							Atributos Metereológicos (PINF)
-        						</a>
-        					</span>
-        				</div>
-        				<div id="collapse_meteorologic_atts" class="panel-collapse collapse in">
-        					<div class="panel-body">
-						    	<form id="meteorologic_atts_form">
-						    		<fieldset>
-										<strong>Precipitação</strong>
+        		<div id="left_side_bar" class="span3">
+	        		<div id="att_analysis_bar_collapse" class="panel-group">
+	        			<div id="collapse_database_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<span class="panel-title">
+	        						<a data-toggle="collapse" data-parent="#att_analysis_bar_collapse" href="#collapse_database_atts">
+	        							Seleção da Base de Dados
+	        						</a>
+	        					</span>
+	        				</div>
+	        				<div id="collapse_database_atts" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+							    	<form id ="scenario" method="GET">
+						        		<fieldset>
+						        			<!-- <strong>Cenário</strong>
+						        			<select id="the_scenario" class="form-control" name="search_scenario">
+												<option selected>Varginha-alta-tx5</option>
+												<option>Tudo-alta-tx5</option>
+											</select>
+											<br> -->
+											<strong>Cidade</strong>
+											<select id="cidade_list" class="form-control" name="cidade" data-toggle='tooltip' title="Cidades do cenário"></select>
+											<br>
+											<strong>Lavoura</strong>
+											<select id="lavoura_list" class="form-control" name="lavoura" data-toggle='tooltip' title="Condição da lavoura quanto ao espaçamento entre plantas: adensada ou larga">
+											</select>
+											<br>
+											<strong>Carga</strong>
+											<select id="carga_list" class="form-control" name="carga" data-toggle='tooltip' title="Nível de produção da lavoura (carga pendente de frutos): alta ou baixa">
+											</select>
+						        		</fieldset>
+						        	</form>
+					        	</div>
+					        </div>
+					    </div>
+					    <div id="collapse_target_att_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<span class="panel-title">
+	        						<a data-toggle="collapse" data-parent="#att_analysis_bar_collapse" href="#collapse_target_att">
+	        							Atributo Meta
+	        						</a>
+	        					</span>
+	        				</div>
+	        				<div id="collapse_target_att" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+							    	<form id ="target_att_form" method="GET">
+						        		<fieldset>
+					        				<div class="radio">
+					        					<label data-toggle='tooltip' title="Incidência da ferrugem do cafeeiro, ou seja, percentual de folhas com lesões de ferrugem">
+					        						<input type="radio" name="target_att" id="incidencia" value="incidencia">incidencia</label>
+					        				</div>
+											<div class="radio">
+					        					<label data-toggle='tooltip' title="Taxa de infecção ≥ 5 p.p. com relação à Incidência do mês anterior">
+					        						<input type="radio" name="target_att" id="taxa_inf_m5" value="taxa_inf_m5" checked>taxa_inf_m5</label>
+					        				</div>
+					        				<div class="radio">
+					        					<label data-toggle='tooltip' title="Taxa de infecção ≥ 10 p.p. com relação à Incidência do mês anterior.">
+					        						<input type="radio" name="target_att" id="taxa_inf_m10" value="taxa_inf_m10" >taxa_inf_m10</label>
+					        				</div>
+						        		</fieldset>
+						        	</form>
+					        	</div>
+					        </div>
+					    </div>
+						<div id="collapse_meteorological_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<span class="panel-title" data-toggle="tooltip" title="Atributos meteorológicos no Período de INFecção (PINF)">
+	        						<a data-toggle="collapse" data-parent="#att_analysis_bar_collapse" href="#collapse_meteorologic_atts">
+	        							Atributos Metereológicos (PINF)
+	        						</a>
+	        					</span>
+	        				</div>
+	        				<div id="collapse_meteorologic_atts" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+							    	<form id="meteorologic_atts_form">
+							    		<fieldset>
+											<strong>Precipitação</strong>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Nº dias chuvosos, precipitação ≥ 1 mm (PINF)">
+														<input type="checkbox" name="dchuv_pinf">dchuv_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Precipitação pluvial acumulada (PINF)">
+														<input type="checkbox" name="precip_pinf">precip_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das precipitações pluviais diárias (PINF)">
+														<input type="checkbox" name="med_precip_pinf">med_precip_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média do índice pluviométrico máximo diário (PINF)">
+														<input type="checkbox" name="med_indpluvmax_pinf">med_indpluvmax_pinf</label></div>
+											<strong>Temperatura</strong>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas máximas diárias (PINF)">
+														<input type="checkbox" name="tmax_pinf">tmax_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas médias diárias (PINF)">
+														<input type="checkbox" name="tmed_pinf">tmed_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias (PINF)">
+														<input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Temperatura média diária durante as horas com umidade relativa ≥ 95% (PINF)">
+														<input type="checkbox" name="thur95_pinf" checked>thur95_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas máximas diárias no período de incubação para os dias do PINF">
+														<input type="checkbox" name="tmax_pi_pinf">tmax_pi_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas médias diárias no período de incubação para os dias do PINF">
+														<input type="checkbox" name="tmed_pi_pinf">tmed_pi_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias no período de incubação para os dias do PINF">
+														<input type="checkbox" name="tmin_pi_pinf">tmin_pi_pinf</label></div>
+											<strong>Umidade Relativa do Ar</strong>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Umidade relativa do ar média diária (PINF)">
+														<input type="checkbox" name="ur_pinf">ur_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média diária do número de horas com umidade relativa do ar ≥ 95% (PINF)">
+														<input type="checkbox" name="nhur95_pinf">nhur95_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Somatório de nhur95_pinf (PINF)">
+														<input type="checkbox" name="smt_nhur95_pinf">smt_nhur95_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média diária do número de horas noturnas com umidade relativa do ar ≥ 95% (PINF)">
+														<input type="checkbox" name="nhnur95_pinf">nhnur95_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Somatório de nhnur95_pinf (PINF)">
+														<input type="checkbox" name="smt_nhnur95_pinf">smt_nhnur95_pinf</label></div>									
+											<strong>Velocidade do Vento</strong>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Velocidade média diária do vento (PINF)">
+														<input type="checkbox" name="vvento_pinf">vvento_pinf</label></div>
+												<div class="checkbox">
+													<label data-toggle='tooltip' title="Média do somatório da velocidade do vento de cada dia (PINF)">
+														<input type="checkbox" name="smt_vvento_pinf">smt_vvento_pinf</label></div>
+										</fieldset>
+									</form>
+					        	</div>
+					   		</div>
+						</div>
+						<div id="collapse_special_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<h5 class="panel-title">
+	        						<a data-toggle="collapse" data-parent="#att_analysis_bar_collapse" href="#collapse_special_atts">
+	        							Atributos Derivados 
+	        						</a>
+	        					</h5>
+	        				</div>
+	        				<div id="collapse_special_atts" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+							    	<form id="special_atts_form" >
+							    		<fieldset>
+							    			<strong data-toggle='tooltip' title="Atributos especiais derivados das condições diárias no Período de INFecção (PINF)">Condição Diária (PINF)</strong>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Nº dias chuvosos, precipitação ≥ 1 mm (PINF)">
-													<input type="checkbox" name="dchuv_pinf">dchuv_pinf</label></div>
+												<label data-toggle='tooltip' title="Somatório dos índices de condição diária de infecção (PINF)">
+													<input type="checkbox" name="acdinf_pinf">acdinf_pinf</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Precipitação pluvial acumulada (PINF)">
-													<input type="checkbox" name="precip_pinf">precip_pinf</label></div>
+												<label data-toggle='tooltip' title="Número de dias muito favoráveis à infecção (PINF)">
+													<input type="checkbox" name="dmfi_pinf">dmfi_pinf</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das precipitações pluviais diárias (PINF)">
-													<input type="checkbox" name="med_precip_pinf">med_precip_pinf</label></div>
+												<label data-toggle='tooltip' title="Número de dias desfavoráveis à infecção (PINF)">
+													<input type="checkbox" name="ddi_pinf" checked>ddi_pinf</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média do índice pluviométrico máximo diário (PINF)">
-													<input type="checkbox" name="med_indpluvmax_pinf">med_indpluvmax_pinf</label></div>
-										<strong>Temperatura</strong>
+												<label data-toggle='tooltip' title="Número de dias favoráveis e muito favoráveis à infecção (PINF)">
+													<input type="checkbox" name="dfmfi_pinf">dfmfi_pinf</label></div>
+											<strong data-toggle='tooltip' title="Atributos baseados no histórico passado dos dados">Incidências Passadas</strong>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas máximas diárias (PINF)">
-													<input type="checkbox" name="tmax_pinf">tmax_pinf</label></div>
+												<label data-toggle='tooltip' title="Incidência do mês anterior">
+													<input type="checkbox" name="incidencia_w1" checked>incidencia_mes_anterior</label></div>
+										</fieldset>
+									</form>
+					        	</div>
+					   		</div>
+						</div>
+		        	</div>
+		        	<div id="prediction_analysis_bar_collapse" class="panel-group" style="display: none">
+		        		<div id="collapse_prediction_scenario_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<span class="panel-title">
+	        						<a data-toggle="collapse" data-parent="#prediction_analysis_bar_collapse" href="#collapse_prediction_scenario">
+	        							Seleção do Cenário de Predição
+	        						</a>
+	        					</span>
+	        				</div>
+	        				<div id="collapse_prediction_scenario" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+							    	<form id ="scenario" method="GET">
+						        		<fieldset>
+						        			<strong>Cenário</strong>
+						        			<select id="the_scenario" class="form-control" name="search_scenario">
+											</select>
+						        		</fieldset>
+						        	</form>
+					        	</div>
+					        </div>
+					    </div>
+						<div id="collapse_model_selection" class="panel panel-default">
+	        				<div class="panel-heading">
+	        					<span class="panel-title">
+	        						<a data-toggle="collapse" data-parent="#prediction_analysis_bar_collapse" href="#collapse_model_atts">
+	        							Seleção dos Modelos
+	        						</a>
+	        					</span>
+	        				</div>
+	        				<div id="collapse_model_atts" class="panel-collapse collapse in">
+	        					<div class="panel-body">
+									<form id="algorithm_selection_form" >
+										<fieldset>
+											<strong title="Algoritmo">Algoritmo</strong>
+												<div class="checkbox">
+													<label><input type="checkbox" name="Random Forest - Dissertation" checked multiple disabled>Random Forest - Dissertation</label></div>
+										</fieldset>
+									</form>
+									<br>
+	        						<form id="att_selection_form" >
+							    		<fieldset>
+							    			<strong title="Descrição">Método de Seleção de Atributos</strong>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas médias diárias (PINF)">
-													<input type="checkbox" name="tmed_pinf">tmed_pinf</label></div>
+												<label><input type="checkbox" name="Subjetivo - M1" checked>Subjetivo - M1</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias (PINF)">
-													<input type="checkbox" name="tmin_pinf">tmin_pinf</label></div>
+												<label><input type="checkbox" name="Subjetivo - M2" checked>Subjetivo - M2</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Temperatura média diária durante as horas com umidade relativa ≥ 95% (PINF)">
-													<input type="checkbox" name="thur95_pinf" checked>thur95_pinf</label></div>
+												<label><input type="checkbox" name="Subjetivo - M3" checked>Subjetivo - M3</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas máximas diárias no período de incubação para os dias do PINF">
-													<input type="checkbox" name="tmax_pi_pinf">tmax_pi_pinf</label></div>
+												<label><input type="checkbox" name="Subjetivo - M1 - IncW1" checked>Subjetivo - M1 - IncW1</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas médias diárias no período de incubação para os dias do PINF">
-													<input type="checkbox" name="tmed_pi_pinf">tmed_pi_pinf</label></div>
+												<label><input type="checkbox" name="Subjetivo - M2 - IncW1" checked>Subjetivo - M2 - IncW1</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média das temperaturas mínimas diárias no período de incubação para os dias do PINF">
-													<input type="checkbox" name="tmin_pi_pinf">tmin_pi_pinf</label></div>
-										<strong>Umidade Relativa do Ar</strong>
+												<label><input type="checkbox" name="Subjetivo - M3 - IncW1" checked>Subjetivo - M3 - IncW1</label></div>
+										</fieldset>
+									</form>
+									<br>
+									<form id="metric_selection_form" >
+										<fieldset>
+							    			<strong title="Métricas">Métricas</strong>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Umidade relativa do ar média diária (PINF)">
-													<input type="checkbox" name="ur_pinf">ur_pinf</label></div>
+												<label><input type="checkbox" name="Acurácia" checked>Acurácia</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média diária do número de horas com umidade relativa do ar ≥ 95% (PINF)">
-													<input type="checkbox" name="nhur95_pinf">nhur95_pinf</label></div>
+												<label><input type="checkbox" name="Erro" checked>Erro</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Somatório de nhur95_pinf (PINF)">
-													<input type="checkbox" name="smt_nhur95_pinf">smt_nhur95_pinf</label></div>
+												<label><input type="checkbox" name="Sensitividade">Sensitividade</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média diária do número de horas noturnas com umidade relativa do ar ≥ 95% (PINF)">
-													<input type="checkbox" name="nhnur95_pinf">nhnur95_pinf</label></div>
+												<label><input type="checkbox" name="Especificidade">Especificidade</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Somatório de nhnur95_pinf (PINF)">
-													<input type="checkbox" name="smt_nhnur95_pinf">smt_nhnur95_pinf</label></div>									
-										<strong>Velocidade do Vento</strong>
+												<label><input type="checkbox" name="FP-Rate">FP-Rate</label></div>
 											<div class="checkbox">
-												<label data-toggle='tooltip' title="Velocidade média diária do vento (PINF)">
-													<input type="checkbox" name="vvento_pinf">vvento_pinf</label></div>
-											<div class="checkbox">
-												<label data-toggle='tooltip' title="Média do somatório da velocidade do vento de cada dia (PINF)">
-													<input type="checkbox" name="smt_vvento_pinf">smt_vvento_pinf</label></div>
-									</fieldset>
-								</form>
-				        	</div>
-				   		</div>
+												<label><input type="checkbox" name="AUC">AUC</label></div>
+										</fieldset>
+									</form>
+					        	</div>
+					   		</div>
+						</div>
 					</div>
-					<div id="collapse_special_selection" class="panel panel-default">
-        				<div class="panel-heading">
-        					<h5 class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_special_atts">
-        							Atributos Derivados 
-        						</a>
-        					</h5>
-        				</div>
-        				<div id="collapse_special_atts" class="panel-collapse collapse in">
-        					<div class="panel-body">
-						    	<form id="special_atts_form" >
-						    		<fieldset>
-						    			<strong data-toggle='tooltip' title="Atributos especiais derivados das condições diárias no Período de INFecção (PINF)">Condição Diária (PINF)</strong>
-										<div class="checkbox">
-											<label data-toggle='tooltip' title="Somatório dos índices de condição diária de infecção (PINF)">
-												<input type="checkbox" name="acdinf_pinf">acdinf_pinf</label></div>
-										<div class="checkbox">
-											<label data-toggle='tooltip' title="Número de dias muito favoráveis à infecção (PINF)">
-												<input type="checkbox" name="dmfi_pinf">dmfi_pinf</label></div>
-										<div class="checkbox">
-											<label data-toggle='tooltip' title="Número de dias desfavoráveis à infecção (PINF)">
-												<input type="checkbox" name="ddi_pinf" checked>ddi_pinf</label></div>
-										<div class="checkbox">
-											<label data-toggle='tooltip' title="Número de dias favoráveis e muito favoráveis à infecção (PINF)">
-												<input type="checkbox" name="dfmfi_pinf">dfmfi_pinf</label></div>
-										<strong data-toggle='tooltip' title="Atributos baseados no histórico passado dos dados">Incidências Passadas</strong>
-										<div class="checkbox">
-											<label data-toggle='tooltip' title="Incidência do mês anterior">
-												<input type="checkbox" name="incidencia_w1" checked>incidencia_mes_anterior</label></div>
-									</fieldset>
-								</form>
-				        	</div>
-				   		</div>
-					</div>
-					<div id="collapse_model_selection" class="panel panel-default" style="display: none">
-        				<div class="panel-heading">
-        					<span class="panel-title">
-        						<a data-toggle="collapse" data-parent="#parameter_bar_collapse" href="#collapse_model_atts">
-        							Seleção dos Modelos
-        						</a>
-        					</span>
-        				</div>
-        				<div id="collapse_model_atts" class="panel-collapse collapse in">
-        					<div class="panel-body">
-
-        						<form id="att_selection_form" >
-						    		<fieldset>
-						    			<strong title="Descrição">Método de Seleção de Atributos</strong>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M1" checked>Subjetivo - M1</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M2" checked>Subjetivo - M2</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M3" checked>Subjetivo - M3</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M1 - IncW1" checked>Subjetivo - M1 - IncW1</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M2 - IncW1" checked>Subjetivo - M2 - IncW1</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Subjetivo - M3 - IncW1" checked>Subjetivo - M3 - IncW1</label></div>
-									</fieldset>
-								</form>
-								<br>
-								<form id="metric_selection_form" >
-									<fieldset>
-						    			<strong title="Métricas">Métricas</strong>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Acurácia" checked>Acurácia</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Erro" checked>Erro</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Sensitividade">Sensitividade</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="Especificidade">Especificidade</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="FP-Rate">FP-Rate</label></div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="AUC">AUC</label></div>
-									</fieldset>
-								</form>
-								<br>
-								<form id="algorithm_selection_form" >
-									<fieldset>
-										<strong title="Algoritmo">Algoritmo</strong>
-											<div class="checkbox">
-												<label><input type="checkbox" name="Random Forest - Dissertation" checked multiple disabled>Random Forest - Dissertation</label></div>
-									</fieldset>
-								</form>
-				        	</div>
-				   		</div>
-					</div>
-	        	</div>
+				</div>
 	        	<div id="central_bar" class="tabbable span9">
-	        		<!-- <legend>2) Visualize a informação</legend> -->
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#att_pane" data-toggle="tab">Análise dos Atributos</a></li>
 						<li><a href="#prediction_pane" data-toggle="tab">Análise da Predição</a></li>
