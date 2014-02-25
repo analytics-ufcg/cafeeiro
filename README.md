@@ -2,6 +2,7 @@ Alerta de progresso da ferrugem do cafeeiro
 ===========================================
 
 FRH Analytics - Ciclo 4 - Cafeeiro
+Online: http://analytics.lsd.ufcg.edu.br/cafeeiro/
 
 # src
 
